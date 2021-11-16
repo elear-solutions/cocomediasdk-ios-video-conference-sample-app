@@ -27,38 +27,37 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ap-SY-qPG">
-                                <rect key="frame" x="16" y="832" width="382" height="48"/>
+                                <rect key="frame" x="16" y="816" width="382" height="64"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1C7-mg-RBJ">
-                                        <rect key="frame" x="103" y="0.0" width="48" height="48"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1C7-mg-RBJ">
+                                        <rect key="frame" x="79" y="0.0" width="64" height="64"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="48" id="K4E-Gx-HNe"/>
-                                            <constraint firstAttribute="height" constant="48" id="rFG-00-Fxn"/>
+                                            <constraint firstAttribute="width" constant="64" id="K4E-Gx-HNe"/>
+                                            <constraint firstAttribute="height" constant="64" id="rFG-00-Fxn"/>
                                         </constraints>
-                                        <state key="normal" title="Button">
-                                            <imageReference key="image" image="video.circle.fill" catalog="system" symbolScale="large"/>
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24" scale="large" weight="regular"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="video.circle.fill" catalog="system" symbolScale="default"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="64" scale="large" weight="regular"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwX-pz-whW">
-                                        <rect key="frame" x="167" y="0.0" width="48" height="48"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwX-pz-whW">
+                                        <rect key="frame" x="159" y="0.0" width="64" height="64"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="48" id="SIt-p5-zwr"/>
-                                            <constraint firstAttribute="height" constant="48" id="Vap-PO-Qp6"/>
+                                            <constraint firstAttribute="width" constant="64" id="SIt-p5-zwr"/>
+                                            <constraint firstAttribute="height" constant="64" id="Vap-PO-Qp6"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" image="mic.circle.fill" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24" scale="large" weight="regular"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="64" scale="default" weight="regular"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwz-AQ-idZ">
-                                        <rect key="frame" x="231" y="0.0" width="48" height="48"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwz-AQ-idZ">
+                                        <rect key="frame" x="239" y="0.0" width="64" height="64"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="48" id="6kX-iz-7Es"/>
-                                            <constraint firstAttribute="height" constant="48" id="URV-Pc-sgu"/>
+                                            <constraint firstAttribute="width" constant="64" id="6kX-iz-7Es"/>
+                                            <constraint firstAttribute="height" constant="64" id="URV-Pc-sgu"/>
                                         </constraints>
-                                        <state key="normal" title="Button" image="speaker.wave.2.circle.fill" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24" scale="large" weight="regular"/>
+                                        <state key="normal" image="speaker.wave.2.circle.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="64" scale="default" weight="regular"/>
                                         </state>
                                     </button>
                                 </subviews>
