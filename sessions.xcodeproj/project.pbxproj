@@ -15,6 +15,7 @@
 		DC3789FF273E8EB900BA0594 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3789FD273E8EB900BA0594 /* LaunchScreen.storyboard */; };
 		DC378A0A273E8EBA00BA0594 /* sessionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC378A09273E8EBA00BA0594 /* sessionsTests.swift */; };
 		DC378A15273E8EBA00BA0594 /* sessionsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC378A14273E8EBA00BA0594 /* sessionsUITests.swift */; };
+		DC467A952743CD1A0025EBF3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC467A942743CD1A0025EBF3 /* PreviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		DC378A10273E8EBA00BA0594 /* sessionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sessionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC378A14273E8EBA00BA0594 /* sessionsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sessionsUITests.swift; sourceTree = "<group>"; };
 		DC378A16273E8EBA00BA0594 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC467A942743CD1A0025EBF3 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				DC3789FB273E8EB900BA0594 /* Assets.xcassets */,
 				DC3789FD273E8EB900BA0594 /* LaunchScreen.storyboard */,
 				DC378A00273E8EB900BA0594 /* Info.plist */,
+				DC467A942743CD1A0025EBF3 /* PreviewView.swift */,
 			);
 			path = sessions;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC3789F7273E8EB800BA0594 /* ViewController.swift in Sources */,
+				DC467A952743CD1A0025EBF3 /* PreviewView.swift in Sources */,
 				DC3789F3273E8EB800BA0594 /* AppDelegate.swift in Sources */,
 				DC3789F5273E8EB800BA0594 /* SceneDelegate.swift in Sources */,
 			);
