@@ -5,12 +5,16 @@
 //  Created by Rohan S on 12/11/21.
 //
 
+import AVFoundation
 import UIKit
 
 class ViewController: UIViewController {
+  @IBOutlet weak var previewView: PreviewView!
   @IBOutlet weak var btnEnableVideo: UIButton!
   @IBOutlet weak var btnEnableMicrophone: UIButton!
   @IBOutlet weak var btnEnableSpeaker: UIButton!
+  
+  private let session = AVCaptureSession()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,6 +25,23 @@ class ViewController: UIViewController {
   
   private func setup() {
     setupButtons()
+    setupPreview()
+  }
+  
+  private func setupPreview() {
+    previewView.session = session
+    session.beginConfiguration()
+    let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
+                                              for: .video, position: .unspecified)
+    guard
+      let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice!),
+      session.canAddInput(videoDeviceInput)
+    else {
+      debugPrint("failed to acquire camera")
+      return
+    }
+    session.addInput(videoDeviceInput)
+    session.commitConfiguration()
   }
   
   private func setupVideoButton() {
