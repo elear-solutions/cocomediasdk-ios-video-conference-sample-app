@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jxz-k2-vjp">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jxz-k2-vjp" customClass="PreviewView" customModule="sessions" customModuleProvider="target">
                                 <rect key="frame" x="274" y="64" width="120" height="240"/>
                                 <color key="backgroundColor" systemColor="systemGrayColor"/>
                                 <constraints>
@@ -88,6 +88,7 @@
                         <outlet property="btnEnableMicrophone" destination="wwX-pz-whW" id="WB2-T4-Tqi"/>
                         <outlet property="btnEnableSpeaker" destination="Wwz-AQ-idZ" id="hGE-da-23F"/>
                         <outlet property="btnEnableVideo" destination="1C7-mg-RBJ" id="an9-QF-zOX"/>
+                        <outlet property="previewView" destination="jxz-k2-vjp" id="TjH-go-nhl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
