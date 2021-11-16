@@ -8,6 +8,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+  @IBOutlet weak var btnEnableVideo: UIButton!
+  @IBOutlet weak var btnEnableMicrophone: UIButton!
+  @IBOutlet weak var btnEnableSpeaker: UIButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()

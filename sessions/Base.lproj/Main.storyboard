@@ -84,6 +84,11 @@
                             <constraint firstItem="jxz-k2-vjp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="s4k-Ch-8mU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnEnableMicrophone" destination="wwX-pz-whW" id="WB2-T4-Tqi"/>
+                        <outlet property="btnEnableSpeaker" destination="Wwz-AQ-idZ" id="hGE-da-23F"/>
+                        <outlet property="btnEnableVideo" destination="1C7-mg-RBJ" id="an9-QF-zOX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
