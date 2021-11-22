@@ -20,7 +20,13 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
     self.setup()
-    
+
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    self.session.stopRunning()
+    // Do any additional wrap up before unloading the view.
+    super.viewDidDisappear(animated)
   }
   
   private func setup() {
@@ -32,7 +38,8 @@ class ViewController: UIViewController {
     previewView.session = session
     session.beginConfiguration()
     let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
-                                              for: .video, position: .unspecified)
+                                              for: .video,
+                                              position: .unspecified)
     guard
       let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice!),
       session.canAddInput(videoDeviceInput)
@@ -41,6 +48,10 @@ class ViewController: UIViewController {
       return
     }
     session.addInput(videoDeviceInput)
+    let photoOutput = AVCapturePhotoOutput()
+    guard session.canAddOutput(photoOutput) else { return }
+    session.sessionPreset = .hd1920x1080
+    session.addOutput(photoOutput)
     session.commitConfiguration()
   }
   
@@ -84,7 +95,11 @@ class ViewController: UIViewController {
     sender.isSelected = !sender.isSelected
     switch sender {
       case btnEnableVideo:
-        debugPrint("\(sender) tapped")
+        if sender.isSelected {
+          self.session.startRunning()
+        } else {
+          self.session.stopRunning()
+        }
       default:
         break
     }
