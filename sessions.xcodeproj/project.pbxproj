@@ -198,8 +198,8 @@
 		DC5183BC2767252300BC7DE2 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
-				DC5183C0276728CF00BC7DE2 /* ListViewItem.xib */,
-				DC5183C22767290D00BC7DE2 /* ListViewItem.swift */,
+				DC5183C92767511C00BC7DE2 /* Views */,
+				DC5183C82767510700BC7DE2 /* TableViewCells */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -208,6 +208,22 @@
 			isa = PBXGroup;
 			children = (
 				DC467A942743CD1A0025EBF3 /* PreviewView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DC5183C82767510700BC7DE2 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				DC5183C0276728CF00BC7DE2 /* ListViewItem.xib */,
+				DC5183C22767290D00BC7DE2 /* ListViewItem.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		DC5183C92767511C00BC7DE2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Views;
 			sourceTree = "<group>";
