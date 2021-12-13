@@ -9,31 +9,36 @@ import AVFoundation
 import UIKit
 
 class ViewController: UIViewController {
-  @IBOutlet weak var previewView: PreviewView!
-  @IBOutlet weak var btnEnableVideo: UIButton!
-  @IBOutlet weak var btnEnableMicrophone: UIButton!
-  @IBOutlet weak var btnEnableSpeaker: UIButton!
-  
-  private let session = AVCaptureSession()
-  
+  // MARK: Lifecycle
+
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
-    self.setup()
-
+    setup()
   }
-  
+
   override func viewDidDisappear(_ animated: Bool) {
-    self.session.stopRunning()
+    session.stopRunning()
     // Do any additional wrap up before unloading the view.
     super.viewDidDisappear(animated)
   }
-  
+
+  // MARK: Internal
+
+  @IBOutlet var previewView: PreviewView!
+  @IBOutlet var btnEnableVideo: UIButton!
+  @IBOutlet var btnEnableMicrophone: UIButton!
+  @IBOutlet var btnEnableSpeaker: UIButton!
+
+  // MARK: Private
+
+  private let session = AVCaptureSession()
+
   private func setup() {
     setupButtons()
     setupPreview()
   }
-  
+
   private func setupPreview() {
     previewView.session = session
     session.beginConfiguration()
@@ -42,8 +47,8 @@ class ViewController: UIViewController {
                                               position: .unspecified)
     guard
       let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice!),
-      session.canAddInput(videoDeviceInput)
-    else {
+      session.canAddInput(videoDeviceInput) else
+    {
       debugPrint("failed to acquire camera")
       return
     }
@@ -54,7 +59,7 @@ class ViewController: UIViewController {
     session.addOutput(photoOutput)
     session.commitConfiguration()
   }
-  
+
   private func setupVideoButton() {
     btnEnableVideo.addTarget(self,
                              action: #selector(buttonDidTap),
@@ -64,45 +69,44 @@ class ViewController: UIViewController {
     btnEnableVideo.setImage(UIImage(systemName: "video.circle.fill"),
                             for: .selected)
   }
-  
+
   private func setupMicrophoneButton() {
     btnEnableMicrophone.addTarget(self,
                                   action: #selector(buttonDidTap),
                                   for: .touchUpInside)
     btnEnableMicrophone.setImage(UIImage(systemName: "mic.circle"),
-      for: .normal)
+                                 for: .normal)
     btnEnableMicrophone.setImage(UIImage(systemName: "mic.circle.fill"),
-      for: .selected)
+                                 for: .selected)
   }
-  
+
   private func setupSpeakerButton() {
     btnEnableSpeaker.setImage(UIImage(systemName: "speaker.wave.2.circle.fill"),
-      for: .normal)
+                              for: .normal)
     btnEnableSpeaker.setImage(UIImage(systemName: "speaker.slash.circle.fill"),
-      for: .selected)
+                              for: .selected)
     btnEnableSpeaker.addTarget(self,
                                action: #selector(buttonDidTap),
                                for: .touchUpInside)
   }
-  
+
   private func setupButtons() {
     setupVideoButton()
     setupMicrophoneButton()
     setupSpeakerButton()
   }
-  
+
   @objc private func buttonDidTap(sender: UIButton) {
     sender.isSelected = !sender.isSelected
     switch sender {
-      case btnEnableVideo:
-        if sender.isSelected {
-          self.session.startRunning()
-        } else {
-          self.session.stopRunning()
-        }
-      default:
-        break
+    case btnEnableVideo:
+      if sender.isSelected {
+        session.startRunning()
+      } else {
+        session.stopRunning()
+      }
+    default:
+      break
     }
   }
 }
-

@@ -5,28 +5,27 @@
 //  Created by Rohan S on 16/11/21.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 class PreviewView: UIView {
-    
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer {
-        guard let layer = layer as? AVCaptureVideoPreviewLayer else {
-            fatalError("Expected `AVCaptureVideoPreviewLayer` type for layer. Check PreviewView.layerClass implementation.")
-        }
-        return layer
+  override class var layerClass: AnyClass {
+    return AVCaptureVideoPreviewLayer.self
+  }
+
+  var videoPreviewLayer: AVCaptureVideoPreviewLayer {
+    guard let layer = layer as? AVCaptureVideoPreviewLayer else {
+      fatalError("Expected `AVCaptureVideoPreviewLayer` type for layer. Check PreviewView.layerClass implementation.")
     }
-    
-    var session: AVCaptureSession? {
-        get {
-            return videoPreviewLayer.session
-        }
-        set {
-            videoPreviewLayer.session = newValue
-        }
+    return layer
+  }
+
+  var session: AVCaptureSession? {
+    get {
+      return videoPreviewLayer.session
     }
-    
-    override class var layerClass: AnyClass {
-        return AVCaptureVideoPreviewLayer.self
+    set {
+      videoPreviewLayer.session = newValue
     }
+  }
 }
