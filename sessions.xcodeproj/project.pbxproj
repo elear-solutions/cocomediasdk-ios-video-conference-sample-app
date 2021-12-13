@@ -20,6 +20,8 @@
 		DC378A15273E8EBA00BA0594 /* sessionsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC378A14273E8EBA00BA0594 /* sessionsUITests.swift */; };
 		DC467A952743CD1A0025EBF3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC467A942743CD1A0025EBF3 /* PreviewView.swift */; };
 		DC5183BF2767262000BC7DE2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC5183BE2767262000BC7DE2 /* Localizable.strings */; };
+		DC5183C1276728CF00BC7DE2 /* ListViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5183C0276728CF00BC7DE2 /* ListViewItem.xib */; };
+		DC5183C32767290D00BC7DE2 /* ListViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5183C22767290D00BC7DE2 /* ListViewItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		DC378A16273E8EBA00BA0594 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC467A942743CD1A0025EBF3 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		DC5183BE2767262000BC7DE2 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		DC5183C0276728CF00BC7DE2 /* ListViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListViewItem.xib; sourceTree = "<group>"; };
+		DC5183C22767290D00BC7DE2 /* ListViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +198,8 @@
 		DC5183BC2767252300BC7DE2 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				DC5183C0276728CF00BC7DE2 /* ListViewItem.xib */,
+				DC5183C22767290D00BC7DE2 /* ListViewItem.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -317,6 +323,7 @@
 			files = (
 				DC3789FF273E8EB900BA0594 /* LaunchScreen.storyboard in Resources */,
 				DC3789FC273E8EB900BA0594 /* Assets.xcassets in Resources */,
+				DC5183C1276728CF00BC7DE2 /* ListViewItem.xib in Resources */,
 				DC3789FA273E8EB800BA0594 /* Main.storyboard in Resources */,
 				DC5183BF2767262000BC7DE2 /* Localizable.strings in Resources */,
 			);
@@ -465,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC3789F7273E8EB800BA0594 /* ViewController.swift in Sources */,
+				DC5183C32767290D00BC7DE2 /* ListViewItem.swift in Sources */,
 				DC467A952743CD1A0025EBF3 /* PreviewView.swift in Sources */,
 				DC3789F3273E8EB800BA0594 /* AppDelegate.swift in Sources */,
 				DC3789F5273E8EB800BA0594 /* SceneDelegate.swift in Sources */,

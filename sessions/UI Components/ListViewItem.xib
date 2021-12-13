@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ListViewItem" customModule="sessions" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="48" translatesAutoresizingMaskIntoConstraints="NO" id="yhe-AF-sNV">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yhe-AF-sNV" id="4OE-0u-iZC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brn-00-R44">
+                                <rect key="frame" x="378" y="6" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="Dqh-Ie-WGS"/>
+                                    <constraint firstAttribute="width" constant="32" id="Wza-3M-iDx"/>
+                                </constraints>
+                                <state key="normal">
+                                    <imageReference key="image" image="phone.circle" catalog="system" symbolScale="default"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="regular"/>
+                                </state>
+                                <connections>
+                                    <action selector="itemButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="zDl-h0-ItM"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="we2-vw-8oJ">
+                                <rect key="frame" x="16" y="11.5" width="109" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="we2-vw-8oJ" firstAttribute="centerY" secondItem="4OE-0u-iZC" secondAttribute="centerY" id="01S-5u-no6"/>
+                            <constraint firstItem="Brn-00-R44" firstAttribute="centerY" secondItem="4OE-0u-iZC" secondAttribute="centerY" id="Q45-kT-Tds"/>
+                            <constraint firstItem="we2-vw-8oJ" firstAttribute="leading" secondItem="4OE-0u-iZC" secondAttribute="leading" constant="16" id="T35-r1-Yg2"/>
+                            <constraint firstAttribute="trailing" secondItem="Brn-00-R44" secondAttribute="trailing" constant="4" id="tNs-U7-nAW"/>
+                        </constraints>
+                    </tableViewCellContentView>
+                </tableViewCell>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="itemButton" destination="Brn-00-R44" id="WYW-Wp-vU0"/>
+                <outlet property="itemLabel" destination="we2-vw-8oJ" id="8fN-5D-bi6"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="295.98214285714283"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="phone.circle" catalog="system" width="128" height="121"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
