@@ -22,6 +22,8 @@
 		DC5183BF2767262000BC7DE2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC5183BE2767262000BC7DE2 /* Localizable.strings */; };
 		DC5183C1276728CF00BC7DE2 /* ListViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5183C0276728CF00BC7DE2 /* ListViewItem.xib */; };
 		DC5183C32767290D00BC7DE2 /* ListViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5183C22767290D00BC7DE2 /* ListViewItem.swift */; };
+		DC5183CF276A2EB500BC7DE2 /* CallView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5183CE276A2EB500BC7DE2 /* CallView.xib */; };
+		DC5183D1276A2EC900BC7DE2 /* CallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5183D0276A2EC900BC7DE2 /* CallView.swift */; };
 		DC9B548D27688C76009EC785 /* ListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9B548C27688C76009EC785 /* ListView.xib */; };
 		DC9B548F27688C86009EC785 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9B548E27688C86009EC785 /* ListView.swift */; };
 /* End PBXBuildFile section */
@@ -71,6 +73,8 @@
 		DC5183BE2767262000BC7DE2 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		DC5183C0276728CF00BC7DE2 /* ListViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListViewItem.xib; sourceTree = "<group>"; };
 		DC5183C22767290D00BC7DE2 /* ListViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewItem.swift; sourceTree = "<group>"; };
+		DC5183CE276A2EB500BC7DE2 /* CallView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CallView.xib; sourceTree = "<group>"; };
+		DC5183D0276A2EC900BC7DE2 /* CallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallView.swift; sourceTree = "<group>"; };
 		DC9B548C27688C76009EC785 /* ListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListView.xib; sourceTree = "<group>"; };
 		DC9B548E27688C86009EC785 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -228,6 +232,8 @@
 		DC5183C92767511C00BC7DE2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DC5183D0276A2EC900BC7DE2 /* CallView.swift */,
+				DC5183CE276A2EB500BC7DE2 /* CallView.xib */,
 				DC9B548E27688C86009EC785 /* ListView.swift */,
 				DC9B548C27688C76009EC785 /* ListView.xib */,
 			);
@@ -343,6 +349,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC5183CF276A2EB500BC7DE2 /* CallView.xib in Resources */,
 				DC3789FF273E8EB900BA0594 /* LaunchScreen.storyboard in Resources */,
 				DC3789FC273E8EB900BA0594 /* Assets.xcassets in Resources */,
 				DC9B548D27688C76009EC785 /* ListView.xib in Resources */,
@@ -496,6 +503,7 @@
 			files = (
 				DC3789F7273E8EB800BA0594 /* ViewController.swift in Sources */,
 				DC5183C32767290D00BC7DE2 /* ListViewItem.swift in Sources */,
+				DC5183D1276A2EC900BC7DE2 /* CallView.swift in Sources */,
 				DC9B548F27688C86009EC785 /* ListView.swift in Sources */,
 				DC467A952743CD1A0025EBF3 /* PreviewView.swift in Sources */,
 				DC3789F3273E8EB800BA0594 /* AppDelegate.swift in Sources */,
