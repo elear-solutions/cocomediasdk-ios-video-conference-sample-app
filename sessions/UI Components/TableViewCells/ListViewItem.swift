@@ -13,4 +13,8 @@ class ListViewItem: UITableViewCell {
   @IBOutlet var itemButton: UIButton!
 
   @IBAction func itemButtonTapped(_: Any) {}
+  
+  func fill(label: String) {
+    self.itemLabel.text = label
+  }
 }
