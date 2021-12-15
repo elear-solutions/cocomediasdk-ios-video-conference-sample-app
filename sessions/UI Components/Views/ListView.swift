@@ -20,7 +20,7 @@ class ListView: UIView {
   @IBAction func buttonTapped(_ sender: Any) {
   }
   
-  func fill() {
-    
+  func fill(username: String, image: URL) {
+    self.labelWelcome.text = "Welcome \(username),"
   }
 }
