@@ -10,17 +10,16 @@ import UIKit
 
 class ListView: UIView {
   // Top View
-  @IBOutlet weak var labelWelcome: UILabel!
-  @IBOutlet weak var imageUser: UIImageView!
+  @IBOutlet var labelWelcome: UILabel!
+  @IBOutlet var imageUser: UIImageView!
   // Middle View
-  @IBOutlet weak var tableListView: UITableView!
+  @IBOutlet var tableListView: UITableView!
   // Bottom View
-  @IBOutlet weak var actionButton: UIButton!
-  
-  @IBAction func buttonTapped(_ sender: Any) {
-  }
-  
+  @IBOutlet var actionButton: UIButton!
+
+  @IBAction func buttonTapped(_: Any) {}
+
   func fill(username: String, image: URL) {
-    self.labelWelcome.text = "Welcome \(username),"
+    labelWelcome.text = "Welcome \(username),"
   }
 }

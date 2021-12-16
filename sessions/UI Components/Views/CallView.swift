@@ -5,75 +5,111 @@
 //  Created by Rohan S on 15/12/21.
 //
 
+import AVFoundation
 import Foundation
 import UIKit
-import AVFoundation
 
 class CallView: UIView {
-  @IBOutlet weak var callerPreview: PreviewView!
-  @IBOutlet weak var callPreview02: UIView!
-  @IBOutlet weak var callPreview03: UIView!
-  @IBOutlet weak var callPreview04: UIView!
-  
-  @IBOutlet weak var btnToggleCamera: UIButton!
-  @IBOutlet weak var btnToggleVideo: UIButton!
-  @IBOutlet weak var btnEndCall: UIButton!
-  @IBOutlet weak var btnToggleMicrophone: UIButton!
-  @IBOutlet weak var btnToggleSpeaker: UIButton!
-  
+  // MARK: Lifecycle
+
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    setupToggleCameraButton()
+    setupToggleVideoButton()
+    setupEndCallButton()
+    setupToggleMicrophoneButton()
+    setupToggleSpeakerButton()
+  }
+
+  // MARK: Internal
+
+  @IBOutlet var callerPreview: PreviewView!
+  @IBOutlet var callPreview02: UIView!
+  @IBOutlet var callPreview03: UIView!
+  @IBOutlet var callPreview04: UIView!
+
+  @IBOutlet var btnToggleCamera: UIButton!
+  @IBOutlet var btnToggleVideo: UIButton!
+  @IBOutlet var btnEndCall: UIButton!
+  @IBOutlet var btnToggleMicrophone: UIButton!
+  @IBOutlet var btnToggleSpeaker: UIButton!
+
+  override func willMove(toSuperview newSuperview: UIView?) {
+    super.willMove(toSuperview: newSuperview)
+  }
+
+  override func didMoveToSuperview() {
+    super.didMoveToSuperview()
+  }
+
+  // MARK: Private
+
+  private let session = AVCaptureSession()
+
   private func setupToggleCameraButton() {
     btnToggleCamera.addTarget(
       self,
       action: #selector(didTouchUpInside),
-      for: .touchUpInside)
+      for: .touchUpInside
+    )
   }
-  
+
   private func setupToggleVideoButton() {
     btnToggleVideo.addTarget(
       self,
       action: #selector(didTouchUpInside),
-      for: .touchUpInside)
+      for: .touchUpInside
+    )
     btnToggleVideo.setImage(
       UIImage(systemName: "video.fill"),
-      for: .normal)
+      for: .normal
+    )
     btnToggleVideo.setImage(
       UIImage(systemName: "video.slash.fill"),
-      for: .selected)
+      for: .selected
+    )
   }
-  
+
   private func setupEndCallButton() {
     btnEndCall.addTarget(
       self,
       action: #selector(didTouchUpInside),
-      for: .touchUpInside)
+      for: .touchUpInside
+    )
   }
-  
+
   private func setupToggleMicrophoneButton() {
     btnToggleMicrophone.addTarget(
       self,
       action: #selector(didTouchUpInside),
-      for: .touchUpInside)
+      for: .touchUpInside
+    )
     btnToggleMicrophone.setImage(
       UIImage(systemName: "mic.fill"),
-      for: .normal)
+      for: .normal
+    )
     btnToggleMicrophone.setImage(
       UIImage(systemName: "mic.slash.fill"),
-      for: .selected)
+      for: .selected
+    )
   }
-  
+
   private func setupToggleSpeakerButton() {
     btnToggleSpeaker.addTarget(
       self,
       action: #selector(didTouchUpInside),
-      for: .touchUpInside)
+      for: .touchUpInside
+    )
     btnToggleSpeaker.setImage(
       UIImage(systemName: "speaker.3.fill"),
-      for: .normal)
+      for: .normal
+    )
     btnToggleSpeaker.setImage(
       UIImage(systemName: "speaker.slash.fill"),
-      for: .selected)
+      for: .selected
+    )
   }
-  
+
   @objc private func didTouchUpInside(sender: UIButton) {
     sender.isSelected = !sender.isSelected
     switch sender {
@@ -95,11 +131,9 @@ class CallView: UIView {
       break
     }
   }
-  
-  private let session = AVCaptureSession()
-  
+
   private func setupCallerPreviewView() {
-    self.callerPreview.session = self.session
+    callerPreview.session = self.session
     session.beginConfiguration()
     let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
                                               for: .video,
@@ -117,22 +151,5 @@ class CallView: UIView {
     session.sessionPreset = .hd1920x1080
     session.addOutput(photoOutput)
     session.commitConfiguration()
-  }
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    self.setupToggleCameraButton()
-    self.setupToggleVideoButton()
-    self.setupEndCallButton()
-    self.setupToggleMicrophoneButton()
-    self.setupToggleSpeakerButton()
-  }
-  
-  override func willMove(toSuperview newSuperview: UIView?) {
-    super.willMove(toSuperview: newSuperview)
-  }
-  
-  override func didMoveToSuperview() {
-    super.didMoveToSuperview()
   }
 }
