@@ -16,16 +16,81 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YjO-fU-Lj9">
+                                <rect key="frame" x="96" y="298" width="222" height="300"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Base URI" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rRj-cb-klp">
+                                        <rect key="frame" x="4" y="16" width="214" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="A9C-ba-sk3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6hU-uF-DS7">
+                                        <rect key="frame" x="4" y="80" width="214" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="iHG-s2-gwn"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLf-5x-LDx">
+                                        <rect key="frame" x="80.5" y="208" width="61" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="6l8-yg-53s"/>
+                                        </constraints>
+                                        <state key="normal" title="Demo" image="paperplane.circle" catalog="system"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MyR-O4-sAh">
+                                        <rect key="frame" x="71.5" y="144" width="79" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="KWa-dL-af4"/>
+                                        </constraints>
+                                        <state key="normal" title="Connect" image="network" catalog="system"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="MyR-O4-sAh" firstAttribute="centerX" secondItem="YjO-fU-Lj9" secondAttribute="centerX" id="4ya-wS-Cf0"/>
+                                    <constraint firstItem="MyR-O4-sAh" firstAttribute="top" secondItem="6hU-uF-DS7" secondAttribute="bottom" constant="16" id="8Re-1Y-xzM"/>
+                                    <constraint firstItem="fLf-5x-LDx" firstAttribute="centerX" secondItem="YjO-fU-Lj9" secondAttribute="centerX" id="BDX-Wn-7ZV"/>
+                                    <constraint firstItem="fLf-5x-LDx" firstAttribute="top" secondItem="MyR-O4-sAh" secondAttribute="bottom" constant="16" id="D8W-F2-7iF"/>
+                                    <constraint firstItem="rRj-cb-klp" firstAttribute="leading" secondItem="YjO-fU-Lj9" secondAttribute="leading" constant="4" id="QX0-OS-0GC"/>
+                                    <constraint firstAttribute="trailing" secondItem="rRj-cb-klp" secondAttribute="trailing" constant="4" id="ZQA-Eq-8mg"/>
+                                    <constraint firstItem="6hU-uF-DS7" firstAttribute="leading" secondItem="YjO-fU-Lj9" secondAttribute="leading" constant="4" id="apn-RG-Etg"/>
+                                    <constraint firstItem="6hU-uF-DS7" firstAttribute="top" secondItem="rRj-cb-klp" secondAttribute="bottom" constant="16" id="eZ7-jO-xJ4"/>
+                                    <constraint firstAttribute="height" constant="300" id="hXp-Zp-bSU"/>
+                                    <constraint firstAttribute="trailing" secondItem="6hU-uF-DS7" secondAttribute="trailing" constant="4" id="xb3-WW-W6Z"/>
+                                    <constraint firstItem="rRj-cb-klp" firstAttribute="top" secondItem="YjO-fU-Lj9" secondAttribute="top" constant="16" id="zwA-cA-Off"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YjO-fU-Lj9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JLP-pb-BaD"/>
+                            <constraint firstItem="YjO-fU-Lj9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="96" id="bRh-I8-Pqs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YjO-fU-Lj9" secondAttribute="trailing" constant="96" id="sN3-fW-24f"/>
+                            <constraint firstItem="YjO-fU-Lj9" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yti-2x-PVa"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="baseUri" destination="rRj-cb-klp" id="xNT-xE-Azs"/>
+                        <outlet property="btnConnect" destination="MyR-O4-sAh" id="hKp-0G-hTv"/>
+                        <outlet property="btnDemo" destination="fLf-5x-LDx" id="DU5-Yu-VZp"/>
+                        <outlet property="username" destination="6hU-uF-DS7" id="LRX-xf-dYU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="89"/>
+            <point key="canvasLocation" x="28.985507246376812" y="88.392857142857139"/>
         </scene>
     </scenes>
     <resources>
+        <image name="network" catalog="system" width="128" height="121"/>
+        <image name="paperplane.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
