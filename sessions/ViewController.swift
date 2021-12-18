@@ -8,10 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController {
+  // MARK: Lifecycle
+
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
-    
+    setup()
   }
 
   override func viewDidDisappear(_ animated: Bool) {
@@ -21,5 +23,30 @@ class ViewController: UIViewController {
 
   // MARK: Internal
 
+  @IBOutlet var baseUri: UITextField!
+  @IBOutlet var username: UITextField!
+  @IBOutlet var btnConnect: UIButton!
+  @IBOutlet var btnDemo: UIButton!
+
   // MARK: Private
+
+  private func setup() {
+    btnConnect.addTarget(self,
+                         action: #selector(didTouchUpInside),
+                         for: .touchUpInside)
+    btnDemo.addTarget(self,
+                      action: #selector(didTouchUpInside),
+                      for: .touchUpInside)
+  }
+
+  @objc private func didTouchUpInside(sender: UIButton) {
+    switch sender {
+    case btnConnect:
+      debugPrint("btnConnect")
+    case btnDemo:
+      debugPrint("btnDemo")
+    default:
+      break
+    }
+  }
 }
