@@ -19,6 +19,7 @@
 		DC378A0A273E8EBA00BA0594 /* sessionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC378A09273E8EBA00BA0594 /* sessionsTests.swift */; };
 		DC378A15273E8EBA00BA0594 /* sessionsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC378A14273E8EBA00BA0594 /* sessionsUITests.swift */; };
 		DC467A952743CD1A0025EBF3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC467A942743CD1A0025EBF3 /* PreviewView.swift */; };
+		DC4722C6276EF17600D7B45E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4722C5276EF17600D7B45E /* String+Extension.swift */; };
 		DC5183BF2767262000BC7DE2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC5183BE2767262000BC7DE2 /* Localizable.strings */; };
 		DC5183C1276728CF00BC7DE2 /* ListViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5183C0276728CF00BC7DE2 /* ListViewItem.xib */; };
 		DC5183C32767290D00BC7DE2 /* ListViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5183C22767290D00BC7DE2 /* ListViewItem.swift */; };
@@ -70,6 +71,7 @@
 		DC378A14273E8EBA00BA0594 /* sessionsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sessionsUITests.swift; sourceTree = "<group>"; };
 		DC378A16273E8EBA00BA0594 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC467A942743CD1A0025EBF3 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		DC4722C5276EF17600D7B45E /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		DC5183BE2767262000BC7DE2 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		DC5183C0276728CF00BC7DE2 /* ListViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListViewItem.xib; sourceTree = "<group>"; };
 		DC5183C22767290D00BC7DE2 /* ListViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewItem.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 		DC5183BA276724FE00BC7DE2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DC4722C5276EF17600D7B45E /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC4722C6276EF17600D7B45E /* String+Extension.swift in Sources */,
 				DC3789F7273E8EB800BA0594 /* ViewController.swift in Sources */,
 				DC5183C32767290D00BC7DE2 /* ListViewItem.swift in Sources */,
 				DC5183D1276A2EC900BC7DE2 /* CallView.swift in Sources */,
