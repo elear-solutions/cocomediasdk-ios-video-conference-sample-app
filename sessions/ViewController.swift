@@ -42,11 +42,16 @@ class ViewController: UIViewController {
   @objc private func didTouchUpInside(sender: UIButton) {
     switch sender {
     case btnConnect:
-      debugPrint("btnConnect")
+      debugPrint(sender)
     case btnDemo:
-      debugPrint("btnDemo")
+      debugPrint(sender)
     default:
+      debugPrint(sender)
       break
     }
+  }
+  
+  private func isValid(input: String) -> Bool {
+    return input.trimWhiteSpaceAndNewLine().isEmpty ? false : true
   }
 }
