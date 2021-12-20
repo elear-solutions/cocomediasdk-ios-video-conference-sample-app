@@ -42,7 +42,7 @@ class SessionListViewController: UIViewController {
     debugPrint("\(#function): \(String(describing: sender))")
   }
 
-  func fill(username: String, image: URL) {
+  func fill(username: String, _ image: URL? = nil) {
     labelWelcome.text = "Welcome \(username),"
   }
 }
