@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,14 +15,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="sessions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YjO-fU-Lj9">
-                                <rect key="frame" x="96" y="298" width="222" height="300"/>
+                                <rect key="frame" x="48" y="256" width="279" height="300"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Base URI" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rRj-cb-klp">
-                                        <rect key="frame" x="4" y="16" width="214" height="48"/>
+                                        <rect key="frame" x="4" y="16" width="271" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="A9C-ba-sk3"/>
                                         </constraints>
@@ -29,7 +30,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6hU-uF-DS7">
-                                        <rect key="frame" x="4" y="80" width="214" height="48"/>
+                                        <rect key="frame" x="4" y="80" width="271" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="iHG-s2-gwn"/>
                                         </constraints>
@@ -37,14 +38,16 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLf-5x-LDx">
-                                        <rect key="frame" x="80.5" y="208" width="61" height="48"/>
+                                        <rect key="frame" x="110.66666666666667" y="208" width="57.666666666666671" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="6l8-yg-53s"/>
                                         </constraints>
-                                        <state key="normal" title="Demo" image="paperplane.circle" catalog="system"/>
+                                        <state key="normal" title="Demo">
+                                            <imageReference key="image" image="paperplane.circle" catalog="system" symbolScale="default"/>
+                                        </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MyR-O4-sAh">
-                                        <rect key="frame" x="71.5" y="144" width="79" height="48"/>
+                                        <rect key="frame" x="100" y="144" width="79" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="KWa-dL-af4"/>
                                         </constraints>
@@ -71,8 +74,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="YjO-fU-Lj9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JLP-pb-BaD"/>
-                            <constraint firstItem="YjO-fU-Lj9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="96" id="bRh-I8-Pqs"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YjO-fU-Lj9" secondAttribute="trailing" constant="96" id="sN3-fW-24f"/>
+                            <constraint firstItem="YjO-fU-Lj9" firstAttribute="leading" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="48" id="bRh-I8-Pqs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="YjO-fU-Lj9" secondAttribute="trailing" constant="48" id="sN3-fW-24f"/>
                             <constraint firstItem="YjO-fU-Lj9" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yti-2x-PVa"/>
                         </constraints>
                     </view>
