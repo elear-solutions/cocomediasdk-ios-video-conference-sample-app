@@ -51,7 +51,7 @@ class ViewController: UIViewController {
     }
   }
   
-  private func isValid(input: String) -> Bool {
-    return input.trimWhiteSpaceAndNewLine().isEmpty ? false : true
+  private func isValid(input: String?) -> Bool {
+    return (input?.trimWhiteSpaceAndNewLine().isEmpty ?? true) ? false : true
   }
 }
