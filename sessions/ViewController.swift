@@ -40,13 +40,13 @@ class ViewController: UIViewController {
   }
 
   @objc private func didTouchUpInside(sender: UIButton) {
+    debugPrint(sender)
     switch sender {
     case btnConnect:
-      debugPrint(sender)
+      break
     case btnDemo:
-      debugPrint(sender)
+      break
     default:
-      debugPrint(sender)
       break
     }
   }
