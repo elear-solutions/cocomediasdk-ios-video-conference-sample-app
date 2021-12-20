@@ -52,20 +52,13 @@ class ViewController: UIViewController {
       return
     }
     switch sender {
-    case btnConnect:
-      let vc = StoryBoard
-        .Main
-        .instantiateViewController(withIdentifier: SessionListViewController.identifier)
-    case btnDemo:
-      let vc = StoryBoard
-        .Main
-        .instantiateViewController(withIdentifier: SessionListViewController.identifier) as! SessionListViewController
-      vc.fill(username: username)
-
-      navigationController?.pushViewController(vc, animated: true)
-    default:
-      break
+      case btnConnect:
+        break
+      default:
+        break
     }
+    let vc = SessionListViewController.initFromNib()
+    navigationController?.pushViewController(vc, animated: true)
   }
 
   private func isValid(input: String?) -> Bool {

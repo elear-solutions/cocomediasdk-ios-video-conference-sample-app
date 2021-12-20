@@ -28,13 +28,14 @@ class SessionListViewController: UIViewController {
 
   // MARK: Internal
 
-  static let identifier = String(describing: SessionCallViewController.self)
+  static let identifier = String(describing: SessionListViewController.self)
 
   // Top View
   @IBOutlet var labelWelcome: UILabel!
   @IBOutlet var imageUser: UIImageView!
   // Middle View
   @IBOutlet var tableListView: UITableView!
+
   // Bottom View
   @IBOutlet var actionButton: UIButton!
 
