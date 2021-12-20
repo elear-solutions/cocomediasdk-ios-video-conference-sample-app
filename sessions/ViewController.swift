@@ -41,6 +41,14 @@ class ViewController: UIViewController {
 
   @objc private func didTouchUpInside(sender: UIButton) {
     debugPrint(sender)
+    guard isValid(input: baseUri.text) else {
+      baseUri.isHighlighted = true
+      return
+    }
+    guard isValid(input: username.text) else {
+      username.isHighlighted = true
+      return
+    }
     switch sender {
     case btnConnect:
       break
