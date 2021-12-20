@@ -1,27 +1,34 @@
 //
-//  CallView.swift
+//  SessionCallViewController.swift
 //  sessions
 //
-//  Created by Rohan S on 15/12/21.
+//  Created by Rohan S on 20/12/21.
 //
 
 import AVFoundation
-import Foundation
 import UIKit
 
-class CallView: UIView {
+class SessionCallViewController: UIViewController {
   // MARK: Lifecycle
 
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    setupToggleCameraButton()
-    setupToggleVideoButton()
-    setupEndCallButton()
-    setupToggleMicrophoneButton()
-    setupToggleSpeakerButton()
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    // Do any additional setup after loading the view.
+    self.setup()
   }
 
   // MARK: Internal
+
+  /*
+   // MARK: - Navigation
+
+   // In a storyboard-based application, you will often want to do a little preparation before navigation
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       // Get the new view controller using segue.destination.
+       // Pass the selected object to the new view controller.
+   }
+   */
 
   @IBOutlet var callerPreview: PreviewView!
   @IBOutlet var callPreview02: UIView!
@@ -33,14 +40,6 @@ class CallView: UIView {
   @IBOutlet var btnEndCall: UIButton!
   @IBOutlet var btnToggleMicrophone: UIButton!
   @IBOutlet var btnToggleSpeaker: UIButton!
-
-  override func willMove(toSuperview newSuperview: UIView?) {
-    super.willMove(toSuperview: newSuperview)
-  }
-
-  override func didMoveToSuperview() {
-    super.didMoveToSuperview()
-  }
 
   // MARK: Private
 
@@ -151,5 +150,13 @@ class CallView: UIView {
     session.sessionPreset = .hd1920x1080
     session.addOutput(photoOutput)
     session.commitConfiguration()
+  }
+  
+  private func setup() {
+    setupToggleCameraButton()
+    setupToggleVideoButton()
+    setupEndCallButton()
+    setupToggleMicrophoneButton()
+    setupToggleSpeakerButton()
   }
 }

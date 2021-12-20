@@ -9,13 +9,26 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SessionCallViewController" customModule="sessions" customModuleProvider="target">
+            <connections>
+                <outlet property="btnEndCall" destination="qbS-fw-adR" id="Icm-O7-Qzn"/>
+                <outlet property="btnToggleCamera" destination="cRx-N6-eJz" id="iSJ-aJ-F2e"/>
+                <outlet property="btnToggleMicrophone" destination="COI-C7-SSt" id="bI6-d1-0Gy"/>
+                <outlet property="btnToggleSpeaker" destination="uMw-3W-njO" id="eP3-Ng-59C"/>
+                <outlet property="btnToggleVideo" destination="pnr-Bj-jaX" id="OTn-ma-TRl"/>
+                <outlet property="callPreview02" destination="eHm-sY-ufJ" id="RPh-YG-Fpp"/>
+                <outlet property="callPreview03" destination="Oay-7F-WEQ" id="0Qp-m6-KRB"/>
+                <outlet property="callPreview04" destination="ulT-me-mGg" id="Ddd-EB-OZg"/>
+                <outlet property="callerPreview" destination="5VL-rL-cyv" id="QAs-EL-81q"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Leh-t2-p7H"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CallView" customModule="sessions" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ziG-XD-lQW">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ziG-XD-lQW" userLabel="Call View">
                     <rect key="frame" x="16" y="60" width="382" height="686"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eHm-sY-ufJ" userLabel="Q2">
@@ -114,17 +127,6 @@
                 <constraint firstItem="ziG-XD-lQW" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="jpf-YM-lGf"/>
                 <constraint firstItem="opg-qL-iD6" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="16" id="oBb-Jt-m2W"/>
             </constraints>
-            <connections>
-                <outlet property="btnEndCall" destination="qbS-fw-adR" id="tbX-Hw-p98"/>
-                <outlet property="btnToggleCamera" destination="cRx-N6-eJz" id="qfu-8Z-zaR"/>
-                <outlet property="btnToggleMicrophone" destination="COI-C7-SSt" id="fC7-cQ-zoC"/>
-                <outlet property="btnToggleSpeaker" destination="uMw-3W-njO" id="TCu-FL-EkN"/>
-                <outlet property="btnToggleVideo" destination="pnr-Bj-jaX" id="aeq-j8-mHl"/>
-                <outlet property="callPreview02" destination="eHm-sY-ufJ" id="UgY-VL-p2I"/>
-                <outlet property="callPreview03" destination="Oay-7F-WEQ" id="Ign-xa-7md"/>
-                <outlet property="callPreview04" destination="ulT-me-mGg" id="yEY-B8-FfR"/>
-                <outlet property="callerPreview" destination="5VL-rL-cyv" id="1BJ-X4-KBD"/>
-            </connections>
             <point key="canvasLocation" x="92.753623188405811" y="108.48214285714285"/>
         </view>
     </objects>

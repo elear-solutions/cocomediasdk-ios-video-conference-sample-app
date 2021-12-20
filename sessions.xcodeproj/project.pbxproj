@@ -23,10 +23,10 @@
 		DC5183BF2767262000BC7DE2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC5183BE2767262000BC7DE2 /* Localizable.strings */; };
 		DC5183C1276728CF00BC7DE2 /* ListViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5183C0276728CF00BC7DE2 /* ListViewItem.xib */; };
 		DC5183C32767290D00BC7DE2 /* ListViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5183C22767290D00BC7DE2 /* ListViewItem.swift */; };
-		DC5183CF276A2EB500BC7DE2 /* CallView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5183CE276A2EB500BC7DE2 /* CallView.xib */; };
-		DC5183D1276A2EC900BC7DE2 /* CallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5183D0276A2EC900BC7DE2 /* CallView.swift */; };
 		DCE60D992770894800C6F510 /* SessionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE60D972770894800C6F510 /* SessionListViewController.swift */; };
 		DCE60D9A2770894800C6F510 /* SessionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE60D982770894800C6F510 /* SessionListViewController.xib */; };
+		DCE60DA1277090FE00C6F510 /* SessionCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE60D9F277090FE00C6F510 /* SessionCallViewController.swift */; };
+		DCE60DA2277090FE00C6F510 /* SessionCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE60DA0277090FE00C6F510 /* SessionCallViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,10 +75,10 @@
 		DC5183BE2767262000BC7DE2 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		DC5183C0276728CF00BC7DE2 /* ListViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListViewItem.xib; sourceTree = "<group>"; };
 		DC5183C22767290D00BC7DE2 /* ListViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewItem.swift; sourceTree = "<group>"; };
-		DC5183CE276A2EB500BC7DE2 /* CallView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CallView.xib; sourceTree = "<group>"; };
-		DC5183D0276A2EC900BC7DE2 /* CallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallView.swift; sourceTree = "<group>"; };
 		DCE60D972770894800C6F510 /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
 		DCE60D982770894800C6F510 /* SessionListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionListViewController.xib; sourceTree = "<group>"; };
+		DCE60D9F277090FE00C6F510 /* SessionCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCallViewController.swift; sourceTree = "<group>"; };
+		DCE60DA0277090FE00C6F510 /* SessionCallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionCallViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,10 +235,10 @@
 		DC5183C92767511C00BC7DE2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DC5183D0276A2EC900BC7DE2 /* CallView.swift */,
-				DC5183CE276A2EB500BC7DE2 /* CallView.xib */,
 				DCE60D972770894800C6F510 /* SessionListViewController.swift */,
 				DCE60D982770894800C6F510 /* SessionListViewController.xib */,
+				DCE60D9F277090FE00C6F510 /* SessionCallViewController.swift */,
+				DCE60DA0277090FE00C6F510 /* SessionCallViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -352,11 +352,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC5183CF276A2EB500BC7DE2 /* CallView.xib in Resources */,
 				DC3789FF273E8EB900BA0594 /* LaunchScreen.storyboard in Resources */,
 				DC3789FC273E8EB900BA0594 /* Assets.xcassets in Resources */,
 				DC5183C1276728CF00BC7DE2 /* ListViewItem.xib in Resources */,
 				DCE60D9A2770894800C6F510 /* SessionListViewController.xib in Resources */,
+				DCE60DA2277090FE00C6F510 /* SessionCallViewController.xib in Resources */,
 				DC3789FA273E8EB800BA0594 /* Main.storyboard in Resources */,
 				DC5183BF2767262000BC7DE2 /* Localizable.strings in Resources */,
 			);
@@ -508,10 +508,10 @@
 				DC3789F7273E8EB800BA0594 /* ViewController.swift in Sources */,
 				DC5183C32767290D00BC7DE2 /* ListViewItem.swift in Sources */,
 				DCE60D992770894800C6F510 /* SessionListViewController.swift in Sources */,
-				DC5183D1276A2EC900BC7DE2 /* CallView.swift in Sources */,
 				DC467A952743CD1A0025EBF3 /* PreviewView.swift in Sources */,
 				DC3789F3273E8EB800BA0594 /* AppDelegate.swift in Sources */,
 				DC3789F5273E8EB800BA0594 /* SceneDelegate.swift in Sources */,
+				DCE60DA1277090FE00C6F510 /* SessionCallViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

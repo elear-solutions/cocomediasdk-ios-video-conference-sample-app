@@ -36,7 +36,9 @@ class SessionListViewController: UIViewController {
   // Bottom View
   @IBOutlet var actionButton: UIButton!
 
-  @IBAction func buttonTapped(_: Any) {}
+  @IBAction func buttonTapped(_ sender: Any) {
+    debugPrint("\(#function): \(String(describing: sender))")
+  }
 
   func fill(username: String, image: URL) {
     labelWelcome.text = "Welcome \(username),"
