@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class ListViewItem: UITableViewCell {
+  static let identifier = String(describing: ListViewItem.self)
+
   @IBOutlet var itemLabel: UILabel!
   @IBOutlet var itemButton: UIButton!
 

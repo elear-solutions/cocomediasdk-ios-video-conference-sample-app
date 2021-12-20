@@ -20,6 +20,8 @@ class SessionCallViewController: UIViewController {
 
   // MARK: Internal
 
+  static let identifier = String(describing: SessionCallViewController.self)
+
   /*
    // MARK: - Navigation
 
@@ -151,7 +153,7 @@ class SessionCallViewController: UIViewController {
     session.addOutput(photoOutput)
     session.commitConfiguration()
   }
-  
+
   private func setup() {
     setupToggleCameraButton()
     setupToggleVideoButton()

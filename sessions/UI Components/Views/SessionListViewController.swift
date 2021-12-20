@@ -28,6 +28,8 @@ class SessionListViewController: UIViewController {
 
   // MARK: Internal
 
+  static let identifier = String(describing: SessionCallViewController.self)
+
   // Top View
   @IBOutlet var labelWelcome: UILabel!
   @IBOutlet var imageUser: UIImageView!
