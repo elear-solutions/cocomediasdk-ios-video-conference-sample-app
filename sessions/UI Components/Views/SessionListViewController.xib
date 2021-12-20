@@ -9,9 +9,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SessionListViewController" customModule="sessions" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="Jaj-IZ-Vfa" id="lm1-vq-zdz"/>
+                <outlet property="imageUser" destination="iRf-JY-37A" id="KLV-qh-Mb0"/>
+                <outlet property="labelWelcome" destination="uPG-J2-o5E" id="3pB-3g-d2c"/>
+                <outlet property="tableListView" destination="Emr-l6-drU" id="2Sh-hE-Y5v"/>
+                <outlet property="view" destination="iN0-l3-epB" id="XhR-s9-mz1"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ListView" customModule="sessions" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="View" customClass="ListView" customModule="sessions" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -55,7 +63,7 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24" scale="large" weight="regular"/>
                             </state>
                             <connections>
-                                <action selector="buttonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="Cxl-bf-tyT"/>
+                                <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="KO8-7H-NLf"/>
                             </connections>
                         </button>
                     </subviews>
@@ -81,12 +89,6 @@
                 <constraint firstItem="bRJ-kt-aeG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="xR6-Rd-HTE"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Emr-l6-drU" secondAttribute="trailing" constant="16" id="xhF-OV-dEL"/>
             </constraints>
-            <connections>
-                <outlet property="actionButton" destination="Jaj-IZ-Vfa" id="cpj-c0-xpZ"/>
-                <outlet property="imageUser" destination="iRf-JY-37A" id="KP0-nd-zkR"/>
-                <outlet property="labelWelcome" destination="uPG-J2-o5E" id="uZd-x4-bvH"/>
-                <outlet property="tableListView" destination="Emr-l6-drU" id="yrJ-hp-Vg1"/>
-            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="103.79464285714285"/>
         </view>
     </objects>

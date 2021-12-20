@@ -8,16 +8,15 @@
 import Foundation
 
 extension String {
-  
   func trimWhiteSpace() -> String {
-    return self.trimmingCharacters(in: .whitespaces)
+    return trimmingCharacters(in: .whitespaces)
   }
-  
+
   func trimRemoveNewLine() -> String {
-    return self.trimmingCharacters(in: .newlines)
+    return trimmingCharacters(in: .newlines)
   }
-  
+
   func trimWhiteSpaceAndNewLine() -> String {
-    return self.trimmingCharacters(in: .whitespacesAndNewlines)
+    return trimmingCharacters(in: .whitespacesAndNewlines)
   }
 }
