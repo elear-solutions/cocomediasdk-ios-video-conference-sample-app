@@ -41,19 +41,28 @@ class ViewController: UIViewController {
 
   @objc private func didTouchUpInside(sender: UIButton) {
     debugPrint(sender)
-    guard isValid(input: baseUri.text) else {
+    guard let baseUri = baseUri.text, isValid(input: baseUri) else {
       baseUri.isHighlighted = true
+      debugPrint("Base URI is empty")
       return
     }
-    guard isValid(input: username.text) else {
+    guard let username = username.text, isValid(input: username) else {
       username.isHighlighted = true
+      debugPrint("Username is empty")
       return
     }
     switch sender {
     case btnConnect:
-      break
+      let vc = StoryBoard
+        .Main
+        .instantiateViewController(withIdentifier: SessionListViewController.identifier)
     case btnDemo:
-      break
+      let vc = StoryBoard
+        .Main
+        .instantiateViewController(withIdentifier: SessionListViewController.identifier) as! SessionListViewController
+      vc.fill(username: username)
+
+      navigationController?.pushViewController(vc, animated: true)
     default:
       break
     }
