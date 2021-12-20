@@ -10,7 +10,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListViewItem" customModule="sessions" customModuleProvider="target">
+            <connections>
+                <outlet property="itemButton" destination="Brn-00-R44" id="TcB-lg-Ppd"/>
+                <outlet property="itemLabel" destination="we2-vw-8oJ" id="Any-3J-3bw"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ListViewItem" customModule="sessions" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
@@ -34,7 +39,7 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="regular"/>
                                 </state>
                                 <connections>
-                                    <action selector="itemButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="zDl-h0-ItM"/>
+                                    <action selector="itemButtonTapped:" destination="-1" eventType="touchUpInside" id="JTw-xA-fxs"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="we2-vw-8oJ">
@@ -56,10 +61,6 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="itemButton" destination="Brn-00-R44" id="WYW-Wp-vU0"/>
-                <outlet property="itemLabel" destination="we2-vw-8oJ" id="8fN-5D-bi6"/>
-            </connections>
             <point key="canvasLocation" x="137.68115942028987" y="295.98214285714283"/>
         </view>
     </objects>
