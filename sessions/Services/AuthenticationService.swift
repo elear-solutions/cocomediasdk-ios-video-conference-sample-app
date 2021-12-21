@@ -44,26 +44,25 @@ typealias FetchTokenResult = (_ result: Result<FetchTokenResponse, Error>) -> Vo
 
 final class AuthenticationManager {
   class func fetchToken(params: FetchTokenParameter,
-                        handler: @escaping FetchTokenResult) {
+                        handler: @escaping FetchTokenResult)
+  {
     let parameters = params.wrap()
-    
+
     AlamofireManager().request(requestMethod: .post,
                                path: "/v1.0/token/fetch-user-token",
                                params: parameters,
                                success: { result, statusCode in
-                                debugPrint(result)
-                                switch statusCode {
-                                  case 200 ... 299:
-                                    let json = JSON(result)
-                                    let tokenResponse = FetchTokenResponse(json: json)
-                                    handler(.success(tokenResponse))
-                                  default:
-                                    break
-                                }
+                                 switch statusCode {
+                                 case 200 ... 299:
+                                   let json = JSON(result)
+                                   let tokenResponse = FetchTokenResponse(json: json)
+                                   handler(.success(tokenResponse))
+                                 default:
+                                   break
+                                 }
                                },
                                failure: { error in
-                                debugPrint(error.localizedDescription)
-                                handler(.failure(error))
+                                 handler(.failure(error))
                                })
   }
 }
