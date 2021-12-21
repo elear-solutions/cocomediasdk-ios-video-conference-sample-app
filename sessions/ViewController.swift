@@ -52,13 +52,17 @@ class ViewController: UIViewController {
       return
     }
     switch sender {
-      case btnConnect:
-        break
-      default:
-        break
+    case btnConnect:
+      break
+    default:
+      break
     }
     let vc = SessionListViewController.initFromNib()
-    navigationController?.pushViewController(vc, animated: true)
+    let nav = UINavigationController(rootViewController: vc)
+    nav.modalPresentationStyle = .fullScreen
+    nav.modalTransitionStyle = .coverVertical
+    nav.setNavigationBarHidden(true, animated: true)
+    present(nav, animated: true)
   }
 
   private func isValid(input: String?) -> Bool {
