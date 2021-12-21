@@ -28,6 +28,12 @@ final class AlamofireManager {
                              headers: headers).validate(statusCode: [200, 204, 205])
     request.response(responseSerializer: serializer) { response in
       debugPrint(response)
+      switch response.result {
+      case let .success(value):
+        success(value, response.response?.statusCode ?? 0)
+      case let .failure(error):
+        failure(error)
+      }
     }
   }
 }
