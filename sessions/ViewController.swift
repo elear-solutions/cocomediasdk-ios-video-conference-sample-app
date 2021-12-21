@@ -37,6 +37,8 @@ class ViewController: UIViewController {
     btnDemo.addTarget(self,
                       action: #selector(didTouchUpInside),
                       for: .touchUpInside)
+    // Demo URL for Development Environment
+    baseUri.text = UserDataManager().getURL()
   }
 
   @objc private func didTouchUpInside(sender: UIButton) {
@@ -46,19 +48,38 @@ class ViewController: UIViewController {
       debugPrint("Base URI is empty")
       return
     }
+    UserDataManager().setURL(baseUri)
     guard let username = username.text, isValid(input: username) else {
       username.isHighlighted = true
       debugPrint("Username is empty")
       return
     }
+    UserDataManager().setUsername(username)
     switch sender {
-      case btnConnect:
-        break
-      default:
-        break
+    case btnConnect:
+      let fetchTokenRequest = FetchTokenParameter(username: username)
+      AuthenticationManager.fetchToken(params: fetchTokenRequest,
+                                       handler: { [self] result in
+                                         guard self != nil else { return }
+                                         switch result {
+                                         case let .success(tokenResponse):
+                                           debugPrint(tokenResponse.accessToken)
+                                           // TODO: Set Token and save isUserLoggedIn
+                                           UserDataManager().setUserLoggedIn(true)
+                                         case let .failure(error):
+                                           debugPrint(error.localizedDescription)
+                                         }
+                                       })
+
+    default:
+      break
     }
     let vc = SessionListViewController.initFromNib()
-    navigationController?.pushViewController(vc, animated: true)
+    let nav = UINavigationController(rootViewController: vc)
+    nav.modalPresentationStyle = .fullScreen
+    nav.modalTransitionStyle = .coverVertical
+    nav.setNavigationBarHidden(true, animated: true)
+    present(nav, animated: true)
   }
 
   private func isValid(input: String?) -> Bool {

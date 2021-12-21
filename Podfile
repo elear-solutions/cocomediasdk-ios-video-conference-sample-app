@@ -11,6 +11,8 @@ target 'sessions' do
     pod 'SwiftFormat/CLI'
     pod 'CocoaLumberjack/Swift'
     pod 'CocoMediaKit' , :path => "~/Workspace/cocomediasdk-swift"
+    pod 'AlamofireImage'
+    pod 'SwiftyJSON'
 
   target 'sessionsTests' do
     inherit! :search_paths
