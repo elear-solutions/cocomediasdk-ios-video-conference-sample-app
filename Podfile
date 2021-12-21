@@ -10,7 +10,7 @@ target 'sessions' do
     pod 'SwiftLint'
     pod 'SwiftFormat/CLI'
     pod 'CocoaLumberjack/Swift'
-    # pod 'CocoMediaKit' , :path => "~/Workspace/cocomediasdk-swift"
+    pod 'CocoMediaKit' , :path => "~/Workspace/cocomediasdk-swift"
     pod 'AlamofireImage'
     pod 'SwiftyJSON'
 
