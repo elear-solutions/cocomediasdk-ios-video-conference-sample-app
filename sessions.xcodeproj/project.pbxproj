@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,8 @@
 		DC8960A927720B2C00CF4196 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8960A827720B2C00CF4196 /* Models.swift */; };
 		DC8960AB27720D2B00CF4196 /* AlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8960AA27720D2B00CF4196 /* AlamofireManager.swift */; };
 		DC8960AE2772270600CF4196 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8960AD2772270600CF4196 /* UserDataManager.swift */; };
+		DCCADC7627727DA80067BDA8 /* CocoMediaSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCADC7527727DA80067BDA8 /* CocoMediaSDK.xcframework */; };
+		DCCADC7727727DA80067BDA8 /* CocoMediaSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCCADC7527727DA80067BDA8 /* CocoMediaSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DCE60D992770894800C6F510 /* SessionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE60D972770894800C6F510 /* SessionListViewController.swift */; };
 		DCE60D9A2770894800C6F510 /* SessionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE60D982770894800C6F510 /* SessionListViewController.xib */; };
 		DCE60DA1277090FE00C6F510 /* SessionCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE60D9F277090FE00C6F510 /* SessionCallViewController.swift */; };
@@ -52,6 +54,20 @@
 			remoteInfo = sessions;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DCCADC7827727DA90067BDA8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DCCADC7727727DA80067BDA8 /* CocoMediaSDK.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		299D16C2F93C2F567B041119 /* Pods-sessions-sessionsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sessions-sessionsUITests.release.xcconfig"; path = "Target Support Files/Pods-sessions-sessionsUITests/Pods-sessions-sessionsUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +105,7 @@
 		DC8960A827720B2C00CF4196 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		DC8960AA27720D2B00CF4196 /* AlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireManager.swift; sourceTree = "<group>"; };
 		DC8960AD2772270600CF4196 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
+		DCCADC7527727DA80067BDA8 /* CocoMediaSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CocoMediaSDK.xcframework; path = Framework/CocoMediaSDK.xcframework; sourceTree = "<group>"; };
 		DCE60D972770894800C6F510 /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
 		DCE60D982770894800C6F510 /* SessionListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionListViewController.xib; sourceTree = "<group>"; };
 		DCE60D9F277090FE00C6F510 /* SessionCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCallViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				585AA18C1195EFD3011E76B2 /* Pods_sessions.framework in Frameworks */,
+				DCCADC7627727DA80067BDA8 /* CocoMediaSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +144,7 @@
 		1B864FFB1AA0FC161CD712D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DCCADC7527727DA80067BDA8 /* CocoMediaSDK.xcframework */,
 				5D3EA3E6FC5EBCA5CCB0486F /* Pods_sessions.framework */,
 				BA3B6971C3032B870E4A3F0C /* Pods_sessions_sessionsUITests.framework */,
 				C3F99F25419BC74EBDB5E79A /* Pods_sessionsTests.framework */,
@@ -285,6 +304,7 @@
 				DC3789EC273E8EB800BA0594 /* Frameworks */,
 				DC3789ED273E8EB800BA0594 /* Resources */,
 				2F91CB76A937D98D5E34E44C /* [CP] Embed Pods Frameworks */,
+				DCCADC7827727DA90067BDA8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
