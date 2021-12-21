@@ -14,6 +14,7 @@ class SessionListViewController: UIViewController {
     super.viewDidLoad()
 
     // Do any additional setup after loading the view.
+    fill(username: UserDataManager().getUsername())
   }
 
   /*
@@ -44,6 +45,6 @@ class SessionListViewController: UIViewController {
   }
 
   func fill(username: String, _ image: URL? = nil) {
-    labelWelcome.text = "Welcome \(username),"
+    labelWelcome.text = "Welcome \(username)"
   }
 }
