@@ -10,6 +10,8 @@ target 'sessions' do
     pod 'SwiftLint'
     pod 'SwiftFormat/CLI'
     pod 'CocoaLumberjack/Swift'
+    pod 'AlamofireImage'
+    pod 'SwiftyJSON'
 
   target 'sessionsTests' do
     inherit! :search_paths

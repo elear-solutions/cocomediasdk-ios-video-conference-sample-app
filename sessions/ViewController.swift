@@ -53,7 +53,21 @@ class ViewController: UIViewController {
     }
     switch sender {
     case btnConnect:
-      break
+      let fetchTokenRequest = FetchTokenParameter(username: username)
+      AuthenticationManager.fetchToken(params: fetchTokenRequest,
+                                       handler: { [self] result in
+                                        guard self != nil else { return }
+                                        switch result {
+                                          case let .success(tokenResponse):
+                                            debugPrint(tokenResponse.accessToken)
+                                            // TODO: Set Token and save isUserLoggedIn
+                                            UserDataManager().setUserLoggedIn(true)
+                                            break
+                                          case let .failure(error):
+                                            debugPrint(error.localizedDescription)
+                                        }
+                                       })
+
     default:
       break
     }
