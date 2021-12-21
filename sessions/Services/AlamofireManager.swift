@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 final class AlamofireManager {
-  final var baseURL = URL(string: "http://13.232.105.177:8080")!
+  final var baseURL = URL(string: UserDataManager().getURL())!
 
   func request(requestMethod: HTTPMethod,
                path: String,

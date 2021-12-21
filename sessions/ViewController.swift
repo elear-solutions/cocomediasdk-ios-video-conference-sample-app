@@ -37,6 +37,8 @@ class ViewController: UIViewController {
     btnDemo.addTarget(self,
                       action: #selector(didTouchUpInside),
                       for: .touchUpInside)
+    // Demo URL for Development Environment
+    baseUri.text = UserDataManager().getURL()
   }
 
   @objc private func didTouchUpInside(sender: UIButton) {
@@ -46,6 +48,7 @@ class ViewController: UIViewController {
       debugPrint("Base URI is empty")
       return
     }
+    UserDataManager().setURL(baseUri)
     guard let username = username.text, isValid(input: username) else {
       username.isHighlighted = true
       debugPrint("Username is empty")
