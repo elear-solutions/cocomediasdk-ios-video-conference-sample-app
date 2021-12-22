@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4EA62E6F3937E67B52A7E763 /* Pods_sessionsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F99F25419BC74EBDB5E79A /* Pods_sessionsTests.framework */; };
-		585AA18C1195EFD3011E76B2 /* Pods_sessions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3EA3E6FC5EBCA5CCB0486F /* Pods_sessions.framework */; };
 		78ACFA13E42FB622E6C51F86 /* Pods_sessions_sessionsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3B6971C3032B870E4A3F0C /* Pods_sessions_sessionsUITests.framework */; };
 		DC3789F3273E8EB800BA0594 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3789F2273E8EB800BA0594 /* AppDelegate.swift */; };
 		DC3789F5273E8EB800BA0594 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3789F4273E8EB800BA0594 /* SceneDelegate.swift */; };
@@ -18,6 +17,7 @@
 		DC3789FF273E8EB900BA0594 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3789FD273E8EB900BA0594 /* LaunchScreen.storyboard */; };
 		DC378A0A273E8EBA00BA0594 /* sessionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC378A09273E8EBA00BA0594 /* sessionsTests.swift */; };
 		DC378A15273E8EBA00BA0594 /* sessionsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC378A14273E8EBA00BA0594 /* sessionsUITests.swift */; };
+		DC4306BC2772EF1400945EAA /* Pods_sessions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3EA3E6FC5EBCA5CCB0486F /* Pods_sessions.framework */; };
 		DC467A952743CD1A0025EBF3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC467A942743CD1A0025EBF3 /* PreviewView.swift */; };
 		DC4722C6276EF17600D7B45E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4722C5276EF17600D7B45E /* String+Extension.swift */; };
 		DC5183BF2767262000BC7DE2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC5183BE2767262000BC7DE2 /* Localizable.strings */; };
@@ -30,8 +30,6 @@
 		DC8960A927720B2C00CF4196 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8960A827720B2C00CF4196 /* Models.swift */; };
 		DC8960AB27720D2B00CF4196 /* AlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8960AA27720D2B00CF4196 /* AlamofireManager.swift */; };
 		DC8960AE2772270600CF4196 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8960AD2772270600CF4196 /* UserDataManager.swift */; };
-		DCCADC7627727DA80067BDA8 /* CocoMediaSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCADC7527727DA80067BDA8 /* CocoMediaSDK.xcframework */; };
-		DCCADC7727727DA80067BDA8 /* CocoMediaSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCCADC7527727DA80067BDA8 /* CocoMediaSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DCE60D992770894800C6F510 /* SessionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE60D972770894800C6F510 /* SessionListViewController.swift */; };
 		DCE60D9A2770894800C6F510 /* SessionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE60D982770894800C6F510 /* SessionListViewController.xib */; };
 		DCE60DA1277090FE00C6F510 /* SessionCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE60D9F277090FE00C6F510 /* SessionCallViewController.swift */; };
@@ -56,13 +54,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		DCCADC7827727DA90067BDA8 /* Embed Frameworks */ = {
+		DCCADC7C277284C30067BDA8 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DCCADC7727727DA80067BDA8 /* CocoMediaSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,7 +102,6 @@
 		DC8960A827720B2C00CF4196 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		DC8960AA27720D2B00CF4196 /* AlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireManager.swift; sourceTree = "<group>"; };
 		DC8960AD2772270600CF4196 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
-		DCCADC7527727DA80067BDA8 /* CocoMediaSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CocoMediaSDK.xcframework; path = Framework/CocoMediaSDK.xcframework; sourceTree = "<group>"; };
 		DCE60D972770894800C6F510 /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
 		DCE60D982770894800C6F510 /* SessionListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionListViewController.xib; sourceTree = "<group>"; };
 		DCE60D9F277090FE00C6F510 /* SessionCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCallViewController.swift; sourceTree = "<group>"; };
@@ -117,8 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				585AA18C1195EFD3011E76B2 /* Pods_sessions.framework in Frameworks */,
-				DCCADC7627727DA80067BDA8 /* CocoMediaSDK.xcframework in Frameworks */,
+				DC4306BC2772EF1400945EAA /* Pods_sessions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +139,6 @@
 		1B864FFB1AA0FC161CD712D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DCCADC7527727DA80067BDA8 /* CocoMediaSDK.xcframework */,
 				5D3EA3E6FC5EBCA5CCB0486F /* Pods_sessions.framework */,
 				BA3B6971C3032B870E4A3F0C /* Pods_sessions_sessionsUITests.framework */,
 				C3F99F25419BC74EBDB5E79A /* Pods_sessionsTests.framework */,
@@ -304,7 +298,7 @@
 				DC3789EC273E8EB800BA0594 /* Frameworks */,
 				DC3789ED273E8EB800BA0594 /* Resources */,
 				2F91CB76A937D98D5E34E44C /* [CP] Embed Pods Frameworks */,
-				DCCADC7827727DA90067BDA8 /* Embed Frameworks */,
+				DCCADC7C277284C30067BDA8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -746,6 +740,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SY8Q6736C7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CocoaLumberjack\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+				);
 				INFOPLIST_FILE = sessions/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -767,6 +768,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SY8Q6736C7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CocoaLumberjack\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+				);
 				INFOPLIST_FILE = sessions/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
