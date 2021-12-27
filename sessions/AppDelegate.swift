@@ -5,8 +5,8 @@
 //  Created by Rohan S on 12/11/21.
 //
 
-import UIKit
 import CocoMediaSDK
+import UIKit
 
 @available(iOS 13.0, *)
 @main
@@ -14,7 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     // Initialize CocoMediaSDK
-    let config = CocoMediaConfig(clientId: <#T##String#>, cwdPath: <#T##String#>)
+    let config = CocoMediaConfig()
+    config.accessList = "{\"appCapabilities\": [0]}"
+    do {
+      try CocoMediaClient.setup(config)
+    } catch {
+      debugPrint("error using setup()")
+    }
     // Set RootViewController
     if UserDataManager().getUserLoggedIn() == true {
       let vc = SessionListViewController.initFromNib()
