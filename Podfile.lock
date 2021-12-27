@@ -5,8 +5,7 @@ PODS:
   - CocoaLumberjack/Core (3.7.0)
   - CocoaLumberjack/Swift (3.7.0):
     - CocoaLumberjack/Core
-  - CocoMediaSDK (0.0.1):
-    - CocoaLumberjack/Swift (= 3.7.0)
+  - CocoMediaSDK (0.0.1)
   - SwiftFormat/CLI (0.47.11)
   - SwiftLint (0.42.0)
   - SwiftyJSON (5.0.1)
@@ -36,11 +35,11 @@ SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
   AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
-  CocoMediaSDK: 7b4aca9a85edc147f6a5b4c0f4bbca5104c760d9
+  CocoMediaSDK: a29ec983e19a770bc5d60e07f06656fba8468e6f
   SwiftFormat: 6f2fd4689e09959ba5b690ab950279e33eb6441e
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 0127de80aeb37bc85159c3c691720dcf9944f1a4
+PODFILE CHECKSUM: ab34916799f37d36496c98b5da9808b3f31e96d5
 
 COCOAPODS: 1.10.2
