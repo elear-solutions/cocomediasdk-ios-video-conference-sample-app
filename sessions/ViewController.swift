@@ -5,6 +5,7 @@
 //  Created by Rohan S on 12/11/21.
 //
 
+import CocoMediaSDK
 import UIKit
 
 class ViewController: UIViewController {
@@ -14,6 +15,7 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
     setup()
+    client = CocoMediaClient.shared
   }
 
   override func viewDidDisappear(_ animated: Bool) {
