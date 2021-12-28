@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     config.accessList = "{\"appCapabilities\": [0]}"
     do {
       try CocoMediaClient.setup(config)
+      client = CocoMediaClient.shared
     } catch {
       debugPrint("error using setup()")
     }
