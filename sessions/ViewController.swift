@@ -11,6 +11,20 @@ import UIKit
 class ViewController: UIViewController {
   // MARK: Lifecycle
 
+  override func viewWillAppear(_: Bool) {
+    super.viewWillAppear(true)
+    if UserDataManager().getUserLoggedIn() == true {
+      DispatchQueue.main.async {
+        let vc = SessionListViewController.initFromNib()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        nav.modalTransitionStyle = .coverVertical
+        nav.setNavigationBarHidden(true, animated: true)
+        self.present(nav, animated: true)
+      }
+    }
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
@@ -64,9 +78,17 @@ class ViewController: UIViewController {
                                          guard self != nil else { return }
                                          switch result {
                                          case let .success(tokenResponse):
-                                           debugPrint(tokenResponse.accessToken)
                                            // TODO: Set Token and save isUserLoggedIn
                                            UserDataManager().setUserLoggedIn(true)
+                                           try! client?.set(token: tokenResponse.rawString!)
+                                           DispatchQueue.main.async {
+                                             let vc = SessionListViewController.initFromNib()
+                                             let nav = UINavigationController(rootViewController: vc)
+                                             nav.modalPresentationStyle = .fullScreen
+                                             nav.modalTransitionStyle = .coverVertical
+                                             nav.setNavigationBarHidden(true, animated: true)
+                                             present(nav, animated: true)
+                                           }
                                          case let .failure(error):
                                            debugPrint(error.localizedDescription)
                                          }
@@ -75,12 +97,6 @@ class ViewController: UIViewController {
     default:
       break
     }
-    let vc = SessionListViewController.initFromNib()
-    let nav = UINavigationController(rootViewController: vc)
-    nav.modalPresentationStyle = .fullScreen
-    nav.modalTransitionStyle = .coverVertical
-    nav.setNavigationBarHidden(true, animated: true)
-    present(nav, animated: true)
   }
 
   private func isValid(input: String?) -> Bool {

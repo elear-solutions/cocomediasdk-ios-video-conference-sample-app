@@ -5,6 +5,7 @@
 //  Created by Rohan S on 20/12/21.
 //
 
+import CocoMediaSDK
 import UIKit
 
 class SessionListViewController: UIViewController {
@@ -15,6 +16,28 @@ class SessionListViewController: UIViewController {
 
     // Do any additional setup after loading the view.
     fill(username: UserDataManager().getUsername())
+    // Register nib
+    tableListView.registerNib(ListViewItem.self)
+    do {
+      if let _savedNetworks = try client?.getSavedNetworks() {
+        networks = networks.union(_savedNetworks)
+      }
+    } catch {
+      debugPrint("error:", error.localizedDescription)
+    }
+    let request = NetworkManagementRequest(commandId: .COCO_MEDIA_NW_CMD_GET_ALL_NETWORKS)
+    do {
+      try request.execute { result in
+        switch result {
+        case let .success(response):
+          debugPrint("response:", response)
+        case let .failure(error):
+          debugPrint("error:", error.localizedDescription)
+        }
+      }
+    } catch {
+      debugPrint("error:", error.localizedDescription)
+    }
   }
 
   /*
@@ -47,4 +70,8 @@ class SessionListViewController: UIViewController {
   func fill(username: String, _ image: URL? = nil) {
     labelWelcome.text = "Welcome \(username)"
   }
+
+  // MARK: Private
+
+  private var networks: Set<CocoMediaSDK.Network> = .init()
 }

@@ -14,21 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     // Initialize CocoMediaSDK
-    let config = CocoMediaConfig()
-    config.accessList = "{\"appCapabilities\": [0]}"
+    let config = CocoMediaConfig(authDelegate: self)
     do {
       try CocoMediaClient.setup(config)
       client = CocoMediaClient.shared
     } catch {
-      debugPrint("error using setup()")
-    }
-    // Set RootViewController
-    if UserDataManager().getUserLoggedIn() == true {
-      let vc = SessionListViewController.initFromNib()
-      let nav = UINavigationController(rootViewController: vc)
-      let window = UIWindow(frame: UIScreen.main.bounds)
-      window.rootViewController = nav
-      window.makeKeyAndVisible()
+      debugPrint("error using setup()", error.localizedDescription)
     }
     return true
   }
@@ -45,5 +36,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Called when the user discards a scene session.
     // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+  }
+}
+
+extension AppDelegate: CocoClientAuthDelegate {
+  func accessTokenCallback(accessToken: String, status: Command.Status, context: UnsafeRawPointer?) {
+    // TODO: Add default implementation
+    return
+  }
+
+  func refreshTokenCallback(status: Command.Status) {
+    // TODO: Add default implementation
+    return
+  }
+
+  func authCallback(authorizationEndpoint: String, tokenEndpoint: String) {
+    debugPrint("authEndpoint:", authorizationEndpoint)
+    debugPrint("tokenEndpoint:", tokenEndpoint)
+    UserDataManager().setUserLoggedIn(false)
+    DispatchQueue.main.async {
+      let vc = ViewController.initFromNib()
+      let nav = UINavigationController(rootViewController: vc)
+      let window = UIWindow(frame: UIScreen.main.bounds)
+      window.rootViewController = nav
+      window.makeKeyAndVisible()
+    }
   }
 }
