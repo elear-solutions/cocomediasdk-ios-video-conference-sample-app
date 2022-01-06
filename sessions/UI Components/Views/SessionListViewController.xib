@@ -59,7 +59,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jaj-IZ-Vfa">
                             <rect key="frame" x="182" y="31" width="34" height="34"/>
-                            <state key="normal" image="phone.badge.plus.fill" catalog="system">
+                            <state key="normal" image="phone.fill.badge.plus" catalog="system">
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24" scale="large" weight="regular"/>
                             </state>
                             <connections>
@@ -94,7 +94,7 @@
     </objects>
     <resources>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="phone.badge.plus.fill" catalog="system" width="128" height="124"/>
+        <image name="phone.fill.badge.plus" catalog="system" width="128" height="124"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
