@@ -11,17 +11,28 @@ import UIKit
 class ViewController: UIViewController {
   // MARK: Lifecycle
 
-  override func viewWillAppear(_: Bool) {
-    super.viewWillAppear(true)
-    if UserDataManager().getUserLoggedIn() == true {
-      DispatchQueue.main.async {
-        let vc = SessionListViewController.initFromNib()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        nav.modalTransitionStyle = .coverVertical
-        nav.setNavigationBarHidden(true, animated: true)
-        self.present(nav, animated: true)
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    let request = NetworkManagementRequest(commandId: .COCO_MEDIA_NW_CMD_GET_ALL_NETWORKS)
+    do {
+      try request.execute { result in
+        switch result {
+        case let .success(response):
+          debugPrint(String(describing: self), #function, String(describing: response))
+          DispatchQueue.main.async {
+            let vc = SessionListViewController.initFromNib()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            nav.modalTransitionStyle = .coverVertical
+            nav.setNavigationBarHidden(true, animated: true)
+            self.present(nav, animated: true)
+          }
+        case let .failure(error):
+          debugPrint(String(describing: self), #function, String(describing: error))
+        }
       }
+    } catch {
+      debugPrint(String(describing: self), #function, String(describing: error))
     }
   }
 
@@ -75,7 +86,6 @@ class ViewController: UIViewController {
       let fetchTokenRequest = FetchTokenParameter(username: username)
       AuthenticationManager.fetchToken(params: fetchTokenRequest,
                                        handler: { [self] result in
-                                         guard self != nil else { return }
                                          switch result {
                                          case let .success(tokenResponse):
                                            // TODO: Set Token and save isUserLoggedIn

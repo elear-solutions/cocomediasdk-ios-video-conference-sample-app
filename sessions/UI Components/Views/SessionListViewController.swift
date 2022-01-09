@@ -18,26 +18,27 @@ class SessionListViewController: UIViewController {
     fill(username: UserDataManager().getUsername())
     // Register nib
     tableListView.registerNib(ListViewItem.self)
+    tableListView.delegate = self
     do {
       if let _savedNetworks = try client?.getSavedNetworks() {
         networks = networks.union(_savedNetworks)
+        tableListView.reloadData()
       }
     } catch {
       debugPrint("error:", error.localizedDescription)
     }
-    let request = NetworkManagementRequest(commandId: .COCO_MEDIA_NW_CMD_GET_ALL_NETWORKS)
-    do {
-      try request.execute { result in
-        switch result {
-        case let .success(response):
-          debugPrint("response:", response)
-        case let .failure(error):
-          debugPrint("error:", error.localizedDescription)
+    NetworkService().fetchNetworksApi(
+      success: { _networks in
+        guard let _networks = _networks else {
+          return
         }
+        self.networks = self.networks.union(_networks)
+        self.tableListView.reloadData()
+      },
+      failure: { _error in
+        debugPrint("error:", _error.localizedDescription)
       }
-    } catch {
-      debugPrint("error:", error.localizedDescription)
-    }
+    )
   }
 
   /*
@@ -74,4 +75,28 @@ class SessionListViewController: UIViewController {
   // MARK: Private
 
   private var networks: Set<CocoMediaSDK.Network> = .init()
+}
+
+extension SessionListViewController: UITableViewDelegate, UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return networks.count
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(cellType: ListViewItem.self, indexPath: indexPath)
+
+    let items = networks.sorted(by: {
+      $0.id > $1.id
+    })
+    let item = items[indexPath.row]
+    cell.tag = indexPath.row
+    cell.fill(label: item.name ?? item.id, networkId: item.id)
+    cell.selectionStyle = .none
+
+    return cell
+  }
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    debugPrint(indexPath)
+  }
 }
