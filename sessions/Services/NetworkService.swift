@@ -21,12 +21,12 @@ final class NetworkService {
           guard let success = success else {
             return
           }
-          
+
           guard let response = response.params else {
             success(nil)
             return
           }
-          
+
           let networks = GetNetworksResponse(response).networks
           success(networks)
         case let .failure(error):
