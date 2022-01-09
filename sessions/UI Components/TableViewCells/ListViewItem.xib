@@ -35,7 +35,7 @@
                                     <constraint firstAttribute="width" constant="32" id="Wza-3M-iDx"/>
                                 </constraints>
                                 <state key="normal">
-                                    <imageReference key="image" image="phone.circle" catalog="system" symbolScale="default"/>
+                                    <imageReference key="image" image="trash.circle" catalog="system" symbolScale="default"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="regular"/>
                                 </state>
                                 <connections>
@@ -65,7 +65,7 @@
         </view>
     </objects>
     <resources>
-        <image name="phone.circle" catalog="system" width="128" height="121"/>
+        <image name="trash.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
