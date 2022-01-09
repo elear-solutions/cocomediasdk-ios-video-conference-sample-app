@@ -10,7 +10,8 @@ import Foundation
 final class NetworkService {
   func createNetworkApi(networkName: String,
                         success: ((String) -> Void)?,
-                        failure: ((Error) -> Void)?) {
+                        failure: ((Error) -> Void)?)
+  {
     let params = CreateNetworkParameters(name: networkName,
                                          metadata: "sample metadata",
                                          type: .COCO_CLIENT_COCONET_TYPE_CALL_NET)
@@ -19,22 +20,22 @@ final class NetworkService {
     do {
       try request.execute { result in
         switch result {
-          case let .success(response):
-            debugPrint("response: ", response)
-            guard let params = response.params else {
-              return
-            }
-            guard let success = success else {
-              return
-            }
-            let networkId = CreateNetworkResponse(params).networkId
-            success(networkId)
-          case let .failure(error):
-            debugPrint("error: ", error)
-            guard let failure = failure else {
-              return
-            }
-            failure(error)
+        case let .success(response):
+          debugPrint("response: ", response)
+          guard let params = response.params else {
+            return
+          }
+          guard let success = success else {
+            return
+          }
+          let networkId = CreateNetworkResponse(params).networkId
+          success(networkId)
+        case let .failure(error):
+          debugPrint("error: ", error)
+          guard let failure = failure else {
+            return
+          }
+          failure(error)
         }
       }
     } catch {
@@ -45,6 +46,7 @@ final class NetworkService {
       failure(error)
     }
   }
+
   func fetchNetworksApi(success: (([Network]?) -> Void)?,
                         failure: ((Error) -> Void)?)
   {
