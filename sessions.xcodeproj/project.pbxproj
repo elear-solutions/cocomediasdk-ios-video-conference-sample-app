@@ -31,6 +31,8 @@
 		DC8960AB27720D2B00CF4196 /* AlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8960AA27720D2B00CF4196 /* AlamofireManager.swift */; };
 		DC8960AE2772270600CF4196 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8960AD2772270600CF4196 /* UserDataManager.swift */; };
 		DC9E24E9278808260073CECF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E24E8278808260073CECF /* NetworkService.swift */; };
+		DC9E24EC278B061A0073CECF /* CreateSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */; };
+		DC9E24ED278B061A0073CECF /* CreateSessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */; };
 		DCAC6A092785C46B003F0C98 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAC6A082785C46B003F0C98 /* UITableView+Extension.swift */; };
 		DCE60D992770894800C6F510 /* SessionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE60D972770894800C6F510 /* SessionListViewController.swift */; };
 		DCE60D9A2770894800C6F510 /* SessionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE60D982770894800C6F510 /* SessionListViewController.xib */; };
@@ -105,6 +107,8 @@
 		DC8960AA27720D2B00CF4196 /* AlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireManager.swift; sourceTree = "<group>"; };
 		DC8960AD2772270600CF4196 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		DC9E24E8278808260073CECF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionViewController.swift; sourceTree = "<group>"; };
+		DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateSessionViewController.xib; sourceTree = "<group>"; };
 		DCAC6A082785C46B003F0C98 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		DCE60D972770894800C6F510 /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
 		DCE60D982770894800C6F510 /* SessionListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionListViewController.xib; sourceTree = "<group>"; };
@@ -270,10 +274,12 @@
 		DC5183C92767511C00BC7DE2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DCE60D972770894800C6F510 /* SessionListViewController.swift */,
-				DCE60D982770894800C6F510 /* SessionListViewController.xib */,
+				DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */,
+				DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */,
 				DCE60D9F277090FE00C6F510 /* SessionCallViewController.swift */,
 				DCE60DA0277090FE00C6F510 /* SessionCallViewController.xib */,
+				DCE60D972770894800C6F510 /* SessionListViewController.swift */,
+				DCE60D982770894800C6F510 /* SessionListViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -408,6 +414,7 @@
 				DCE60DA2277090FE00C6F510 /* SessionCallViewController.xib in Resources */,
 				DC3789FA273E8EB800BA0594 /* Main.storyboard in Resources */,
 				DC5183BF2767262000BC7DE2 /* Localizable.strings in Resources */,
+				DC9E24ED278B061A0073CECF /* CreateSessionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +577,7 @@
 				DC8960AB27720D2B00CF4196 /* AlamofireManager.swift in Sources */,
 				DC621D4D2770B8DD000A3029 /* AuthenticationService.swift in Sources */,
 				DCAC6A092785C46B003F0C98 /* UITableView+Extension.swift in Sources */,
+				DC9E24EC278B061A0073CECF /* CreateSessionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
