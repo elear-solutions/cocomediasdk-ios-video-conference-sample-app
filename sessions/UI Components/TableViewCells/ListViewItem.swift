@@ -15,8 +15,11 @@ class ListViewItem: UITableViewCell {
   @IBOutlet var itemButton: UIButton!
 
   @IBAction func itemButtonTapped(_: Any) {}
+  
+  private var networkId: String?
 
-  func fill(label: String) {
+  func fill(label: String, networkId: String) {
     itemLabel.text = label
+    self.networkId = networkId
   }
 }
