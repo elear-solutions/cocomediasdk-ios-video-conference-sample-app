@@ -10,36 +10,31 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListViewItem" customModule="sessions" customModuleProvider="target">
-            <connections>
-                <outlet property="itemButton" destination="Brn-00-R44" id="TcB-lg-Ppd"/>
-                <outlet property="itemLabel" destination="we2-vw-8oJ" id="Any-3J-3bw"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListViewItem" customModule="sessions" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ListViewItem" customModule="sessions" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="ListViewItem" customModule="sessions" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="48" translatesAutoresizingMaskIntoConstraints="NO" id="yhe-AF-sNV">
+                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" translatesAutoresizingMaskIntoConstraints="NO" id="yhe-AF-sNV">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yhe-AF-sNV" id="4OE-0u-iZC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brn-00-R44">
-                                <rect key="frame" x="378" y="6" width="32" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brn-00-R44">
+                                <rect key="frame" x="366" y="6" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="Dqh-Ie-WGS"/>
                                     <constraint firstAttribute="width" constant="32" id="Wza-3M-iDx"/>
                                 </constraints>
                                 <state key="normal">
                                     <imageReference key="image" image="trash.circle" catalog="system" symbolScale="default"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="regular"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23" scale="large" weight="regular"/>
                                 </state>
                                 <connections>
-                                    <action selector="itemButtonTapped:" destination="-1" eventType="touchUpInside" id="JTw-xA-fxs"/>
+                                    <action selector="itemButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="5wf-Xc-b88"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="we2-vw-8oJ">
@@ -53,15 +48,21 @@
                             <constraint firstItem="we2-vw-8oJ" firstAttribute="centerY" secondItem="4OE-0u-iZC" secondAttribute="centerY" id="01S-5u-no6"/>
                             <constraint firstItem="Brn-00-R44" firstAttribute="centerY" secondItem="4OE-0u-iZC" secondAttribute="centerY" id="Q45-kT-Tds"/>
                             <constraint firstItem="we2-vw-8oJ" firstAttribute="leading" secondItem="4OE-0u-iZC" secondAttribute="leading" constant="16" id="T35-r1-Yg2"/>
-                            <constraint firstAttribute="trailing" secondItem="Brn-00-R44" secondAttribute="trailing" constant="4" id="tNs-U7-nAW"/>
+                            <constraint firstAttribute="trailing" secondItem="Brn-00-R44" secondAttribute="trailing" constant="16" id="tNs-U7-nAW"/>
                         </constraints>
                     </tableViewCellContentView>
                 </tableViewCell>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="137.68115942028987" y="295.98214285714283"/>
+            <connections>
+                <outlet property="itemButton" destination="Brn-00-R44" id="rAx-Nm-wDP"/>
+                <outlet property="itemLabel" destination="we2-vw-8oJ" id="WGf-Dh-ari"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="10.714285714285714"/>
         </view>
     </objects>
     <resources>

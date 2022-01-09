@@ -18,6 +18,7 @@ class SessionListViewController: UIViewController {
     fill(username: UserDataManager().getUsername())
     // Register nib
     tableListView.registerNib(ListViewItem.self)
+    tableListView.dataSource = self
     tableListView.delegate = self
     do {
       if let _savedNetworks = try client?.getSavedNetworks() {
@@ -33,7 +34,9 @@ class SessionListViewController: UIViewController {
           return
         }
         self.networks = self.networks.union(_networks)
-        self.tableListView.reloadData()
+        DispatchQueue.main.async {
+          self.tableListView.reloadData()
+        }
       },
       failure: { _error in
         debugPrint("error:", _error.localizedDescription)
@@ -66,6 +69,8 @@ class SessionListViewController: UIViewController {
 
   @IBAction func buttonTapped(_ sender: Any) {
     debugPrint("\(#function): \(String(describing: sender))")
+    let controller = CreateSessionViewController.initFromNib()
+    navigationController?.pushViewController(controller, animated: true)
   }
 
   func fill(username: String, _ image: URL? = nil) {
@@ -92,11 +97,12 @@ extension SessionListViewController: UITableViewDelegate, UITableViewDataSource 
     cell.tag = indexPath.row
     cell.fill(label: item.name ?? item.id, networkId: item.id)
     cell.selectionStyle = .none
-
     return cell
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    debugPrint(indexPath)
+    if let selectedCell = tableView.cellForRow(at: indexPath) as? ListViewItem {
+      debugPrint(selectedCell.networkId)
+    }
   }
 }

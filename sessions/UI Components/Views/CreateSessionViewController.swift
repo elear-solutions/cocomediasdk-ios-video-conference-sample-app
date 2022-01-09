@@ -12,6 +12,7 @@ class CreateSessionViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationController?.isNavigationBarHidden = false
 
     // Do any additional setup after loading the view.
   }
@@ -30,15 +31,17 @@ class CreateSessionViewController: UIViewController {
       alert.addAction(UIAlertAction(title: "Dismiss",
                                     style: .default,
                                     handler: nil))
-      self.present(alert, animated: true, completion: nil)
+      present(alert, animated: true, completion: nil)
       return
     }
-    showSpinner(onView: self.view)
+    showSpinner(onView: view)
     NetworkService().createNetworkApi(
       networkName: networkName,
-      success: { networkId in
+      success: { _ in
         self.removeSpinner()
-        self.dismiss(animated: true)
+        DispatchQueue.main.async {
+          self.navigationController?.popViewController(animated: true)
+        }
       },
       failure: { error in
         self.removeSpinner()
@@ -49,6 +52,7 @@ class CreateSessionViewController: UIViewController {
                                       style: .default,
                                       handler: nil))
         self.present(alert, animated: true, completion: nil)
-      })
+      }
+    )
   }
 }
