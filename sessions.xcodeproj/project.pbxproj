@@ -33,6 +33,7 @@
 		DC9E24E9278808260073CECF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E24E8278808260073CECF /* NetworkService.swift */; };
 		DC9E24EC278B061A0073CECF /* CreateSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */; };
 		DC9E24ED278B061A0073CECF /* CreateSessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */; };
+		DC9E24EF278B12D50073CECF /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E24EE278B12D50073CECF /* SpinnerView.swift */; };
 		DCAC6A092785C46B003F0C98 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAC6A082785C46B003F0C98 /* UITableView+Extension.swift */; };
 		DCE60D992770894800C6F510 /* SessionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE60D972770894800C6F510 /* SessionListViewController.swift */; };
 		DCE60D9A2770894800C6F510 /* SessionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE60D982770894800C6F510 /* SessionListViewController.xib */; };
@@ -109,6 +110,7 @@
 		DC9E24E8278808260073CECF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionViewController.swift; sourceTree = "<group>"; };
 		DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateSessionViewController.xib; sourceTree = "<group>"; };
+		DC9E24EE278B12D50073CECF /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		DCAC6A082785C46B003F0C98 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		DCE60D972770894800C6F510 /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
 		DCE60D982770894800C6F510 /* SessionListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionListViewController.xib; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				DC467A942743CD1A0025EBF3 /* PreviewView.swift */,
+				DC9E24EE278B12D50073CECF /* SpinnerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				DC8960A72771CBC300CF4196 /* RestApiHeaders.swift in Sources */,
 				DC5183C32767290D00BC7DE2 /* ListViewItem.swift in Sources */,
 				DCE60D992770894800C6F510 /* SessionListViewController.swift in Sources */,
+				DC9E24EF278B12D50073CECF /* SpinnerView.swift in Sources */,
 				DC467A952743CD1A0025EBF3 /* PreviewView.swift in Sources */,
 				DC3789F3273E8EB800BA0594 /* AppDelegate.swift in Sources */,
 				DC3789F5273E8EB800BA0594 /* SceneDelegate.swift in Sources */,
