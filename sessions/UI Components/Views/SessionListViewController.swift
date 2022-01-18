@@ -20,6 +20,7 @@ class SessionListViewController: UIViewController {
     tableListView.registerNib(ListViewItem.self)
     tableListView.dataSource = self
     tableListView.delegate = self
+    tableListView.configureRefreshController(self)
     do {
       if let _savedNetworks = try client?.getSavedNetworks() {
         networks = networks.union(_savedNetworks)
@@ -102,7 +103,33 @@ extension SessionListViewController: UITableViewDelegate, UITableViewDataSource 
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let selectedCell = tableView.cellForRow(at: indexPath) as? ListViewItem {
-      debugPrint(selectedCell.networkId)
+      debugPrint(selectedCell.networkId ?? "nil")
     }
+  }
+}
+
+extension SessionListViewController: TableViewReloadDataDelegate {
+  func reload() {
+    if let savedNetworks = try? client?.getSavedNetworks() {
+      networks = networks.intersection(savedNetworks)
+    }
+    NetworkService().fetchNetworksApi(
+      success: { _networks in
+        guard let _networks = _networks else {
+          return
+        }
+        self.networks = self.networks.union(_networks)
+        DispatchQueue.main.async {
+          self.tableListView.reloadData()
+          self.tableListView.refreshControl?.endRefreshing()
+        }
+      },
+      failure: { error in
+        debugPrint(error.localizedDescription)
+        DispatchQueue.main.async {
+          self.tableListView.refreshControl?.endRefreshing()
+        }
+      }
+    )
   }
 }

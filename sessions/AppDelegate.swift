@@ -6,11 +6,14 @@
 //
 
 import CocoMediaSDK
+import OSLog
 import UIKit
 
 @available(iOS 13.0, *)
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+  // MARK: Internal
+
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     // Initialize CocoMediaSDK
@@ -37,6 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
   }
+
+  // MARK: Private
+
+  private let logger = OSLog(AppDelegate.self)
 }
 
 extension AppDelegate: CocoClientAuthDelegate {
@@ -51,8 +58,11 @@ extension AppDelegate: CocoClientAuthDelegate {
   }
 
   func authCallback(authorizationEndpoint: String, tokenEndpoint: String) {
-    debugPrint("authEndpoint:", authorizationEndpoint)
-    debugPrint("tokenEndpoint:", tokenEndpoint)
+    os_log("%s started", log: logger, type: .debug, #function)
+    os_log("%s authEndpoint: %s", log: logger, type: .info, #function,
+           authorizationEndpoint)
+    os_log("%s tokenEndpoint: %s", log: logger, type: .info, #function,
+           tokenEndpoint)
     UserDataManager().setUserLoggedIn(false)
     DispatchQueue.main.async {
       let vc = ViewController.initFromNib()
@@ -61,5 +71,6 @@ extension AppDelegate: CocoClientAuthDelegate {
       window.rootViewController = nav
       window.makeKeyAndVisible()
     }
+    os_log("%s completed", log: logger, type: .debug, #function)
   }
 }

@@ -16,8 +16,19 @@ class ListViewItem: UITableViewCell {
 
   var networkId: String?
 
-  @IBAction func itemButtonTapped(_ sender: Any) {
-    debugPrint(String(describing: self), #function, sender)
+  @IBAction func itemButtonTapped(_: Any) {
+    guard let networkId = self.networkId else {
+      return
+    }
+    NetworkService().deleteNetworkApi(
+      networkId: networkId,
+      success: {
+        debugPrint("Deleted Successful ", networkId)
+      },
+      failure: { error in
+        debugPrint(#function, "error: ", error.localizedDescription)
+      }
+    )
   }
 
   func fill(label: String, networkId: String) {

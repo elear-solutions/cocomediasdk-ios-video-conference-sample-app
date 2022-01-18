@@ -35,24 +35,41 @@ class CreateSessionViewController: UIViewController {
       return
     }
     showSpinner(onView: view)
-    NetworkService().createNetworkApi(
-      networkName: networkName,
-      success: { _ in
-        self.removeSpinner()
-        DispatchQueue.main.async {
-          self.navigationController?.popViewController(animated: true)
-        }
-      },
-      failure: { error in
-        self.removeSpinner()
-        let alert = UIAlertController(title: "Error Encountered",
-                                      message: error.localizedDescription,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss",
-                                      style: .default,
-                                      handler: nil))
-        self.present(alert, animated: true, completion: nil)
-      }
-    )
+//    NetworkService().createNetworkApi(
+//      networkName: networkName,
+//      success: { _ in
+//        self.removeSpinner()
+//        DispatchQueue.main.async {
+//          self.navigationController?.popViewController(animated: true)
+//        }
+//      },
+//      failure: { error in
+//        self.removeSpinner()
+//        let alert = UIAlertController(title: "Error Encountered",
+//                                      message: error.localizedDescription,
+//                                      preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Dismiss",
+//                                      style: .default,
+//                                      handler: nil))
+//        self.present(alert, animated: true, completion: nil)
+//      }
+//    )
+    try? NetworkService().createNetworkApi(name: networkName,
+                                           success: { _ in
+                                             self.removeSpinner()
+                                             DispatchQueue.main.async {
+                                               self.navigationController?.popViewController(animated: true)
+                                             }
+                                           },
+                                           failure: { error in
+                                             self.removeSpinner()
+                                             let alert = UIAlertController(title: "Error Encountered",
+                                                                           message: error.localizedDescription,
+                                                                           preferredStyle: .alert)
+                                             alert.addAction(UIAlertAction(title: "Dismiss",
+                                                                           style: .default,
+                                                                           handler: nil))
+                                             self.present(alert, animated: true, completion: nil)
+                                           })
   }
 }

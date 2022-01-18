@@ -13,27 +13,6 @@ class ViewController: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    let request = NetworkManagementRequest(commandId: .COCO_MEDIA_NW_CMD_GET_ALL_NETWORKS)
-    do {
-      try request.execute { result in
-        switch result {
-        case let .success(response):
-          debugPrint(String(describing: self), #function, String(describing: response))
-          DispatchQueue.main.async {
-            let vc = SessionListViewController.initFromNib()
-            let nav = UINavigationController(rootViewController: vc)
-            nav.modalPresentationStyle = .fullScreen
-            nav.modalTransitionStyle = .coverVertical
-            nav.setNavigationBarHidden(true, animated: true)
-            self.present(nav, animated: true)
-          }
-        case let .failure(error):
-          debugPrint(String(describing: self), #function, String(describing: error))
-        }
-      }
-    } catch {
-      debugPrint(String(describing: self), #function, String(describing: error))
-    }
   }
 
   override func viewDidLoad() {

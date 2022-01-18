@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brn-00-R44">
-                                <rect key="frame" x="366" y="6" width="32" height="32"/>
+                                <rect key="frame" x="141" y="6" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="Dqh-Ie-WGS"/>
                                     <constraint firstAttribute="width" constant="32" id="Wza-3M-iDx"/>
@@ -48,7 +48,7 @@
                             <constraint firstItem="we2-vw-8oJ" firstAttribute="centerY" secondItem="4OE-0u-iZC" secondAttribute="centerY" id="01S-5u-no6"/>
                             <constraint firstItem="Brn-00-R44" firstAttribute="centerY" secondItem="4OE-0u-iZC" secondAttribute="centerY" id="Q45-kT-Tds"/>
                             <constraint firstItem="we2-vw-8oJ" firstAttribute="leading" secondItem="4OE-0u-iZC" secondAttribute="leading" constant="16" id="T35-r1-Yg2"/>
-                            <constraint firstAttribute="trailing" secondItem="Brn-00-R44" secondAttribute="trailing" constant="16" id="tNs-U7-nAW"/>
+                            <constraint firstItem="Brn-00-R44" firstAttribute="leading" secondItem="we2-vw-8oJ" secondAttribute="trailing" constant="16" id="d4m-Qg-RvL"/>
                         </constraints>
                     </tableViewCellContentView>
                 </tableViewCell>

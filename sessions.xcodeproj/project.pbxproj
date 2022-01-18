@@ -30,6 +30,7 @@
 		DC8960A927720B2C00CF4196 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8960A827720B2C00CF4196 /* Models.swift */; };
 		DC8960AB27720D2B00CF4196 /* AlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8960AA27720D2B00CF4196 /* AlamofireManager.swift */; };
 		DC8960AE2772270600CF4196 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8960AD2772270600CF4196 /* UserDataManager.swift */; };
+		DC923184279689C30009F355 /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC923183279689C30009F355 /* LaunchScreenController.swift */; };
 		DC9E24E9278808260073CECF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E24E8278808260073CECF /* NetworkService.swift */; };
 		DC9E24EC278B061A0073CECF /* CreateSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */; };
 		DC9E24ED278B061A0073CECF /* CreateSessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */; };
@@ -107,6 +108,7 @@
 		DC8960A827720B2C00CF4196 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		DC8960AA27720D2B00CF4196 /* AlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireManager.swift; sourceTree = "<group>"; };
 		DC8960AD2772270600CF4196 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
+		DC923183279689C30009F355 /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
 		DC9E24E8278808260073CECF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionViewController.swift; sourceTree = "<group>"; };
 		DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateSessionViewController.xib; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				DC5183BE2767262000BC7DE2 /* Localizable.strings */,
 				DC3789F2273E8EB800BA0594 /* AppDelegate.swift */,
 				DC621D492770B2D6000A3029 /* Global.swift */,
+				DC923183279689C30009F355 /* LaunchScreenController.swift */,
 				DC3789F4273E8EB800BA0594 /* SceneDelegate.swift */,
 				DC3789F6273E8EB800BA0594 /* ViewController.swift */,
 				DC3789FB273E8EB900BA0594 /* Assets.xcassets */,
@@ -565,6 +568,7 @@
 			files = (
 				DC4722C6276EF17600D7B45E /* String+Extension.swift in Sources */,
 				DC8960A927720B2C00CF4196 /* Models.swift in Sources */,
+				DC923184279689C30009F355 /* LaunchScreenController.swift in Sources */,
 				DC8960AE2772270600CF4196 /* UserDataManager.swift in Sources */,
 				DC621D5727710FBC000A3029 /* UIViewController+Extension.swift in Sources */,
 				DC3789F7273E8EB800BA0594 /* ViewController.swift in Sources */,

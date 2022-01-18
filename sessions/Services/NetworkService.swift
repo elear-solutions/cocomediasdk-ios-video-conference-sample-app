@@ -85,8 +85,11 @@ final class NetworkService {
     }
   }
 
-  func deleteNetworkApi(network: Network) {
-    let params = DeleteNetworkParameters(network: network)
+  func deleteNetworkApi(networkId: String,
+                        success: @escaping(() -> Void),
+                        failure: @escaping(Error) -> Void)
+  {
+    let params = DeleteNetworkParameters(id: networkId)
     let request = NetworkManagementRequest(
       commandId: .COCO_MEDIA_NW_CMD_DELETE_NETWORK,
       params
@@ -96,15 +99,32 @@ final class NetworkService {
         switch result {
         case let .success(response):
           debugPrint("response:", response)
-          guard let response = response.params else {
-            return
-          }
+          success()
         case let .failure(error):
           debugPrint("error:", error)
+          failure(error)
         }
       }
     } catch {
       debugPrint("error:", error.localizedDescription)
+      failure(error)
     }
+  }
+
+  func createNetworkApi(name: String,
+                        success: @escaping ((Network) -> Void),
+                        failure: @escaping ((Error) -> Void)) throws
+  {
+    try Network.create(name: name,
+                       metadata: "metadata",
+                       type: .COCO_CLIENT_COCONET_TYPE_CALL_NET,
+                       completionHandler: { result in
+                         switch result {
+                         case let .success(network):
+                           success(network)
+                         case let .failure(error):
+                           failure(error)
+                         }
+                       })
   }
 }
