@@ -74,7 +74,9 @@ class CreateSessionViewController: UIViewController {
                                              alert.addAction(UIAlertAction(title: "Dismiss",
                                                                            style: .default,
                                                                            handler: nil))
-                                             self.present(alert, animated: true, completion: nil)
+                                             DispatchQueue.main.async {
+                                               self.present(alert, animated: true, completion: nil)
+                                             }
                                            })
   }
 }
