@@ -65,7 +65,7 @@ extension AppDelegate: CocoClientAuthDelegate {
            tokenEndpoint)
     UserDataManager().setUserLoggedIn(false)
     DispatchQueue.main.async {
-      guard let rootViewController = UIApplication.shared.windows.first?.rootViewController?.navigationController else {
+      guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
         os_log("%s rootViewController: nil", log: self.logger, type: .error, #function)
         return
       }
