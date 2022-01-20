@@ -108,7 +108,7 @@ extension SessionListViewController: UITableViewDelegate, UITableViewDataSource 
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let selectedCell = tableView.cellForRow(at: indexPath) as? ListViewItem {
-      debugPrint("selectedNetwork:", dump(selectedCell.network))
+      selectedCell.network?.delegate = self
       do {
         try selectedCell.network?.connect()
       } catch {
@@ -141,5 +141,11 @@ extension SessionListViewController: TableViewReloadDataDelegate {
         }
       }
     )
+  }
+}
+
+extension SessionListViewController: NetworkDelegate {
+  func didChangeStatus(status from: Network.State, to: Network.State) {
+    debugPrint("[DBG] coco_media_client_connect_status_cb_t: ", from, to)
   }
 }
