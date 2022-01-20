@@ -17,6 +17,11 @@ class CreateSessionViewController: UIViewController {
     // Do any additional setup after loading the view.
   }
 
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.isNavigationBarHidden = true
+  }
+
   // MARK: Internal
 
   @IBOutlet var txtSessionName: UITextField!
