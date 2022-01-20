@@ -109,6 +109,11 @@ extension SessionListViewController: UITableViewDelegate, UITableViewDataSource 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let selectedCell = tableView.cellForRow(at: indexPath) as? ListViewItem {
       debugPrint("selectedNetwork:", dump(selectedCell.network))
+      do {
+        try selectedCell.network?.connect()
+      } catch {
+        debugPrint(error.localizedDescription)
+      }
     }
   }
 }
