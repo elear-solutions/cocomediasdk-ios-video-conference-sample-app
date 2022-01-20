@@ -65,11 +65,15 @@ extension AppDelegate: CocoClientAuthDelegate {
            tokenEndpoint)
     UserDataManager().setUserLoggedIn(false)
     DispatchQueue.main.async {
-      let vc = ViewController.initFromNib()
-      let nav = UINavigationController(rootViewController: vc)
-      let window = UIWindow(frame: UIScreen.main.bounds)
-      window.rootViewController = nav
-      window.makeKeyAndVisible()
+      guard let rootViewController = UIApplication.shared.windows.first?.rootViewController?.navigationController else {
+        os_log("%s rootViewController: nil", log: self.logger, type: .error, #function)
+        return
+      }
+      let loginVC = UIStoryboard(name: "Main", bundle: nil)
+        .instantiateViewController(identifier: "LoginViewController")
+      rootViewController.modalPresentationStyle = .fullScreen
+      rootViewController.modalTransitionStyle = .coverVertical
+      rootViewController.present(loginVC, animated: true)
     }
     os_log("%s completed", log: logger, type: .debug, #function)
   }

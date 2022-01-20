@@ -24,19 +24,19 @@ class LaunchScreenController: UIViewController {
           self.launchSessionsScreen()
         case let .failure(error):
           debugPrint(String(describing: self), #function, String(describing: error))
-          self.launchLoginScreen()
         }
       }
     } catch {
       debugPrint(String(describing: self), #function, String(describing: error))
-      launchLoginScreen()
     }
     os_log("%s completed", log: logger, type: .debug, #function)
   }
 
   override func viewDidLoad() {
+    os_log("%s started", log: logger, type: .debug, #function)
     super.viewDidLoad()
     // Do any additional setup after loading the view.
+    os_log("%s completed", log: logger, type: .debug, #function)
   }
 
   override func viewDidDisappear(_ animated: Bool) {
@@ -47,18 +47,6 @@ class LaunchScreenController: UIViewController {
   // MARK: Private
 
   private let logger = OSLog(LaunchScreenController.self)
-
-  private func launchLoginScreen() {
-    os_log("%s started", log: logger, type: .debug, #function)
-    DispatchQueue.main.async {
-      os_log("%s queue started", log: self.logger, type: .debug, #function)
-      let loginScreenController = ViewController.initFromNib()
-      self.navigationController?.pushViewController(loginScreenController,
-                                                    animated: false)
-      os_log("%s queue completed", log: self.logger, type: .debug, #function)
-    }
-    os_log("%s completed", log: logger, type: .debug, #function)
-  }
 
   private func launchSessionsScreen() {
     os_log("%s started", log: logger, type: .debug, #function)

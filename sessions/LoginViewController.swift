@@ -8,7 +8,7 @@
 import CocoMediaSDK
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
   // MARK: Lifecycle
 
   override func viewWillAppear(_ animated: Bool) {
