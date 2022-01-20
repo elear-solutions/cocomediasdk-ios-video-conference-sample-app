@@ -101,14 +101,14 @@ extension SessionListViewController: UITableViewDelegate, UITableViewDataSource 
     })
     let item = items[indexPath.row]
     cell.tag = indexPath.row
-    cell.fill(label: item.name ?? item.id, networkId: item.id)
+    cell.fill(network: item)
     cell.selectionStyle = .none
     return cell
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let selectedCell = tableView.cellForRow(at: indexPath) as? ListViewItem {
-      debugPrint(selectedCell.networkId ?? "nil")
+      debugPrint("selectedNetwork:", dump(selectedCell.network))
     }
   }
 }
