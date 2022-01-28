@@ -44,6 +44,10 @@ class LoginViewController: UIViewController {
                       for: .touchUpInside)
     // Demo URL for Development Environment
     baseUri.text = UserDataManager().getURL()
+    username.text = UserDataManager().getUsername()
+    username.isEnabled = !UserDataManager().getUserLoggedIn()
+    debugPrint("UserDataManager().getUserLoggedIn():", UserDataManager().getUserLoggedIn())
+    debugPrint("username.isEnabled:", username.isEnabled)
   }
 
   @objc private func didTouchUpInside(sender: UIButton) {
@@ -59,7 +63,6 @@ class LoginViewController: UIViewController {
       debugPrint("Username is empty")
       return
     }
-    UserDataManager().setUsername(username)
     switch sender {
     case btnConnect:
       let fetchTokenRequest = FetchTokenParameter(username: username)
@@ -67,8 +70,8 @@ class LoginViewController: UIViewController {
                                        handler: { [self] result in
                                          switch result {
                                          case let .success(tokenResponse):
-                                           // TODO: Set Token and save isUserLoggedIn
                                            UserDataManager().setUserLoggedIn(true)
+                                           UserDataManager().setUsername(username)
                                            try! client?.set(token: tokenResponse.rawString!)
                                            DispatchQueue.main.async {
                                              let vc = SessionListViewController.initFromNib()
