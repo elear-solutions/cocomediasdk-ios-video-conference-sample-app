@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import CocoMediaSDK
 import UIKit
 
 class SessionCallViewController: UIViewController {
@@ -42,6 +43,8 @@ class SessionCallViewController: UIViewController {
   @IBOutlet var btnEndCall: UIButton!
   @IBOutlet var btnToggleMicrophone: UIButton!
   @IBOutlet var btnToggleSpeaker: UIButton!
+
+  var selectedNetwork: Network?
 
   // MARK: Private
 
@@ -123,7 +126,8 @@ class SessionCallViewController: UIViewController {
         session.stopRunning()
       }
     case btnEndCall:
-      break
+      try? selectedNetwork?.disconnect()
+      navigationController?.popViewController(animated: true)
     case btnToggleMicrophone:
       break
     case btnToggleSpeaker:
@@ -160,5 +164,6 @@ class SessionCallViewController: UIViewController {
     setupEndCallButton()
     setupToggleMicrophoneButton()
     setupToggleSpeakerButton()
+    setupCallerPreviewView()
   }
 }
