@@ -21,14 +21,15 @@ class ListViewItem: UITableViewCell {
     network?.id
   }
 
-  @IBAction func itemButtonTapped(_: Any) {
+  @IBAction func itemButtonTapped(_ sender: Any) {
+    debugPrint("sender: ", sender)
     guard let networkId = self.networkId else {
       return
     }
     NetworkService().deleteNetworkApi(
       networkId: networkId,
       success: {
-        debugPrint("Deleted Successful ", networkId)
+        debugPrint("Deleted Successful: ", networkId)
       },
       failure: { error in
         debugPrint(#function, "error: ", error.localizedDescription)
