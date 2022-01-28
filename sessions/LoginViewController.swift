@@ -57,7 +57,6 @@ class LoginViewController: UIViewController {
       debugPrint("Base URI is empty")
       return
     }
-    UserDataManager().setURL(baseUri)
     guard let username = username.text, isValid(input: username) else {
       username.isHighlighted = true
       debugPrint("Username is empty")
@@ -70,6 +69,7 @@ class LoginViewController: UIViewController {
                                        handler: { [self] result in
                                          switch result {
                                          case let .success(tokenResponse):
+                                           UserDataManager().setURL(baseUri)
                                            UserDataManager().setUserLoggedIn(true)
                                            UserDataManager().setUsername(username)
                                            try! client?.set(token: tokenResponse.rawString!)
