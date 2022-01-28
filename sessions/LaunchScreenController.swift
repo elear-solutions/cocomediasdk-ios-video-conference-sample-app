@@ -24,6 +24,8 @@ class LaunchScreenController: UIViewController {
           self.launchSessionsScreen()
         case let .failure(error):
           debugPrint(String(describing: self), #function, String(describing: error))
+          AppDelegate().authCallback(authorizationEndpoint: "localhost",
+                                     tokenEndpoint: "localhost")
         }
       }
     } catch {
