@@ -9,7 +9,17 @@ import CocoMediaSDK
 import Foundation
 import UIKit
 
+protocol ListViewItemDelegate: AnyObject {
+  func didDeleteItem(_ item: Any?)
+}
+
 class ListViewItem: UITableViewCell {
+  // MARK: Public
+
+  public weak var delegate: ListViewItemDelegate?
+
+  // MARK: Internal
+
   static let identifier = String(describing: ListViewItem.self)
 
   @IBOutlet var itemLabel: UILabel!
@@ -30,6 +40,7 @@ class ListViewItem: UITableViewCell {
       networkId: networkId,
       success: {
         debugPrint("Deleted Successful: ", networkId)
+        self.delegate?.didDeleteItem(self.network)
       },
       failure: { error in
         debugPrint(#function, "error: ", error.localizedDescription)

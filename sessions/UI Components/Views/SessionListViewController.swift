@@ -103,6 +103,7 @@ extension SessionListViewController: UITableViewDelegate, UITableViewDataSource 
     cell.tag = indexPath.row
     cell.fill(network: item)
     cell.selectionStyle = .none
+    cell.delegate = self
     return cell
   }
 
@@ -163,6 +164,19 @@ extension SessionListViewController: NetworkDelegate {
       removeSpinner()
     default:
       break
+    }
+  }
+}
+
+extension SessionListViewController: ListViewItemDelegate {
+  func didDeleteItem(_ item: Any?) {
+    guard let network = item as? Network else {
+      return
+    }
+    self.networks.remove(network)
+    DispatchQueue.main.async {
+      self.tableListView.reloadData()
+      self.tableListView.refreshControl?.endRefreshing()
     }
   }
 }
