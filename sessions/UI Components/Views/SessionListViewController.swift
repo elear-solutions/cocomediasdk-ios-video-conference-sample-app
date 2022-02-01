@@ -103,7 +103,6 @@ extension SessionListViewController: UITableViewDelegate, UITableViewDataSource 
     cell.tag = indexPath.row
     cell.fill(network: item)
     cell.selectionStyle = .none
-    cell.delegate = self
     return cell
   }
 
