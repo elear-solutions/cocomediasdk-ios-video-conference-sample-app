@@ -29,7 +29,8 @@ class FetchTokenResponse: ResponseResult, Encodable {
 
   required init(json: JSON) {
     accessToken = json["access_token"].stringValue
-    expiresIn = "120" // json["expires_in"].stringValue // TODO: Remove after testing
+    // expiresIn = "120" // TODO: Remove after testing
+    expiresIn = json["expires_in"].stringValue
     tokenType = json["token_type"].stringValue
   }
 
