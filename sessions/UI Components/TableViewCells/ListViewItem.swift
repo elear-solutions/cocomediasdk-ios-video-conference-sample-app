@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 
 class ListViewItem: UITableViewCell {
-
-  // MARK: Internal
-
   static let identifier = String(describing: ListViewItem.self)
 
   @IBOutlet var itemLabel: UILabel!
