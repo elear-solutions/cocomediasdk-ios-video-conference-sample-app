@@ -173,7 +173,7 @@ extension SessionListViewController: ListViewItemDelegate {
     guard let network = item as? Network else {
       return
     }
-    self.networks.remove(network)
+    networks.remove(network)
     DispatchQueue.main.async {
       self.tableListView.reloadData()
       self.tableListView.refreshControl?.endRefreshing()
