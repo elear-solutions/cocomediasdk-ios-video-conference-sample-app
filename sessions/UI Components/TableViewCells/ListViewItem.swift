@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 
 class ListViewItem: UITableViewCell {
-  // MARK: Public
-
-  public weak var delegate: ListViewItemDelegate?
 
   // MARK: Internal
 
