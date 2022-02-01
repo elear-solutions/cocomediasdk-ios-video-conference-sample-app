@@ -127,6 +127,7 @@ extension SessionListViewController: UITableViewDelegate, UITableViewDataSource 
         {
           fatalError("networkId: nil")
         }
+        showSpinner(onView: view)
         NetworkService().deleteNetworkApi(networkId: networkId,
                                           success: {
                                             DispatchQueue.main.async {
@@ -134,10 +135,12 @@ extension SessionListViewController: UITableViewDelegate, UITableViewDataSource 
                                               self.networks.remove(network)
                                               tableView.deleteRows(at: [indexPath], with: .automatic)
                                               tableView.endUpdates()
+                                              self.removeSpinner()
                                             }
                                           },
                                           failure: { error in
                                             debugPrint(#function, "error: ", error.localizedDescription)
+                                            self.removeSpinner()
                                           })
       }
     }
