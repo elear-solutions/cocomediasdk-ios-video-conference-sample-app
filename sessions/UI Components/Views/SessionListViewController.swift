@@ -119,6 +119,30 @@ extension SessionListViewController: UITableViewDelegate, UITableViewDataSource 
       }
     }
   }
+
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      if let selectedCell = tableView.cellForRow(at: indexPath) as? ListViewItem {
+        guard let networkId = selectedCell.networkId,
+              let network = selectedCell.network else
+        {
+          fatalError("networkId: nil")
+        }
+        NetworkService().deleteNetworkApi(networkId: networkId,
+                                          success: {
+                                            DispatchQueue.main.async {
+                                              tableView.beginUpdates()
+                                              self.networks.remove(network)
+                                              tableView.deleteRows(at: [indexPath], with: .automatic)
+                                              tableView.endUpdates()
+                                            }
+                                          },
+                                          failure: { error in
+                                            debugPrint(#function, "error: ", error.localizedDescription)
+                                          })
+      }
+    }
+  }
 }
 
 extension SessionListViewController: TableViewReloadDataDelegate {
@@ -164,19 +188,6 @@ extension SessionListViewController: NetworkDelegate {
       removeSpinner()
     default:
       break
-    }
-  }
-}
-
-extension SessionListViewController: ListViewItemDelegate {
-  func didDeleteItem(_ item: Any?) {
-    guard let network = item as? Network else {
-      return
-    }
-    self.networks.remove(network)
-    DispatchQueue.main.async {
-      self.tableListView.reloadData()
-      self.tableListView.refreshControl?.endRefreshing()
     }
   }
 }

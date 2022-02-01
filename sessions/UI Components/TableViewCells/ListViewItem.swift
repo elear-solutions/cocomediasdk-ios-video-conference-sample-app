@@ -9,10 +9,6 @@ import CocoMediaSDK
 import Foundation
 import UIKit
 
-protocol ListViewItemDelegate: AnyObject {
-  func didDeleteItem(_ item: Any?)
-}
-
 class ListViewItem: UITableViewCell {
   // MARK: Public
 
@@ -29,23 +25,6 @@ class ListViewItem: UITableViewCell {
 
   var networkId: String? {
     network?.id
-  }
-
-  @IBAction func itemButtonTapped(_ sender: Any) {
-    debugPrint("sender: ", sender)
-    guard let networkId = self.networkId else {
-      return
-    }
-    NetworkService().deleteNetworkApi(
-      networkId: networkId,
-      success: {
-        debugPrint("Deleted Successful: ", networkId)
-        self.delegate?.didDeleteItem(self.network)
-      },
-      failure: { error in
-        debugPrint(#function, "error: ", error.localizedDescription)
-      }
-    )
   }
 
   func fill(network: Network) {
