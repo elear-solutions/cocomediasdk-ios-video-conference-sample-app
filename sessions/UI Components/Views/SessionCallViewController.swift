@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import CocoMediaPlayer
 import CocoMediaSDK
 import UIKit
 
@@ -49,6 +50,8 @@ class SessionCallViewController: UIViewController {
   // MARK: Private
 
   private let session = AVCaptureSession()
+
+  private var players: [SampleBufferPlayer] = .init()
 
   private func setupToggleCameraButton() {
     btnToggleCamera.addTarget(
@@ -137,7 +140,7 @@ class SessionCallViewController: UIViewController {
     }
   }
 
-  private func setupCallerPreviewView() {
+  private func setupHostPreviewView() {
     callerPreview.session = self.session
     session.beginConfiguration()
     let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
@@ -158,12 +161,20 @@ class SessionCallViewController: UIViewController {
     session.commitConfiguration()
   }
 
+  private func setupParticipantView() {
+    players = .init(repeating: SampleBufferPlayer(),
+                    count: 3)
+    players[0].attach(view: callPreview02)
+    players[1].attach(view: callPreview03)
+    players[2].attach(view: callPreview04)
+  }
+
   private func setup() {
     setupToggleCameraButton()
     setupToggleVideoButton()
     setupEndCallButton()
     setupToggleMicrophoneButton()
     setupToggleSpeakerButton()
-    setupCallerPreviewView()
+    setupHostPreviewView()
   }
 }
