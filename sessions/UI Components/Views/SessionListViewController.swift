@@ -26,6 +26,7 @@ class SessionListViewController: UIViewController {
         guard let _networks = _networks else {
           return
         }
+        self.networks.removeAll()
         self.networks = self.networks.union(_networks)
         DispatchQueue.main.async {
           self.tableListView.reloadData()
