@@ -21,14 +21,6 @@ class SessionListViewController: UIViewController {
     tableListView.dataSource = self
     tableListView.delegate = self
     tableListView.configureRefreshController(self)
-    do {
-      if let _savedNetworks = try client?.getSavedNetworks() {
-        networks = networks.union(_savedNetworks)
-        tableListView.reloadData()
-      }
-    } catch {
-      debugPrint("error:", error.localizedDescription)
-    }
     NetworkService().fetchNetworksApi(
       success: { _networks in
         guard let _networks = _networks else {
@@ -149,9 +141,6 @@ extension SessionListViewController: UITableViewDelegate, UITableViewDataSource 
 
 extension SessionListViewController: TableViewReloadDataDelegate {
   func reload() {
-    if let savedNetworks = try? client?.getSavedNetworks() {
-      networks = networks.intersection(savedNetworks)
-    }
     NetworkService().fetchNetworksApi(
       success: { _networks in
         guard let _networks = _networks else {
