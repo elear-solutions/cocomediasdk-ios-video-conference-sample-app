@@ -18,6 +18,13 @@ class SessionCallViewController: UIViewController {
 
     // Do any additional setup after loading the view.
     setup()
+    selectedNetwork?.delegate = self
+    try? selectedNetwork?.connect()
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    try? selectedNetwork?.disconnect()
   }
 
   // MARK: Internal
@@ -159,6 +166,10 @@ class SessionCallViewController: UIViewController {
     session.sessionPreset = .hd1920x1080
     session.addOutput(photoOutput)
     session.commitConfiguration()
+
+    showSpinner(onView: callPreview02)
+    showSpinner(onView: callPreview03)
+    showSpinner(onView: callPreview04)
   }
 
   private func setupParticipantView() {
@@ -176,5 +187,25 @@ class SessionCallViewController: UIViewController {
     setupToggleMicrophoneButton()
     setupToggleSpeakerButton()
     setupHostPreviewView()
+  }
+}
+
+extension SessionCallViewController: NetworkDelegate {
+  func didChangeStatus(status from: Network.State, to: Network.State) {
+    debugPrint("[DBG] coco_media_client_connect_status_cb_t: ", from, to)
+    switch to {
+    case .COCO_CLIENT_REMOTE_CONNECTED:
+      removeSpinner()
+    case .COCO_CLIENT_COCONET_BLOCKED,
+         .COCO_CLIENT_COCONET_RESET,
+         .COCO_CLIENT_CONNECT_ERROR,
+         .COCO_CLIENT_DISCONNECTED:
+      removeSpinner()
+      DispatchQueue.main.async {
+        self.navigationController?.popViewController(animated: true)
+      }
+    default:
+      break
+    }
   }
 }

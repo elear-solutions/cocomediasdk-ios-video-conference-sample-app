@@ -101,14 +101,9 @@ extension SessionListViewController: UITableViewDelegate, UITableViewDataSource 
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let selectedCell = tableView.cellForRow(at: indexPath) as? ListViewItem {
-      selectedCell.network?.delegate = self
-      do {
-        showSpinner(onView: view)
-        try selectedCell.network?.connect()
-      } catch {
-        debugPrint(error.localizedDescription)
-        removeSpinner()
-      }
+      let controller = SessionCallViewController.initFromNib()
+      controller.selectedNetwork = selectedCell.network
+      navigationController?.pushViewController(controller, animated: true)
     }
   }
 
@@ -160,26 +155,5 @@ extension SessionListViewController: TableViewReloadDataDelegate {
         }
       }
     )
-  }
-}
-
-extension SessionListViewController: NetworkDelegate {
-  func didChangeStatus(status from: Network.State, to: Network.State) {
-    debugPrint("[DBG] coco_media_client_connect_status_cb_t: ", from, to)
-    switch to {
-    case .COCO_CLIENT_REMOTE_CONNECTED:
-      removeSpinner()
-      DispatchQueue.main.async {
-        let controller = SessionCallViewController.initFromNib()
-        self.navigationController?.pushViewController(controller, animated: true)
-      }
-    case .COCO_CLIENT_COCONET_BLOCKED,
-         .COCO_CLIENT_COCONET_RESET,
-         .COCO_CLIENT_CONNECT_ERROR,
-         .COCO_CLIENT_DISCONNECTED:
-      removeSpinner()
-    default:
-      break
-    }
   }
 }
