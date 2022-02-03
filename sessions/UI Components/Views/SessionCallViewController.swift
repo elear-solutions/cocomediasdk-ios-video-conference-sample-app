@@ -18,6 +18,7 @@ class SessionCallViewController: UIViewController {
 
     // Do any additional setup after loading the view.
     setup()
+    debugPrint("selectedNetwork: ", Unmanaged.passUnretained(selectedNetwork!).toOpaque())
     selectedNetwork?.delegate = self
     try? selectedNetwork?.connect()
   }
@@ -193,6 +194,7 @@ class SessionCallViewController: UIViewController {
 extension SessionCallViewController: NetworkDelegate {
   func didChangeStatus(_ network: Network, status from: Network.State, to: Network.State) {
     debugPrint("[DBG] coco_media_client_connect_status_cb_t: ", from, to)
+    debugPrint("[DBG] selectedNetwork: ", Unmanaged.passUnretained(network).toOpaque())
     switch to {
     case .COCO_CLIENT_REMOTE_CONNECTED:
       removeSpinner()
