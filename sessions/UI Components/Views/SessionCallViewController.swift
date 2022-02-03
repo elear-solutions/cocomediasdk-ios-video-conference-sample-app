@@ -191,11 +191,20 @@ class SessionCallViewController: UIViewController {
 }
 
 extension SessionCallViewController: NetworkDelegate {
-  func didChangeStatus(status from: Network.State, to: Network.State) {
+  func didChangeStatus(_ network: Network, status from: Network.State, to: Network.State) {
     debugPrint("[DBG] coco_media_client_connect_status_cb_t: ", from, to)
     switch to {
     case .COCO_CLIENT_REMOTE_CONNECTED:
       removeSpinner()
+      try! network.getChannels(completionHandler: { result in
+        debugPrint(result)
+        switch result {
+        case let .success(channels):
+          debugPrint(channels)
+        case let .failure(error):
+          debugPrint(error.localizedDescription)
+        }
+      })
     case .COCO_CLIENT_COCONET_BLOCKED,
          .COCO_CLIENT_COCONET_RESET,
          .COCO_CLIENT_CONNECT_ERROR,
