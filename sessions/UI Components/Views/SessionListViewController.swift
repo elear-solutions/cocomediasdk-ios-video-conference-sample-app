@@ -21,6 +21,11 @@ class SessionListViewController: UIViewController {
     tableListView.dataSource = self
     tableListView.delegate = self
     tableListView.configureRefreshController(self)
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.isNavigationBarHidden = true
     NetworkService().fetchNetworksApi(
       success: { _networks in
         guard let _networks = _networks else {
@@ -36,11 +41,6 @@ class SessionListViewController: UIViewController {
         debugPrint("error:", _error.localizedDescription)
       }
     )
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.isNavigationBarHidden = true
   }
 
   /*
