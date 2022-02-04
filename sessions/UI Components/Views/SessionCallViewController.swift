@@ -199,12 +199,26 @@ extension SessionCallViewController: NetworkDelegate {
     case .COCO_CLIENT_REMOTE_CONNECTED:
       removeSpinner()
       try! network.getChannels(completionHandler: { result in
-        debugPrint(result)
+        debugPrint("[DBG] result:", result)
         switch result {
         case let .success(channels):
-          debugPrint(channels)
+          debugPrint("[DBG] channels.count:", channels.count)
+          for channel in channels {
+            do {
+              try channel.join(completionHandler: { result in
+                switch result {
+                case let .success(channel):
+                  debugPrint("[DBG] channel:", channel)
+                case let .failure(error):
+                  debugPrint("[DBG] channel.error:", error.localizedDescription)
+                }
+              })
+            } catch {
+              debugPrint("[DBG] error:", error.localizedDescription)
+            }
+          }
         case let .failure(error):
-          debugPrint(error.localizedDescription)
+          debugPrint("[DBG] getChannels.error:", error.localizedDescription)
         }
       })
     case .COCO_CLIENT_COCONET_BLOCKED,
