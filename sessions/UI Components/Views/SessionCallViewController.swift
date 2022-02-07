@@ -9,6 +9,7 @@ import AVFoundation
 import CocoMediaPlayer
 import CocoMediaSDK
 import UIKit
+import OSLog
 
 class SessionCallViewController: UIViewController {
   // MARK: Lifecycle
@@ -18,14 +19,23 @@ class SessionCallViewController: UIViewController {
 
     // Do any additional setup after loading the view.
     setup()
-    debugPrint("selectedNetwork: ", Unmanaged.passUnretained(selectedNetwork!).toOpaque())
-    selectedNetwork?.delegate = self
-    try? selectedNetwork?.connect()
+    do {
+      selectedNetwork?.delegate = self
+      debugPrint("[DBG] \(#file) -> \(#function) \(#file) -> \(#function) connecting: \(selectedNetwork)")
+      try selectedNetwork?.connect()
+    } catch {
+      debugPrint("[DBG] \(#file) -> \(#function) \(#file) -> \(#function)  error: \(error.localizedDescription)")
+    }
   }
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    try? selectedNetwork?.disconnect()
+    do {
+      debugPrint("[DBG] \(#file) -> \(#function) disconnecting: \(selectedNetwork)")
+      try selectedNetwork?.disconnect()
+    } catch {
+      debugPrint("[DBG] \(#file) -> \(#function) \(#function) error: \(error.localizedDescription)")
+    }
   }
 
   // MARK: Internal
@@ -187,38 +197,38 @@ class SessionCallViewController: UIViewController {
     setupEndCallButton()
     setupToggleMicrophoneButton()
     setupToggleSpeakerButton()
-    setupHostPreviewView()
+    // setupHostPreviewView()
   }
 }
 
 extension SessionCallViewController: NetworkDelegate {
   func didChangeStatus(_ network: Network, status from: Network.State, to: Network.State) {
-    debugPrint("[DBG] coco_media_client_connect_status_cb_t: ", from, to)
-    debugPrint("[DBG] selectedNetwork: ", Unmanaged.passUnretained(network).toOpaque())
+    debugPrint("[DBG] \(#file) -> \(#function) coco_media_client_connect_status_cb_t: ", from, to)
+    debugPrint("[DBG] \(#file) -> \(#function) selectedNetwork: ", Unmanaged.passUnretained(network).toOpaque())
     switch to {
     case .COCO_CLIENT_REMOTE_CONNECTED:
       removeSpinner()
       try! network.getChannels(completionHandler: { result in
-        debugPrint("[DBG] result:", result)
+        debugPrint("[DBG] \(#file) -> \(#function) result:", result)
         switch result {
         case let .success(channels):
-          debugPrint("[DBG] channels.count:", channels.count)
+          debugPrint("[DBG] \(#file) -> \(#function) channels.count:", channels.count)
           for channel in channels {
             do {
-              try channel.join(completionHandler: { result in
-                switch result {
-                case let .success(channel):
-                  debugPrint("[DBG] channel:", channel)
-                case let .failure(error):
-                  debugPrint("[DBG] channel.error:", error.localizedDescription)
-                }
-              })
+              debugPrint("[DBG] \(#file) -> \(#function) channel:",
+                         String(describing: channel.id),
+                         String(describing: channel.metadata),
+                         String(describing: channel.name),
+                         String(describing: channel.maxStreams),
+                         String(describing: channel.network.name))
+              channel.delegate = self
+              try channel.join()
             } catch {
-              debugPrint("[DBG] error:", error.localizedDescription)
+              debugPrint("[DBG] \(#file) -> \(#function) error:", error.localizedDescription)
             }
           }
         case let .failure(error):
-          debugPrint("[DBG] getChannels.error:", error.localizedDescription)
+          debugPrint("[DBG] \(#file) -> \(#function) getChannels.error:", error.localizedDescription)
         }
       })
     case .COCO_CLIENT_COCONET_BLOCKED,
@@ -232,5 +242,19 @@ extension SessionCallViewController: NetworkDelegate {
     default:
       break
     }
+  }
+}
+
+extension SessionCallViewController: ChannelDelegate {
+  func didChangeStatus(_ channel: Channel, status from: Channel.Status, to: Channel.Status) {
+    debugPrint("[DBG] \(#file) -> \(#function) \(#function) channel:",
+               String(describing: channel.id),
+               String(describing: channel.metadata),
+               String(describing: channel.name),
+               String(describing: channel.streams),
+               String(describing: channel.maxStreams),
+               String(describing: channel.network.name))
+    debugPrint("[DBG] \(#file) -> \(#function) status from -> to", from, to)
+    channel.streams.first?.start(<#T##dataHandler: ((PackedFrame) -> Void)?##((PackedFrame) -> Void)?##(PackedFrame) -> Void#>)
   }
 }
