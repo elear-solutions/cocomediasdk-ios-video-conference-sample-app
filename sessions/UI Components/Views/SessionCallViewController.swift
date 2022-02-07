@@ -255,6 +255,5 @@ extension SessionCallViewController: ChannelDelegate {
                String(describing: channel.maxStreams),
                String(describing: channel.network.name))
     debugPrint("[DBG] \(#file) -> \(#function) status from -> to", from, to)
-    channel.streams.first?.start(<#T##dataHandler: ((PackedFrame) -> Void)?##((PackedFrame) -> Void)?##(PackedFrame) -> Void#>)
   }
 }
