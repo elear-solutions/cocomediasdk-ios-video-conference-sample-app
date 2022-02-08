@@ -1,0 +1,26 @@
+PODS:
+  - CocoaLumberjack/Core (3.7.0)
+  - CocoaLumberjack/Swift (3.7.0):
+    - CocoaLumberjack/Core
+  - SwiftFormat/CLI (0.47.11)
+  - SwiftLint (0.42.0)
+
+DEPENDENCIES:
+  - CocoaLumberjack/Swift
+  - SwiftFormat/CLI
+  - SwiftLint
+
+SPEC REPOS:
+  trunk:
+    - CocoaLumberjack
+    - SwiftFormat
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
+  SwiftFormat: 6f2fd4689e09959ba5b690ab950279e33eb6441e
+  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
+
+PODFILE CHECKSUM: 391cd487549664f220dfa82d5cf2ae835b330da5
+
+COCOAPODS: 1.10.2

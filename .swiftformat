@@ -1,0 +1,96 @@
+# Exclude files
+--exclude Pods
+--exclude **/*.c
+--exclude **/*.h
+# Rules
+--enable andOperator
+--enable anyObjectProtocol
+--allman false
+--assetliterals visual-width
+--beforemarks typealias, struct
+--binarygrouping 4,8
+--enable blankLinesAroundMark
+--enable blankLinesBetweenScopes
+--disable braces
+--categorymark "MARK: %c"
+--classthreshold 0
+--closingparen balanced
+--commas always
+--conflictmarkers reject
+--enable consecutiveBlankLines
+--enable consecutiveSpaces
+--enable duplicateImports
+--decimalgrouping 3,6
+--elseposition same-line
+--enumthreshold 0
+--exponentcase lowercase
+--exponentgrouping disabled
+--extensionacl on-extension
+--extensionlength 0
+--extensionmark "MARK: - %t + %c"
+--disable fileHeader
+--fractiongrouping disabled
+--fragment false
+--funcattributes same-line
+--groupedextension "MARK: %c"
+--guardelse same-line
+--header ignore
+--hexgrouping 4,8
+--hexliteralcase uppercase
+--ifdef indent
+--importgrouping alphabetized
+--indent 2
+--indentcase false
+--lifecycle awakeFromNib, viewDidLoad, viewWillAppear, viewWillLayoutSubviews, viewDidLayoutSubviews, viewDidAppear, viewWillDisappear, viewDidDisappear
+--linebreaks lf
+--markextensions always
+--marktypes always
+--maxwidth none
+--modifierorder
+--nevertrailing
+--nospaceoperators
+--nowrapoperators
+--octalgrouping 4,8
+--operatorfunc spaced
+--enable organizeDeclarations
+--organizetypes class,enum,struct
+--patternlet hoist
+--ranges spaced
+--enable redundantFileprivate
+--enable redundantGet
+--enable redundantInit
+--enable redundantLet
+--enable redundantObjc
+--enable redundantParens
+--enable redundantRawValues
+--enable redundantVoidReturnType
+--redundanttype inferred
+--self remove
+--selfrequired
+--semicolons inline
+--shortoptionals always
+--smarttabs disabled
+--enable sortedSwitchCases
+--enable spaceAroundBraces
+--enable spaceAroundGenerics
+--disable spaceAroundParens
+--enable spaceInsideBraces
+--enable spaceInsideBrackets
+--enable strongOutlets
+--stripunusedargs unnamed-only
+--structthreshold 0
+--tabwidth 2
+--trailingclosures
+--trimwhitespace always
+--typeattributes preserve
+--typemark "MARK: - %t"
+--varattributes preserve
+--voidtype void
+--wraparguments preserve
+--wrapcollections preserve
+--wrapconditions preserve
+--enable wrapEnumCases
+--wrapparameters preserve
+--wrapreturntype preserve
+--xcodeindentation disabled
+--yodaswap literals-only
