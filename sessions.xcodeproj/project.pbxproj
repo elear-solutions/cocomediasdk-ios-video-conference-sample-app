@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,7 @@
 		DC378A0A273E8EBA00BA0594 /* sessionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC378A09273E8EBA00BA0594 /* sessionsTests.swift */; };
 		DC378A15273E8EBA00BA0594 /* sessionsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC378A14273E8EBA00BA0594 /* sessionsUITests.swift */; };
 		DC467A952743CD1A0025EBF3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC467A942743CD1A0025EBF3 /* PreviewView.swift */; };
+		DC5183BF2767262000BC7DE2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC5183BE2767262000BC7DE2 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		DC378A14273E8EBA00BA0594 /* sessionsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sessionsUITests.swift; sourceTree = "<group>"; };
 		DC378A16273E8EBA00BA0594 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC467A942743CD1A0025EBF3 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		DC5183BE2767262000BC7DE2 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +115,6 @@
 				D1B8B098775D0459F912E2D6 /* Pods-sessionsTests.debug.xcconfig */,
 				43CF653FF4705D3BB1F465E6 /* Pods-sessionsTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -142,14 +143,17 @@
 		DC3789F1273E8EB800BA0594 /* sessions */ = {
 			isa = PBXGroup;
 			children = (
+				DC378A00273E8EB900BA0594 /* Info.plist */,
 				DC3789F2273E8EB800BA0594 /* AppDelegate.swift */,
 				DC3789F4273E8EB800BA0594 /* SceneDelegate.swift */,
 				DC3789F6273E8EB800BA0594 /* ViewController.swift */,
-				DC3789F8273E8EB800BA0594 /* Main.storyboard */,
 				DC3789FB273E8EB900BA0594 /* Assets.xcassets */,
+				DC5183BB2767251800BC7DE2 /* Common */,
+				DC5183BA276724FE00BC7DE2 /* Extensions */,
+				DC5183BC2767252300BC7DE2 /* UI Components */,
 				DC3789FD273E8EB900BA0594 /* LaunchScreen.storyboard */,
-				DC378A00273E8EB900BA0594 /* Info.plist */,
-				DC467A942743CD1A0025EBF3 /* PreviewView.swift */,
+				DC3789F8273E8EB800BA0594 /* Main.storyboard */,
+				DC5183BE2767262000BC7DE2 /* Localizable.strings */,
 			);
 			path = sessions;
 			sourceTree = "<group>";
@@ -170,6 +174,36 @@
 				DC378A16273E8EBA00BA0594 /* Info.plist */,
 			);
 			path = sessionsUITests;
+			sourceTree = "<group>";
+		};
+		DC5183BA276724FE00BC7DE2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DC5183BB2767251800BC7DE2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DC5183BD2767258800BC7DE2 /* Views */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		DC5183BC2767252300BC7DE2 /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "UI Components";
+			sourceTree = "<group>";
+		};
+		DC5183BD2767258800BC7DE2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DC467A942743CD1A0025EBF3 /* PreviewView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,6 +317,7 @@
 				DC3789FF273E8EB900BA0594 /* LaunchScreen.storyboard in Resources */,
 				DC3789FC273E8EB900BA0594 /* Assets.xcassets in Resources */,
 				DC3789FA273E8EB800BA0594 /* Main.storyboard in Resources */,
+				DC5183BF2767262000BC7DE2 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
