@@ -8,8 +8,8 @@
 import AVFoundation
 import CocoMediaPlayer
 import CocoMediaSDK
-import UIKit
 import OSLog
+import UIKit
 
 class SessionCallViewController: UIViewController {
   // MARK: Lifecycle
@@ -202,6 +202,14 @@ class SessionCallViewController: UIViewController {
 }
 
 extension SessionCallViewController: NetworkDelegate {
+  func didReceiveData(_ network: Network, from node: Node, data: String?) {
+    return
+  }
+
+  func didReceiveContentInfo(_ network: Network, from node: Node, metadata: String?, time stamp: TimeInterval) {
+    return
+  }
+
   func didChangeStatus(_ network: Network, status from: Network.State, to: Network.State) {
     debugPrint("[DBG] \(#file) -> \(#function) coco_media_client_connect_status_cb_t: ", from, to)
     debugPrint("[DBG] \(#file) -> \(#function) selectedNetwork: ", Unmanaged.passUnretained(network).toOpaque())
@@ -246,14 +254,29 @@ extension SessionCallViewController: NetworkDelegate {
 }
 
 extension SessionCallViewController: ChannelDelegate {
+  func didReceive(_ channel: Channel, rxStream: RxStream) {
+    channel.debugPrint()
+  }
+
   func didChangeStatus(_ channel: Channel, status from: Channel.Status, to: Channel.Status) {
-    debugPrint("[DBG] \(#file) -> \(#function) \(#function) channel:",
-               String(describing: channel.id),
-               String(describing: channel.metadata),
-               String(describing: channel.name),
-               String(describing: channel.streams),
-               String(describing: channel.maxStreams),
-               String(describing: channel.network.name))
+    debugPrint("[DBG] \(#file) -> \(#function) channel: \(channel)")
+    debugPrint("[DBG] \(#file) -> \(#function) channel: \(String(reflecting: channel))")
     debugPrint("[DBG] \(#file) -> \(#function) status from -> to", from, to)
+  }
+}
+
+extension Channel {
+  func debugPrint() {
+    let json = """
+    channel: {
+    id: \(String(describing: id))
+    metadata: \(String(describing: metadata))
+    name: \(String(describing: name))
+    streams: \(String(describing: streams.count))
+    maxStreams: \(String(describing: maxStreams))
+    network: \(String(describing: network.name))
+    }
+    """
+    Swift.debugPrint(json)
   }
 }
