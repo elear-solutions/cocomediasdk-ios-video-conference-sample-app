@@ -8,8 +8,8 @@
 import AVFoundation
 import CocoMediaPlayer
 import CocoMediaSDK
-import UIKit
 import OSLog
+import UIKit
 
 class SessionCallViewController: UIViewController {
   // MARK: Lifecycle
@@ -21,7 +21,7 @@ class SessionCallViewController: UIViewController {
     setup()
     do {
       selectedNetwork?.delegate = self
-      debugPrint("[DBG] \(#file) -> \(#function) \(#file) -> \(#function) connecting: \(selectedNetwork)")
+      debugPrint("[DBG] \(#file) -> \(#function) \(#file) -> \(#function) connecting: \(selectedNetwork!)")
       try selectedNetwork?.connect()
     } catch {
       debugPrint("[DBG] \(#file) -> \(#function) \(#file) -> \(#function)  error: \(error.localizedDescription)")
@@ -31,7 +31,7 @@ class SessionCallViewController: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     do {
-      debugPrint("[DBG] \(#file) -> \(#function) disconnecting: \(selectedNetwork)")
+      debugPrint("[DBG] \(#file) -> \(#function) disconnecting: \(selectedNetwork!)")
       try selectedNetwork?.disconnect()
     } catch {
       debugPrint("[DBG] \(#file) -> \(#function) \(#function) error: \(error.localizedDescription)")
@@ -69,7 +69,8 @@ class SessionCallViewController: UIViewController {
 
   private let session = AVCaptureSession()
 
-  private var players: [SampleBufferPlayer] = .init()
+  private var players: [SampleBufferPlayer] = .init(repeating: SampleBufferPlayer(),
+                                                    count: 3)
 
   private func setupToggleCameraButton() {
     btnToggleCamera.addTarget(
@@ -184,8 +185,6 @@ class SessionCallViewController: UIViewController {
   }
 
   private func setupParticipantView() {
-    players = .init(repeating: SampleBufferPlayer(),
-                    count: 3)
     players[0].attach(view: callPreview02)
     players[1].attach(view: callPreview03)
     players[2].attach(view: callPreview04)
@@ -202,9 +201,19 @@ class SessionCallViewController: UIViewController {
 }
 
 extension SessionCallViewController: NetworkDelegate {
+  func didReceiveData(_ network: Network, from node: Node, data: String?) {
+    debugPrint("[DBG] \(#file) -> \(#function) \(node)")
+    debugPrint("[DBG] \(#file) -> \(#function) \(data)")
+  }
+
+  func didReceiveContentInfo(_ network: Network, from node: Node, metadata: String?, time stamp: TimeInterval) {
+    debugPrint("[DBG] \(#file) -> \(#function) \(node)")
+    debugPrint("[DBG] \(#file) -> \(#function) \(metadata)")
+    debugPrint("[DBG] \(#file) -> \(#function) \(stamp)")
+  }
+
   func didChangeStatus(_ network: Network, status from: Network.State, to: Network.State) {
     debugPrint("[DBG] \(#file) -> \(#function) coco_media_client_connect_status_cb_t: ", from, to)
-    debugPrint("[DBG] \(#file) -> \(#function) selectedNetwork: ", Unmanaged.passUnretained(network).toOpaque())
     switch to {
     case .COCO_CLIENT_REMOTE_CONNECTED:
       removeSpinner()
@@ -215,12 +224,7 @@ extension SessionCallViewController: NetworkDelegate {
           debugPrint("[DBG] \(#file) -> \(#function) channels.count:", channels.count)
           for channel in channels {
             do {
-              debugPrint("[DBG] \(#file) -> \(#function) channel:",
-                         String(describing: channel.id),
-                         String(describing: channel.metadata),
-                         String(describing: channel.name),
-                         String(describing: channel.maxStreams),
-                         String(describing: channel.network.name))
+              debugPrint(channel)
               channel.delegate = self
               try channel.join()
             } catch {
@@ -246,14 +250,14 @@ extension SessionCallViewController: NetworkDelegate {
 }
 
 extension SessionCallViewController: ChannelDelegate {
+  func didReceive(_ channel: Channel, rxStream: RxStream) {
+    debugPrint("[DBG] \(#file) -> \(#function) channel: \(channel)")
+    debugPrint("[DBG] \(#file) -> \(#function) rxStream: \(rxStream)")
+    players[0].parse(sdpString: rxStream.sdp)
+  }
+
   func didChangeStatus(_ channel: Channel, status from: Channel.Status, to: Channel.Status) {
-    debugPrint("[DBG] \(#file) -> \(#function) \(#function) channel:",
-               String(describing: channel.id),
-               String(describing: channel.metadata),
-               String(describing: channel.name),
-               String(describing: channel.streams),
-               String(describing: channel.maxStreams),
-               String(describing: channel.network.name))
+    debugPrint("[DBG] \(#file) -> \(#function) channel: \(channel)")
     debugPrint("[DBG] \(#file) -> \(#function) status from -> to", from, to)
   }
 }
