@@ -261,3 +261,19 @@ extension SessionCallViewController: ChannelDelegate {
     debugPrint("[DBG] \(#file) -> \(#function) status from -> to", from, to)
   }
 }
+
+extension Channel {
+  func debugPrint() {
+    let json = """
+    channel: {
+    id: \(String(describing: id))
+    metadata: \(String(describing: metadata))
+    name: \(String(describing: name))
+    streams: \(String(describing: streams.count))
+    maxStreams: \(String(describing: maxStreams))
+    network: \(String(describing: network.name))
+    }
+    """
+    Swift.debugPrint(json)
+  }
+}
