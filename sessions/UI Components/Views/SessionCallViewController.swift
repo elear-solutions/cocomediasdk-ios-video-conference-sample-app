@@ -71,6 +71,8 @@ class SessionCallViewController: UIViewController {
 
   private var players: [SampleBufferPlayer] = .init(repeating: SampleBufferPlayer(),
                                                     count: 3)
+  private var audioDecoders: [LiveAudioDecoder]?
+  private var videoDecoders: [LiveVideoDecoder]?
 
   private func setupToggleCameraButton() {
     btnToggleCamera.addTarget(
@@ -253,7 +255,28 @@ extension SessionCallViewController: ChannelDelegate {
   func didReceive(_ channel: Channel, rxStream: RxStream) {
     debugPrint("[DBG] \(#file) -> \(#function) channel: \(channel)")
     debugPrint("[DBG] \(#file) -> \(#function) rxStream: \(rxStream)")
-    players[0].parse(sdpString: rxStream.sdp)
+    let sdp = players[0].parse(sdpString: rxStream.sdp)
+    sdp?.mediaDescriptionList.map {
+      debugPrint("[DBG] \(#function) -> \($0.debugDescription)")
+      $0.rtpMapAttributes.map {
+        switch $0.mediaEncoding {
+        case "AMR-WB":
+          let audioDecoder = LiveAudioDecoder(AudioMediaFrame.AmrWbFormatHelper(sampleRate: $0.clockRate))
+          audioDecoder.delegate = self
+          self.audioDecoders?.append(audioDecoder)
+        case "H264":
+          let videoDecoder = LiveVideoDecoder()
+          videoDecoder.delegate = self
+          self.videoDecoders?.append(videoDecoder)
+        default:
+          break
+        }
+        debugPrint("[DBG] \(#function) -> \($0.debugDescription)")
+      }
+    }
+//    let audioDecoder = LiveAudioDecoder(
+//      AudioMediaFrame.AmrWbFormatHelper(sampleRate: 16000)
+//    )
   }
 
   func didChangeStatus(_ channel: Channel, status from: Channel.Status, to: Channel.Status) {
@@ -262,18 +285,8 @@ extension SessionCallViewController: ChannelDelegate {
   }
 }
 
-extension Channel {
-  func debugPrint() {
-    let json = """
-    channel: {
-    id: \(String(describing: id))
-    metadata: \(String(describing: metadata))
-    name: \(String(describing: name))
-    streams: \(String(describing: streams.count))
-    maxStreams: \(String(describing: maxStreams))
-    network: \(String(describing: network.name))
-    }
-    """
-    Swift.debugPrint(json)
+extension SessionCallViewController: LiveDecoderDelegate {
+  func output(mediaFrame: MediaFrame) {
+    self.players[0].enqueue(mediaFrame)
   }
 }
