@@ -71,8 +71,8 @@ class SessionCallViewController: UIViewController {
 
   private var players: [SampleBufferPlayer] = .init(repeating: SampleBufferPlayer(),
                                                     count: 3)
-  private var audioDecoders: [LiveAudioDecoder]?
   private var videoDecoders: [LiveVideoDecoder]?
+  private var audioDecoders: [LiveAudioDecoder]?
 
   private func setupToggleCameraButton() {
     btnToggleCamera.addTarget(
@@ -253,30 +253,35 @@ extension SessionCallViewController: NetworkDelegate {
 
 extension SessionCallViewController: ChannelDelegate {
   func didReceive(_ channel: Channel, rxStream: RxStream) {
-    debugPrint("[DBG] \(#file) -> \(#function) channel: \(channel)")
-    debugPrint("[DBG] \(#file) -> \(#function) rxStream: \(rxStream)")
+    debugPrint("[DBG] \(#function) channel: \(channel)")
+    debugPrint("[DBG] \(#function) rxStream: \(rxStream)")
     let sdp = players[0].parse(sdpString: rxStream.sdp)
-    sdp?.mediaDescriptionList.map {
-      debugPrint("[DBG] \(#function) -> \($0.debugDescription)")
-      $0.rtpMapAttributes.map {
-        switch $0.mediaEncoding {
-        case "AMR-WB":
-          let audioDecoder = LiveAudioDecoder(AudioMediaFrame.AmrWbFormatHelper(sampleRate: $0.clockRate))
-          audioDecoder.delegate = self
-          self.audioDecoders?.append(audioDecoder)
-        case "H264":
-          let videoDecoder = LiveVideoDecoder()
-          videoDecoder.delegate = self
-          self.videoDecoders?.append(videoDecoder)
-        default:
-          break
-        }
-        debugPrint("[DBG] \(#function) -> \($0.debugDescription)")
+    guard let mediaDesc = sdp?.mediaDescriptionList.first else {
+      return
+    }
+    switch mediaDesc.mediaType {
+    case "video":
+      let videoDecoder = LiveVideoDecoder()
+      videoDecoder.delegate = self
+      videoDecoders?.append(videoDecoder)
+    case "audio":
+      let audioDecoder = LiveAudioDecoder(
+        AudioMediaFrame
+          .AmrWbFormatHelper(sampleRate:
+            mediaDesc.rtpMapAttributes.first?.clockRate ?? 16000))
+      audioDecoder.delegate = self
+      audioDecoders?.append(audioDecoder)
+    default:
+      break
+    }
+    try! rxStream.start { status in
+      switch status {
+      case .COCO_MEDIA_CLIENT_STREAM_STARTED:
+        rxStream.delegate = self
+      default:
+        break
       }
     }
-//    let audioDecoder = LiveAudioDecoder(
-//      AudioMediaFrame.AmrWbFormatHelper(sampleRate: 16000)
-//    )
   }
 
   func didChangeStatus(_ channel: Channel, status from: Channel.Status, to: Channel.Status) {
@@ -287,6 +292,28 @@ extension SessionCallViewController: ChannelDelegate {
 
 extension SessionCallViewController: LiveDecoderDelegate {
   func output(mediaFrame: MediaFrame) {
-    self.players[0].enqueue(mediaFrame)
+    players[0].enqueue(mediaFrame)
+  }
+}
+
+extension SessionCallViewController: RxStreamDelegate {
+  func didReceiveFrame(_ stream: CocoMediaSDK.Stream, frame: PackedFrame) {
+    switch frame.mime {
+    case .COCO_MEDIA_CLIENT_MIME_TYPE_VIDEO_H264:
+      let time = CMTime(seconds: Double(frame.time),
+                        preferredTimescale: 90000)
+      try? videoDecoders?.first?.feed(data: frame.data!, sampleTime: time)
+    case .COCO_MEDIA_CLIENT_MIME_TYPE_AUDIO_AAC:
+      let time = CMTime(seconds: Double(frame.time),
+                        preferredTimescale: 16000)
+      try? audioDecoders?.first?.feed(data: frame.data!,
+                                      sampleTime: time)
+    default:
+      break
+    }
+  }
+
+  func didChangeStatus(_ stream: CocoMediaSDK.Stream, status from: CocoMediaSDK.Stream.Status, to: CocoMediaSDK.Stream.Status) {
+    // TODO: Add in extension
   }
 }
