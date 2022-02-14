@@ -182,15 +182,15 @@ class SessionCallViewController: UIViewController {
     session.addOutput(photoOutput)
     session.commitConfiguration()
 
-    showSpinner(onView: callPreview02)
-    showSpinner(onView: callPreview03)
-    showSpinner(onView: callPreview04)
+    // showSpinner(onView: callPreview02)
+    // showSpinner(onView: callPreview03)
+    // showSpinner(onView: callPreview04)
   }
 
   private func setupParticipantView() {
-    players[0].attach(view: callPreview02)
-    players[1].attach(view: callPreview03)
-    players[2].attach(view: callPreview04)
+    players[0].attach(view: self.callPreview02)
+    players[1].attach(view: self.callPreview03)
+    players[2].attach(view: self.callPreview04)
   }
 
   private func setup() {
@@ -261,6 +261,8 @@ extension SessionCallViewController: ChannelDelegate {
       return
     }
     switch mediaDesc.mediaType {
+    case "video":
+      videoDecoders[0].delegate = self
     case "audio":
       let audioDecoder = LiveAudioDecoder(
         AudioMediaFrame
@@ -291,6 +293,9 @@ extension SessionCallViewController: LiveDecoderDelegate {
   func output(mediaFrame: MediaFrame) {
     debugPrint("[DBG] \(#function) started.")
     players[0].enqueue(mediaFrame)
+    if players[0].state != .PLAYING {
+      players[0].play()
+    }
     debugPrint("[DBG] \(#function) completed.")
   }
 }
