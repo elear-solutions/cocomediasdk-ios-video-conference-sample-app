@@ -303,11 +303,11 @@ extension SessionCallViewController: RxStreamDelegate {
     case .COCO_MEDIA_CLIENT_MIME_TYPE_VIDEO_H264:
       let time = CMTime(seconds: Double(frame.time),
                         preferredTimescale: 90000)
-      try! videoDecoders[0].feed(data: frame.data!, sampleTime: time)
+      try! videoDecoders[0].feed(data: frame.data, sampleTime: time)
     case .COCO_MEDIA_CLIENT_MIME_TYPE_AUDIO_AAC:
       let time = CMTime(seconds: Double(frame.time),
                         preferredTimescale: 16000)
-      try! audioDecoders?.first?.feed(data: frame.data!,
+      try! audioDecoders?.first?.feed(data: frame.data,
                                       sampleTime: time)
     default:
       break
