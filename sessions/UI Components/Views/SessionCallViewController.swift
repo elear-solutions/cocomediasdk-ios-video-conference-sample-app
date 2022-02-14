@@ -73,7 +73,8 @@ class SessionCallViewController: UIViewController {
                                                     count: 3)
   private var videoDecoders: [LiveVideoDecoder] = .init(repeating: .init(),
                                                         count: 3)
-  private var audioDecoders: [LiveAudioDecoder]?
+  private var audioDecoders: [LiveAudioDecoder] = .init(repeating: .init(AudioMediaFrame.AmrWbFormatHelper(sampleRate: 16000)),
+                                                        count: 3)
 
   private func setupToggleCameraButton() {
     btnToggleCamera.addTarget(
@@ -188,9 +189,9 @@ class SessionCallViewController: UIViewController {
   }
 
   private func setupParticipantView() {
-    players[0].attach(view: self.callPreview02)
-    players[1].attach(view: self.callPreview03)
-    players[2].attach(view: self.callPreview04)
+    players[0].attach(view: callPreview02) // red
+    players[1].attach(view: callPreview03) // orange
+    players[2].attach(view: callPreview04) // green
   }
 
   private func setup() {
@@ -199,7 +200,8 @@ class SessionCallViewController: UIViewController {
     setupEndCallButton()
     setupToggleMicrophoneButton()
     setupToggleSpeakerButton()
-    // setupHostPreviewView()
+    setupHostPreviewView()
+    setupParticipantView()
   }
 }
 
@@ -257,6 +259,7 @@ extension SessionCallViewController: ChannelDelegate {
     debugPrint("[DBG] \(#function) channel: \(channel)")
     debugPrint("[DBG] \(#function) rxStream: \(rxStream)")
     let sdp = players[0].parse(sdpString: rxStream.sdp)
+    debugPrint("[DBG] \(#function) sdpString: \(String(describing: sdp))")
     guard let mediaDesc = sdp?.mediaDescriptionList.first else {
       return
     }
@@ -264,12 +267,7 @@ extension SessionCallViewController: ChannelDelegate {
     case "video":
       videoDecoders[0].delegate = self
     case "audio":
-      let audioDecoder = LiveAudioDecoder(
-        AudioMediaFrame
-          .AmrWbFormatHelper(sampleRate:
-            mediaDesc.rtpMapAttributes.first?.clockRate ?? 16000))
-      audioDecoder.delegate = self
-      audioDecoders?.append(audioDecoder)
+      audioDecoders[0].delegate = self
     default:
       break
     }
@@ -306,14 +304,11 @@ extension SessionCallViewController: RxStreamDelegate {
     debugPrint("[DBG] \(#function) frame.mime: \(String(describing: frame.mime))")
     switch frame.mime {
     case .COCO_MEDIA_CLIENT_MIME_TYPE_VIDEO_H264:
-      let time = CMTime(seconds: Double(frame.time),
-                        preferredTimescale: 90000)
+      let time = CMTime(seconds: Double(frame.time), preferredTimescale: 90000)
       try! videoDecoders[0].feed(data: frame.data, sampleTime: time)
     case .COCO_MEDIA_CLIENT_MIME_TYPE_AUDIO_AAC:
-      let time = CMTime(seconds: Double(frame.time),
-                        preferredTimescale: 16000)
-      try! audioDecoders?.first?.feed(data: frame.data,
-                                      sampleTime: time)
+      let time = CMTime(seconds: Double(frame.time), preferredTimescale: 16000)
+      try! audioDecoders[0].feed(data: frame.data, sampleTime: time)
     default:
       break
     }
