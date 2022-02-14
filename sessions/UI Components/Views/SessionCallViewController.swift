@@ -52,10 +52,10 @@ class SessionCallViewController: UIViewController {
    }
    */
 
-  @IBOutlet var callerPreview: PreviewView!
-  @IBOutlet var callPreview02: UIView!
-  @IBOutlet var callPreview03: UIView!
-  @IBOutlet var callPreview04: UIView!
+  @IBOutlet var callerPreview: PreviewView! // blue
+  @IBOutlet var callPreview02: UIView! // red
+  @IBOutlet var callPreview03: UIView! // orange
+  @IBOutlet var callPreview04: UIView! // green
 
   @IBOutlet var btnToggleCamera: UIButton!
   @IBOutlet var btnToggleVideo: UIButton!
