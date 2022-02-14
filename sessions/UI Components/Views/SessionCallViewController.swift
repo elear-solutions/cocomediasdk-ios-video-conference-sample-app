@@ -71,7 +71,8 @@ class SessionCallViewController: UIViewController {
 
   private var players: [SampleBufferPlayer] = .init(repeating: SampleBufferPlayer(),
                                                     count: 3)
-  private var videoDecoders: [LiveVideoDecoder]?
+  private var videoDecoders: [LiveVideoDecoder] = .init(repeating: .init(),
+                                                        count: 3)
   private var audioDecoders: [LiveAudioDecoder]?
 
   private func setupToggleCameraButton() {
@@ -260,10 +261,6 @@ extension SessionCallViewController: ChannelDelegate {
       return
     }
     switch mediaDesc.mediaType {
-    case "video":
-      let videoDecoder = LiveVideoDecoder()
-      videoDecoder.delegate = self
-      videoDecoders?.append(videoDecoder)
     case "audio":
       let audioDecoder = LiveAudioDecoder(
         AudioMediaFrame
@@ -292,25 +289,30 @@ extension SessionCallViewController: ChannelDelegate {
 
 extension SessionCallViewController: LiveDecoderDelegate {
   func output(mediaFrame: MediaFrame) {
+    debugPrint("[DBG] \(#function) started.")
     players[0].enqueue(mediaFrame)
+    debugPrint("[DBG] \(#function) completed.")
   }
 }
 
 extension SessionCallViewController: RxStreamDelegate {
   func didReceiveFrame(_ stream: CocoMediaSDK.Stream, frame: PackedFrame) {
+    debugPrint("[DBG] \(#function) started.")
+    debugPrint("[DBG] \(#function) frame.mime: \(String(describing: frame.mime))")
     switch frame.mime {
     case .COCO_MEDIA_CLIENT_MIME_TYPE_VIDEO_H264:
       let time = CMTime(seconds: Double(frame.time),
                         preferredTimescale: 90000)
-      try? videoDecoders?.first?.feed(data: frame.data!, sampleTime: time)
+      try! videoDecoders[0].feed(data: frame.data!, sampleTime: time)
     case .COCO_MEDIA_CLIENT_MIME_TYPE_AUDIO_AAC:
       let time = CMTime(seconds: Double(frame.time),
                         preferredTimescale: 16000)
-      try? audioDecoders?.first?.feed(data: frame.data!,
+      try! audioDecoders?.first?.feed(data: frame.data!,
                                       sampleTime: time)
     default:
       break
     }
+    debugPrint("[DBG] \(#function) completed.")
   }
 
   func didChangeStatus(_ stream: CocoMediaSDK.Stream, status from: CocoMediaSDK.Stream.Status, to: CocoMediaSDK.Stream.Status) {
