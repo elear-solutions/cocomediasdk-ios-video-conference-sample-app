@@ -75,6 +75,7 @@ class SessionCallViewController: UIViewController {
                                                         count: 3)
   private var audioDecoders: [LiveAudioDecoder] = .init(repeating: .init(AudioMediaFrame.AmrWbFormatHelper(sampleRate: 16000)),
                                                         count: 3)
+  private var basetime: Int64?
 
   private func setupToggleCameraButton() {
     btnToggleCamera.addTarget(
@@ -302,12 +303,21 @@ extension SessionCallViewController: RxStreamDelegate {
   func didReceiveFrame(_ stream: CocoMediaSDK.Stream, frame: PackedFrame) {
     debugPrint("[DBG] \(#function) started.")
     debugPrint("[DBG] \(#function) frame.mime: \(String(describing: frame.mime))")
+    if basetime == nil {
+      basetime = frame.time
+    }
+    guard let basetime = basetime else {
+      return
+    }
+    let tmpDiff = Double(frame.time) - Double(basetime)
+    let ptsDiff = tmpDiff
+    let ptsTime: Double = .init(ptsDiff / 10_000_000) // convert into seconds
     switch frame.mime {
     case .COCO_MEDIA_CLIENT_MIME_TYPE_VIDEO_H264:
-      let time = CMTime(seconds: Double(frame.time), preferredTimescale: 90000)
+      let time = CMTime(seconds: ptsTime, preferredTimescale: 90000)
       try! videoDecoders[0].feed(data: frame.data, sampleTime: time)
     case .COCO_MEDIA_CLIENT_MIME_TYPE_AUDIO_AAC:
-      let time = CMTime(seconds: Double(frame.time), preferredTimescale: 16000)
+      let time = CMTime(seconds: ptsTime, preferredTimescale: 16000)
       try! audioDecoders[0].feed(data: frame.data, sampleTime: time)
     default:
       break
