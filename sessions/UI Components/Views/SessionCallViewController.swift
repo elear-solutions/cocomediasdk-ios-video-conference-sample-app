@@ -196,6 +196,18 @@ class SessionCallViewController: UIViewController {
     players[2].attach(view: callPreview04) // green
   }
 
+  private func setupRecordingAudioSession() {
+    let avAudioSession = AVAudioSession.sharedInstance()
+    do {
+      try avAudioSession.setCategory(.playAndRecord,
+                                     mode: .voiceChat,
+                                     options: [.defaultToSpeaker, .allowBluetooth])
+      // try? avAudioSession.setPreferredIOBufferDuration(0.4)
+    } catch {
+      debugPrint(error.localizedDescription)
+    }
+  }
+
   private func setup() {
     setupToggleCameraButton()
     setupToggleVideoButton()
