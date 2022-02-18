@@ -5,6 +5,7 @@
 //  Created by Rohan S on 20/12/21.
 //
 
+import AMRAudioSwift
 import AVFoundation
 import CocoMediaPlayer
 import CocoMediaSDK
@@ -73,9 +74,11 @@ class SessionCallViewController: UIViewController {
                                                     count: 3)
   private var videoDecoders: [LiveVideoDecoder] = .init(repeating: .init(),
                                                         count: 3)
-  private var audioDecoders: [LiveAudioDecoder] = .init(repeating: .init(AudioMediaFrame.AmrWbFormatHelper(sampleRate: 16000)),
+//  private var audioDecoders: [LiveAudioDecoder] = .init(repeating: .init(AudioMediaFrame.AmrWbFormatHelper(sampleRate: 16000)),
+//                                                        count: 3)
+  private var audioDecoders: [LiveAudioDecoder] = .init(repeating: .init(AudioMediaFrame.LpcmFormatHelper(sampleRate: 16000)),
                                                         count: 3)
-  private var basetime: Int64?
+  private var basetime: Int?
 
   private func setupToggleCameraButton() {
     btnToggleCamera.addTarget(
@@ -209,12 +212,12 @@ class SessionCallViewController: UIViewController {
 extension SessionCallViewController: NetworkDelegate {
   func didReceiveData(_ network: Network, from node: Node, data: String?) {
     debugPrint("[DBG] \(#file) -> \(#function) \(node)")
-    debugPrint("[DBG] \(#file) -> \(#function) \(data)")
+    debugPrint("[DBG] \(#file) -> \(#function) \(data ?? "")")
   }
 
   func didReceiveContentInfo(_ network: Network, from node: Node, metadata: String?, time stamp: TimeInterval) {
     debugPrint("[DBG] \(#file) -> \(#function) \(node)")
-    debugPrint("[DBG] \(#file) -> \(#function) \(metadata)")
+    debugPrint("[DBG] \(#file) -> \(#function) \(metadata ?? "")")
     debugPrint("[DBG] \(#file) -> \(#function) \(stamp)")
   }
 
@@ -259,7 +262,11 @@ extension SessionCallViewController: ChannelDelegate {
   func didReceive(_ channel: Channel, rxStream: RxStream) {
     debugPrint("[DBG] \(#function) channel: \(channel)")
     debugPrint("[DBG] \(#function) rxStream: \(rxStream)")
-    let sdp = players[0].parse(sdpString: rxStream.sdp)
+    guard let sdpString = rxStream.sdp else {
+      debugPrint("sdpString is nil")
+      return
+    }
+    let sdp = players[0].parse(sdpString: sdpString)
     debugPrint("[DBG] \(#function) sdpString: \(String(describing: sdp))")
     guard let mediaDesc = sdp?.mediaDescriptionList.first else {
       return
@@ -302,7 +309,9 @@ extension SessionCallViewController: LiveDecoderDelegate {
 extension SessionCallViewController: RxStreamDelegate {
   func didReceiveFrame(_ stream: CocoMediaSDK.Stream, frame: PackedFrame) {
     debugPrint("[DBG] \(#function) started.")
-    debugPrint("[DBG] \(#function) frame.mime: \(String(describing: frame.mime))")
+    debugPrint("[DBG] \(#function) stream: \(String(describing: stream))")
+    debugPrint("[DBG] \(#function) frame: \(String(describing: frame))")
+    debugPrint("[DBG] \(#function) frame.data: \(String(describing: frame.data?.hex))")
     if basetime == nil {
       basetime = frame.time
     }
@@ -312,13 +321,17 @@ extension SessionCallViewController: RxStreamDelegate {
     let tmpDiff = Double(frame.time) - Double(basetime)
     let ptsDiff = tmpDiff
     let ptsTime: Double = .init(ptsDiff / 10_000_000) // convert into seconds
+    guard let data = frame.data else {
+      return
+    }
     switch frame.mime {
     case .COCO_MEDIA_CLIENT_MIME_TYPE_VIDEO_H264:
       let time = CMTime(seconds: ptsTime, preferredTimescale: 90000)
-      try! videoDecoders[0].feed(data: frame.data, sampleTime: time)
+      try! videoDecoders[0].feed(data: data, sampleTime: time)
     case .COCO_MEDIA_CLIENT_MIME_TYPE_AUDIO_AAC:
       let time = CMTime(seconds: ptsTime, preferredTimescale: 16000)
-      try! audioDecoders[0].feed(data: frame.data, sampleTime: time)
+      let data = AMRAudio.decodeAMRDataToWAVEData(amrData: data)
+      try! audioDecoders[0].feed(data: data, sampleTime: time)
     default:
       break
     }
