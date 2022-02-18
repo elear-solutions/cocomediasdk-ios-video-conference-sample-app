@@ -13,7 +13,7 @@ target 'sessions' do
     pod 'CocoMediaPlayer' , :path => "~/Workspace/cocomediaplayer-swift"
     pod 'CocoMediaSDK' , :path => "~/Workspace/cocomediasdk-swift"
     pod 'AlamofireImage'
-    pod 'AMRAudioSwift'
+    pod 'AMRAudioSwift', :git => 'https://github.com/teambition/AMRAudioSwift.git'
     pod 'SwiftyJSON'
 
   target 'sessionsTests' do
@@ -32,5 +32,5 @@ target 'sessions' do
       end
     end
   end
-  
+
 end

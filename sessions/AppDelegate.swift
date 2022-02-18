@@ -5,6 +5,7 @@
 //  Created by Rohan S on 12/11/21.
 //
 
+import AVFoundation
 import CocoMediaSDK
 import OSLog
 import UIKit
@@ -24,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     } catch {
       debugPrint("error using setup()", error.localizedDescription)
     }
+    setUpAudioSession()
     return true
   }
 
@@ -44,6 +46,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: Private
 
   private let logger = OSLog(AppDelegate.self)
+}
+
+extension AppDelegate {
+  private func setUpAudioSession() {
+    os_log("%s started", log: logger, type: .debug, #function)
+    let session = AVAudioSession.sharedInstance()
+    do {
+      try session.setCategory(.playAndRecord,
+                              mode: .voiceChat,
+                              options: [.defaultToSpeaker, .allowBluetooth])
+      try? session.setPreferredIOBufferDuration(0.4)
+    } catch {
+      os_log("%s failed: %s", log: logger, type: .error,
+             #function, error.localizedDescription)
+    }
+    os_log("%s completed", log: logger, type: .debug, #function)
+  }
 }
 
 extension AppDelegate: CocoClientAuthDelegate {
