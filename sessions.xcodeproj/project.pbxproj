@@ -35,6 +35,7 @@
 		DC9E24EC278B061A0073CECF /* CreateSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */; };
 		DC9E24ED278B061A0073CECF /* CreateSessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */; };
 		DC9E24EF278B12D50073CECF /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E24EE278B12D50073CECF /* SpinnerView.swift */; };
+		DCA6876F27BFBE8B00BDF404 /* AudioRecordingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA6876E27BFBE8B00BDF404 /* AudioRecordingService.swift */; };
 		DCAC6A092785C46B003F0C98 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAC6A082785C46B003F0C98 /* UITableView+Extension.swift */; };
 		DCE60D992770894800C6F510 /* SessionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE60D972770894800C6F510 /* SessionListViewController.swift */; };
 		DCE60D9A2770894800C6F510 /* SessionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE60D982770894800C6F510 /* SessionListViewController.xib */; };
@@ -113,6 +114,7 @@
 		DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionViewController.swift; sourceTree = "<group>"; };
 		DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateSessionViewController.xib; sourceTree = "<group>"; };
 		DC9E24EE278B12D50073CECF /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
+		DCA6876E27BFBE8B00BDF404 /* AudioRecordingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecordingService.swift; sourceTree = "<group>"; };
 		DCAC6A082785C46B003F0C98 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		DCE60D972770894800C6F510 /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
 		DCE60D982770894800C6F510 /* SessionListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionListViewController.xib; sourceTree = "<group>"; };
@@ -296,8 +298,9 @@
 				DC8960A827720B2C00CF4196 /* Models.swift */,
 				DC8960A62771CBC300CF4196 /* RestApiHeaders.swift */,
 				DC8960AA27720D2B00CF4196 /* AlamofireManager.swift */,
-				DC621D4C2770B8DD000A3029 /* AuthenticationService.swift */,
 				DC8960AD2772270600CF4196 /* UserDataManager.swift */,
+				DCA6876E27BFBE8B00BDF404 /* AudioRecordingService.swift */,
+				DC621D4C2770B8DD000A3029 /* AuthenticationService.swift */,
 				DC9E24E8278808260073CECF /* NetworkService.swift */,
 			);
 			path = Services;
@@ -577,6 +580,7 @@
 				DC5183C32767290D00BC7DE2 /* ListViewItem.swift in Sources */,
 				DCE60D992770894800C6F510 /* SessionListViewController.swift in Sources */,
 				DC9E24EF278B12D50073CECF /* SpinnerView.swift in Sources */,
+				DCA6876F27BFBE8B00BDF404 /* AudioRecordingService.swift in Sources */,
 				DC467A952743CD1A0025EBF3 /* PreviewView.swift in Sources */,
 				DC3789F3273E8EB800BA0594 /* AppDelegate.swift in Sources */,
 				DC3789F5273E8EB800BA0594 /* SceneDelegate.swift in Sources */,
