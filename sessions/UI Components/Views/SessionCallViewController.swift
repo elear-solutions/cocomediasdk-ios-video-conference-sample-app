@@ -181,7 +181,7 @@ class SessionCallViewController: UIViewController {
     session.addInput(videoDeviceInput)
     let photoOutput = AVCapturePhotoOutput()
     guard session.canAddOutput(photoOutput) else { return }
-    session.sessionPreset = .hd1920x1080
+    session.sessionPreset = .vga640x480
     session.addOutput(photoOutput)
     session.commitConfiguration()
 
