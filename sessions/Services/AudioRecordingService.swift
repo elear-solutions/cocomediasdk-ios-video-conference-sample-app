@@ -32,6 +32,8 @@ class AudioRecordingService {
 
   func start() {
     os_log("%s started", log: logger, type: .debug, #function)
+    let mic = AVCaptureDevice.default(.builtInMicrophone,
+                                      for: .audio, position: .unspecified)
     let sampleRate = audioEngine.inputNode.outputFormat(forBus: 0).sampleRate
     let format = AVAudioFormat(commonFormat: AVAudioCommonFormat.pcmFormatInt16,
                                sampleRate: sampleRate,
@@ -41,9 +43,9 @@ class AudioRecordingService {
     audioEngine.inputNode.installTap(onBus: 0,
                                      bufferSize: AVAudioFrameCount(sampleRate),
                                      format: format,
-                                     block: { (buffer: AVAudioPCMBuffer!,
-                                               _: AVAudioTime!) -> Void in
-                                       self.linear2alaw(buffer: buffer)
+                                     block: { buffer, when in
+                                       debugPrint("[DBG] \(#function) buffer: \(buffer)")
+                                       debugPrint("[DBG] \(#function) when: \(when)")
                                      })
 
     do {
