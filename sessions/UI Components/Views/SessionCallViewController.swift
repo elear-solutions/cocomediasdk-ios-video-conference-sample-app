@@ -170,7 +170,7 @@ class SessionCallViewController: UIViewController {
     }
   }
 
-  private func setupHostPreviewView() {
+  private func setupLocalView() {
     callerPreview.session = self.session
     session.beginConfiguration()
     let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
@@ -185,9 +185,9 @@ class SessionCallViewController: UIViewController {
     }
     session.addInput(videoDeviceInput)
     let photoOutput = AVCapturePhotoOutput()
-    guard session.canAddOutput(photoOutput) else { return }
+    // guard session.canAddOutput(photoOutput) else { return }
     session.sessionPreset = .vga640x480
-    session.addOutput(photoOutput)
+    // session.addOutput(photoOutput)
     session.commitConfiguration()
 
     // showSpinner(onView: callPreview02)
@@ -195,13 +195,13 @@ class SessionCallViewController: UIViewController {
     // showSpinner(onView: callPreview04)
   }
 
-  private func setupParticipantView() {
+  private func setupRemoteView() {
     players[0].attach(view: callPreview02) // red
     players[1].attach(view: callPreview03) // orange
     players[2].attach(view: callPreview04) // green
   }
 
-  private func setupRecordingAudioSession() {
+  private func setupLocalAudioFeed() {
     let avAudioSession = AVAudioSession.sharedInstance()
     do {
       try avAudioSession.setCategory(.playAndRecord,
@@ -214,15 +214,29 @@ class SessionCallViewController: UIViewController {
     }
   }
 
+  private func setupLocalVideoFeed() {
+    session.beginConfiguration()
+    let videoOutput = AVCaptureVideoDataOutput()
+    videoOutput.alwaysDiscardsLateVideoFrames = true
+    let sampleBufferQueue = DispatchQueue(label: "sampleBufferQueue")
+    videoOutput.setSampleBufferDelegate(self, queue: sampleBufferQueue)
+    guard session.canAddOutput(videoOutput) else {
+      return
+    }
+    session.addOutput(videoOutput)
+    session.commitConfiguration()
+  }
+
   private func setup() {
     setupToggleCameraButton()
     setupToggleVideoButton()
     setupEndCallButton()
     setupToggleMicrophoneButton()
     setupToggleSpeakerButton()
-    setupHostPreviewView()
-    setupParticipantView()
-    setupRecordingAudioSession()
+    setupRemoteView()
+    setupLocalView()
+    setupLocalAudioFeed()
+    setupLocalVideoFeed()
   }
 }
 
@@ -381,5 +395,14 @@ extension SessionCallViewController: TxStreamDelegate {
   func didChangeStatus(_ stream: CocoMediaSDK.Stream, status from: CocoMediaSDK.Stream.Status, to: CocoMediaSDK.Stream.Status) {
     debugPrint("[DBG] \(#function) txstream: \(stream)")
     debugPrint("[DBG] \(#function) status: \(to)")
+  }
+}
+
+extension SessionCallViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+  func captureOutput(_ output: AVCaptureOutput,
+                     didOutput sampleBuffer: CMSampleBuffer,
+                     from connection: AVCaptureConnection)
+  {
+    // TODO: Call LiveVideoEncoder.encode
   }
 }
