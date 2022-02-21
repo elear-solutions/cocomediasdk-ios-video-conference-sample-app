@@ -208,6 +208,7 @@ class SessionCallViewController: UIViewController {
                                      mode: .voiceChat,
                                      options: [.defaultToSpeaker, .allowBluetooth])
       // try? avAudioSession.setPreferredIOBufferDuration(0.4)
+      AudioRecordingService().start()
     } catch {
       debugPrint(error.localizedDescription)
     }
@@ -221,6 +222,7 @@ class SessionCallViewController: UIViewController {
     setupToggleSpeakerButton()
     setupHostPreviewView()
     setupParticipantView()
+    setupRecordingAudioSession()
   }
 }
 
@@ -251,22 +253,6 @@ extension SessionCallViewController: NetworkDelegate {
               debugPrint(channel)
               channel.delegate = self
               try channel.join()
-              try channel.createStream(descriptor: "video", statusHandler: { status in
-                switch status {
-                case .COCO_MEDIA_CLIENT_STREAM_CREATED:
-                  debugPrint("video stream created")
-                default:
-                  debugPrint(status)
-                }
-              })
-              try channel.createStream(descriptor: "audio", statusHandler: { status in
-                switch status {
-                case .COCO_MEDIA_CLIENT_STREAM_CREATED:
-                  debugPrint("audio stream created")
-                default:
-                  debugPrint(status)
-                }
-              })
             } catch {
               debugPrint("[DBG] \(#file) -> \(#function) error:", error.localizedDescription)
             }
@@ -321,8 +307,29 @@ extension SessionCallViewController: ChannelDelegate {
   }
 
   func didChangeStatus(_ channel: Channel, status from: Channel.Status, to: Channel.Status) {
-    debugPrint("[DBG] \(#file) -> \(#function) channel: \(channel)")
-    debugPrint("[DBG] \(#file) -> \(#function) status from -> to", from, to)
+    switch to {
+    case .COCO_MEDIA_CLIENT_CHANNEL_JOINED:
+      let vTxStream = try! channel.createStream(descriptor: "video", statusHandler: { status in
+        switch status {
+        case .COCO_MEDIA_CLIENT_STREAM_CREATED:
+          debugPrint("video stream created")
+        default:
+          debugPrint(status)
+        }
+      })
+      vTxStream.delegate = self
+      let aTxStream = try! channel.createStream(descriptor: "audio", statusHandler: { status in
+        switch status {
+        case .COCO_MEDIA_CLIENT_STREAM_CREATED:
+          debugPrint("audio stream created")
+        default:
+          debugPrint(status)
+        }
+      })
+      aTxStream.delegate = self
+    default:
+      break
+    }
   }
 }
 
@@ -368,8 +375,11 @@ extension SessionCallViewController: RxStreamDelegate {
     }
     debugPrint("[DBG] \(#function) completed.")
   }
+}
 
+extension SessionCallViewController: TxStreamDelegate {
   func didChangeStatus(_ stream: CocoMediaSDK.Stream, status from: CocoMediaSDK.Stream.Status, to: CocoMediaSDK.Stream.Status) {
-    // TODO: Add in extension
+    debugPrint("[DBG] \(#function) txstream: \(stream)")
+    debugPrint("[DBG] \(#function) status: \(to)")
   }
 }
