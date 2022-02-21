@@ -20,12 +20,17 @@ class SessionCallViewController: UIViewController {
 
     // Do any additional setup after loading the view.
     setup()
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    // connects to network
+    selectedNetwork?.delegate = self
     do {
-      selectedNetwork?.delegate = self
-      debugPrint("[DBG] \(#file) -> \(#function) \(#file) -> \(#function) connecting: \(selectedNetwork!)")
+      debugPrint("[DBG] \(#file) -> \(#function) connecting: \(selectedNetwork!)")
       try selectedNetwork?.connect()
     } catch {
-      debugPrint("[DBG] \(#file) -> \(#function) \(#file) -> \(#function)  error: \(error.localizedDescription)")
+      debugPrint("[DBG] \(#file) -> \(#function)  error: \(error.localizedDescription)")
     }
   }
 
@@ -246,6 +251,22 @@ extension SessionCallViewController: NetworkDelegate {
               debugPrint(channel)
               channel.delegate = self
               try channel.join()
+              try channel.createStream(descriptor: "video", statusHandler: { status in
+                switch status {
+                case .COCO_MEDIA_CLIENT_STREAM_CREATED:
+                  debugPrint("video stream created")
+                default:
+                  debugPrint(status)
+                }
+              })
+              try channel.createStream(descriptor: "audio", statusHandler: { status in
+                switch status {
+                case .COCO_MEDIA_CLIENT_STREAM_CREATED:
+                  debugPrint("audio stream created")
+                default:
+                  debugPrint(status)
+                }
+              })
             } catch {
               debugPrint("[DBG] \(#file) -> \(#function) error:", error.localizedDescription)
             }
