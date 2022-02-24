@@ -5,12 +5,12 @@
 //  Created by Rohan S on 20/12/21.
 //
 
-import AMRAudioSwift
 import AVFoundation
 import CocoMediaPlayer
 import CocoMediaSDK
 import OSLog
 import UIKit
+import VideoToolbox
 
 class SessionCallViewController: UIViewController {
   // MARK: Lifecycle
@@ -70,6 +70,8 @@ class SessionCallViewController: UIViewController {
   @IBOutlet var btnToggleSpeaker: UIButton!
 
   var selectedNetwork: Network?
+
+  var videoOutput: AVCaptureVideoDataOutput = .init()
 
   // MARK: Private
 
@@ -184,7 +186,7 @@ class SessionCallViewController: UIViewController {
       return
     }
     session.addInput(videoDeviceInput)
-    let photoOutput = AVCapturePhotoOutput()
+    // let photoOutput = AVCapturePhotoOutput()
     // guard session.canAddOutput(photoOutput) else { return }
     session.sessionPreset = .vga640x480
     // session.addOutput(photoOutput)
@@ -216,7 +218,7 @@ class SessionCallViewController: UIViewController {
 
   private func setupLocalVideoFeed() {
     session.beginConfiguration()
-    let videoOutput = AVCaptureVideoDataOutput()
+    // videoOutput = AVCaptureVideoDataOutput()
     videoOutput.alwaysDiscardsLateVideoFrames = true
     let sampleBufferQueue = DispatchQueue(label: "sampleBufferQueue")
     videoOutput.setSampleBufferDelegate(self, queue: sampleBufferQueue)
@@ -403,6 +405,58 @@ extension SessionCallViewController: AVCaptureVideoDataOutputSampleBufferDelegat
                      didOutput sampleBuffer: CMSampleBuffer,
                      from connection: AVCaptureConnection)
   {
+    guard output == videoOutput else {
+      return
+    }
     // TODO: Call LiveVideoEncoder.encode
+    print("\(#function) -> \(sampleBuffer)")
+    let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
+    let width: size_t = CVPixelBufferGetWidth(imageBuffer)
+    let height: size_t = CVPixelBufferGetHeight(imageBuffer)
+    var vtSession = UnsafeMutablePointer<VTCompressionSession?>
+      .allocate(capacity: 1)
+    // ontime init
+    let status: OSStatus = VTCompressionSessionCreate(
+      allocator: nil,
+      width: Int32(width),
+      height: Int32(height),
+      codecType: kCMVideoCodecType_H264,
+      encoderSpecification: nil,
+      imageBufferAttributes: nil,
+      compressedDataAllocator: nil,
+      outputCallback: nil,
+      refcon: nil,
+      compressionSessionOut: vtSession
+    )
+
+    if status == noErr {
+      VTSessionSetProperty(vtSession.pointee!,
+                           key: kVTCompressionPropertyKey_RealTime,
+                           value: kCFBooleanTrue)
+      let presentationTimestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
+      // function to encode
+      VTCompressionSessionEncodeFrame(
+        vtSession.pointee!,
+        imageBuffer: imageBuffer,
+        presentationTimeStamp: presentationTimestamp,
+        duration: CMTime.invalid,
+        frameProperties: nil,
+        infoFlagsOut: nil,
+        outputHandler: { status, infoFlags, sampleBuffer in
+          debugPrint(status)
+          debugPrint(infoFlags)
+          guard let sBuf = sampleBuffer else {
+            return
+          }
+          print (#function, sBuf)
+          let encodedStream = LiveVideoEncoder.encode(sBuf)
+        }
+      )
+    }
+
+    if vtSession != nil {
+      VTCompressionSessionInvalidate(vtSession.pointee!)
+    }
+    // let videoEncoder = LiveVideoEncoder.encode(sampleBuffer)
   }
 }
