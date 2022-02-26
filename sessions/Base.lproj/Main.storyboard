@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jxz-k2-vjp">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jxz-k2-vjp" customClass="PreviewView" customModule="sessions" customModuleProvider="target">
                                 <rect key="frame" x="274" y="64" width="120" height="240"/>
                                 <color key="backgroundColor" systemColor="systemGrayColor"/>
                                 <constraints>
@@ -25,14 +26,70 @@
                                     <constraint firstAttribute="width" secondItem="jxz-k2-vjp" secondAttribute="height" multiplier="1:2" id="T6b-qK-4ZR"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ap-SY-qPG">
+                                <rect key="frame" x="16" y="816" width="382" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1C7-mg-RBJ">
+                                        <rect key="frame" x="79" y="0.0" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="64" id="K4E-Gx-HNe"/>
+                                            <constraint firstAttribute="height" constant="64" id="rFG-00-Fxn"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <imageReference key="image" image="video.circle.fill" catalog="system" symbolScale="default"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="64" scale="large" weight="regular"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwX-pz-whW">
+                                        <rect key="frame" x="159" y="0.0" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="64" id="SIt-p5-zwr"/>
+                                            <constraint firstAttribute="height" constant="64" id="Vap-PO-Qp6"/>
+                                        </constraints>
+                                        <state key="normal" image="mic.circle.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="64" scale="default" weight="regular"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwz-AQ-idZ">
+                                        <rect key="frame" x="239" y="0.0" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="64" id="6kX-iz-7Es"/>
+                                            <constraint firstAttribute="height" constant="64" id="URV-Pc-sgu"/>
+                                        </constraints>
+                                        <state key="normal" image="speaker.wave.2.circle.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="64" scale="default" weight="regular"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="wwX-pz-whW" firstAttribute="centerX" secondItem="3Ap-SY-qPG" secondAttribute="centerX" id="Dnm-vs-hAJ"/>
+                                    <constraint firstItem="1C7-mg-RBJ" firstAttribute="top" secondItem="3Ap-SY-qPG" secondAttribute="top" id="Hjj-GM-MUW"/>
+                                    <constraint firstItem="Wwz-AQ-idZ" firstAttribute="top" secondItem="3Ap-SY-qPG" secondAttribute="top" id="Htb-UY-xvh"/>
+                                    <constraint firstItem="wwX-pz-whW" firstAttribute="centerY" secondItem="3Ap-SY-qPG" secondAttribute="centerY" id="P0K-la-rYR"/>
+                                    <constraint firstItem="wwX-pz-whW" firstAttribute="leading" secondItem="1C7-mg-RBJ" secondAttribute="trailing" constant="16" id="Ss5-Nf-jQh"/>
+                                    <constraint firstAttribute="bottom" secondItem="Wwz-AQ-idZ" secondAttribute="bottom" id="V4a-kj-cQc"/>
+                                    <constraint firstItem="Wwz-AQ-idZ" firstAttribute="leading" secondItem="wwX-pz-whW" secondAttribute="trailing" constant="16" id="dOs-IF-vUI"/>
+                                    <constraint firstAttribute="bottom" secondItem="1C7-mg-RBJ" secondAttribute="bottom" id="iUC-63-5OK"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="3Ap-SY-qPG" secondAttribute="bottom" constant="16" id="HaY-Gs-l5V"/>
+                            <constraint firstItem="3Ap-SY-qPG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Im8-Mu-hYj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3Ap-SY-qPG" secondAttribute="trailing" constant="16" id="Tf4-cX-QVq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jxz-k2-vjp" secondAttribute="trailing" constant="20" id="ZaF-cB-fH5"/>
                             <constraint firstItem="jxz-k2-vjp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="s4k-Ch-8mU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnEnableMicrophone" destination="wwX-pz-whW" id="WB2-T4-Tqi"/>
+                        <outlet property="btnEnableSpeaker" destination="Wwz-AQ-idZ" id="hGE-da-23F"/>
+                        <outlet property="btnEnableVideo" destination="1C7-mg-RBJ" id="an9-QF-zOX"/>
+                        <outlet property="previewView" destination="jxz-k2-vjp" id="TjH-go-nhl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -40,6 +97,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="mic.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="speaker.wave.2.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="video.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

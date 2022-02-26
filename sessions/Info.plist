@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Requires Camera Access for Video Conference</string>
 	<key>CFBundleDisplayName</key>
 	<string>Sessions</string>
 	<key>CFBundleExecutable</key>
