@@ -1,26 +1,61 @@
 PODS:
+  - Alamofire (5.4.4)
+  - AlamofireImage (4.2.0):
+    - Alamofire (~> 5.4)
+  - AMRAudioSwift (0.2.5)
   - CocoaLumberjack/Core (3.7.0)
   - CocoaLumberjack/Swift (3.7.0):
     - CocoaLumberjack/Core
+  - CocoMediaPlayer (0.0.1):
+    - CocoaLumberjack/Swift (= 3.7.0)
+  - CocoMediaSDK (0.0.1)
   - SwiftFormat/CLI (0.47.11)
   - SwiftLint (0.42.0)
+  - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
+  - AlamofireImage
+  - AMRAudioSwift (from `https://github.com/teambition/AMRAudioSwift.git`)
   - CocoaLumberjack/Swift
+  - CocoMediaPlayer (from `~/Workspace/cocomediaplayer-swift`)
+  - CocoMediaSDK (from `~/Workspace/cocomediasdk-swift`)
   - SwiftFormat/CLI
   - SwiftLint
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
+    - Alamofire
+    - AlamofireImage
     - CocoaLumberjack
     - SwiftFormat
     - SwiftLint
+    - SwiftyJSON
+
+EXTERNAL SOURCES:
+  AMRAudioSwift:
+    :git: https://github.com/teambition/AMRAudioSwift.git
+  CocoMediaPlayer:
+    :path: "~/Workspace/cocomediaplayer-swift"
+  CocoMediaSDK:
+    :path: "~/Workspace/cocomediasdk-swift"
+
+CHECKOUT OPTIONS:
+  AMRAudioSwift:
+    :commit: 983b30a95d4b97893685b2ca6110d7e25e7bc167
+    :git: https://github.com/teambition/AMRAudioSwift.git
 
 SPEC CHECKSUMS:
+  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
+  AMRAudioSwift: 1c1ccc78d93bf3ff9263cf77717de995b4b5e211
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
+  CocoMediaPlayer: c39a540cf5293f7ce9c2702c1272293b8cba31f3
+  CocoMediaSDK: a29ec983e19a770bc5d60e07f06656fba8468e6f
   SwiftFormat: 6f2fd4689e09959ba5b690ab950279e33eb6441e
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 391cd487549664f220dfa82d5cf2ae835b330da5
+PODFILE CHECKSUM: b5ac59fd0e7c5c7a0356c70971609f0d1ad4a905
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.2

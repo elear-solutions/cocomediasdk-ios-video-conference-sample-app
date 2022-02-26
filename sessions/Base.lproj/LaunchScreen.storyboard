@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,15 +14,56 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iad-ct-zk5">
+                                <rect key="frame" x="0.0" y="241" width="414" height="414"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreenIcon" translatesAutoresizingMaskIntoConstraints="NO" id="MaT-9a-t3Z">
+                                        <rect key="frame" x="143" y="143" width="128" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="128" id="fTV-s7-Fds"/>
+                                            <constraint firstAttribute="width" constant="128" id="suQ-nx-E59"/>
+                                        </constraints>
+                                    </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="5V3-fC-NEg">
+                                        <rect key="frame" x="175" y="287" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="Edx-KT-yZb"/>
+                                            <constraint firstAttribute="width" constant="64" id="Hv5-ho-aVf"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="5V3-fC-NEg" firstAttribute="top" secondItem="MaT-9a-t3Z" secondAttribute="bottom" constant="16" id="8f1-ah-GA4"/>
+                                    <constraint firstItem="MaT-9a-t3Z" firstAttribute="centerY" secondItem="Iad-ct-zk5" secondAttribute="centerY" id="G7b-Z9-bjU"/>
+                                    <constraint firstAttribute="width" secondItem="Iad-ct-zk5" secondAttribute="height" multiplier="1:1" id="K4q-Zg-MlT"/>
+                                    <constraint firstItem="MaT-9a-t3Z" firstAttribute="centerX" secondItem="Iad-ct-zk5" secondAttribute="centerX" id="kde-y1-fv3"/>
+                                    <constraint firstItem="5V3-fC-NEg" firstAttribute="centerX" secondItem="Iad-ct-zk5" secondAttribute="centerX" id="rro-mw-gub"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" name="AccentColor"/>
+                        <constraints>
+                            <constraint firstItem="Iad-ct-zk5" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="09A-Ft-Bzv"/>
+                            <constraint firstItem="Iad-ct-zk5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="12a-bX-C4t"/>
+                            <constraint firstItem="Iad-ct-zk5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2D0-jy-1LQ"/>
+                            <constraint firstItem="Iad-ct-zk5" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cmM-hr-diA"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <color key="tintColor" name="AccentColor"/>
+    <resources>
+        <image name="LaunchScreenIcon" width="480" height="422"/>
+        <namedColor name="AccentColor">
+            <color red="0.40000000596046448" green="0.62699997425079346" blue="0.6119999885559082" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
