@@ -39,7 +39,7 @@ class FetchTokenResponse: ResponseResult, Encodable {
   var accessToken: String
   var expiresIn: String
   var tokenType: String
-  var refreshToken: String = "ZW_AVWbg7ZZ2VOCeYGEQ" // TODO: Remove after fix from platform
+  var refreshToken = "ZW_AVWbg7ZZ2VOCeYGEQ" // TODO: Remove after fix from platform
 
   var rawString: String? {
     let encoder = JSONEncoder()

@@ -49,6 +49,8 @@ class LoginViewController: UIViewController {
     username.isEnabled = !UserDataManager().getUserLoggedIn()
     debugPrint("UserDataManager().getUserLoggedIn():", UserDataManager().getUserLoggedIn())
     debugPrint("username.isEnabled:", username.isEnabled)
+
+    enableKeyboardDismissal()
   }
 
   @objc private func didTouchUpInside(sender: UIButton) {
@@ -76,11 +78,7 @@ class LoginViewController: UIViewController {
                                            try! client?.set(token: tokenResponse.rawString!)
                                            DispatchQueue.main.async {
                                              let vc = SessionListViewController.initFromNib()
-                                             let nav = UINavigationController(rootViewController: vc)
-                                             nav.modalPresentationStyle = .fullScreen
-                                             nav.modalTransitionStyle = .coverVertical
-                                             nav.setNavigationBarHidden(true, animated: true)
-                                             present(nav, animated: true)
+                                             self.navigationController?.setViewControllers([vc], animated: true)
                                            }
                                          case let .failure(error):
                                            debugPrint(error.localizedDescription)

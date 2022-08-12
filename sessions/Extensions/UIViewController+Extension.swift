@@ -14,4 +14,12 @@ extension UIViewController {
     }
     return instanceFromNib()
   }
+
+  public func enableKeyboardDismissal() {
+    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+  }
+
+  @objc private func hideKeyboard() {
+    view.endEditing(true)
+  }
 }

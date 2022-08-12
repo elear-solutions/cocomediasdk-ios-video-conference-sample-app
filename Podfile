@@ -10,8 +10,8 @@ target 'sessions' do
     pod 'SwiftLint'
     pod 'SwiftFormat/CLI'
     pod 'CocoaLumberjack/Swift'
-    pod 'CocoMediaPlayer' , :path => "~/Workspace/cocomediaplayer-swift"
-    pod 'CocoMediaSDK' , :path => "~/Workspace/cocomediasdk-swift"
+    pod 'CocoMediaPlayer' , :path => "/Users/hellophant/Developer/COCO/cocomediaplayer-swift/CocoMediaPlayer.podspec"
+    pod 'CocoMediaSDK' , :path => "/Users/hellophant/Developer/COCO/cocomediasdk-swift/CocoMediaSDK.podspec"
     pod 'AlamofireImage'
     pod 'AMRAudioSwift', :git => 'https://github.com/teambition/AMRAudioSwift.git'
     pod 'SwiftyJSON'

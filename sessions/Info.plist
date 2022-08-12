@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Requires permission for video/audio calls</string>
 	<key>CFBundleDisplayName</key>
 	<string>Sessions</string>
 	<key>CFBundleExecutable</key>
@@ -26,6 +24,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Requires Camera Access for Video Conference</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Requires permission for video/audio calls</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -63,8 +63,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

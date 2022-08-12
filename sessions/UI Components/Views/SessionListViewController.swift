@@ -25,7 +25,6 @@ class SessionListViewController: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    navigationController?.isNavigationBarHidden = true
     NetworkService().fetchNetworksApi(
       success: { _networks in
         guard let _networks = _networks else {

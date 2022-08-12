@@ -12,14 +12,12 @@ class CreateSessionViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationController?.isNavigationBarHidden = false
 
     // Do any additional setup after loading the view.
   }
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    navigationController?.isNavigationBarHidden = true
   }
 
   // MARK: Internal

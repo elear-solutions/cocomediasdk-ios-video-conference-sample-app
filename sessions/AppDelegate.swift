@@ -15,16 +15,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: Internal
 
+  var window: UIWindow?
+
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     // Initialize CocoMediaSDK
     let config = CocoMediaConfig(authDelegate: self)
     do {
       try CocoMediaClient.setup(config)
-      client = CocoMediaClient.shared
     } catch {
       debugPrint("error using setup()", error.localizedDescription)
     }
+    client = CocoMediaClient.shared
     setUpAudioSession()
     return true
   }
@@ -68,12 +70,10 @@ extension AppDelegate {
 extension AppDelegate: CocoClientAuthDelegate {
   func accessTokenCallback(accessToken: String, status: Command.Status, context: UnsafeRawPointer?) {
     // TODO: Add default implementation
-    return
   }
 
   func refreshTokenCallback(status: Command.Status) {
     // TODO: Add default implementation
-    return
   }
 
   func authCallback(authorizationEndpoint: String, tokenEndpoint: String) {
@@ -82,16 +82,12 @@ extension AppDelegate: CocoClientAuthDelegate {
            authorizationEndpoint)
     os_log("%s tokenEndpoint: %s", log: logger, type: .info, #function,
            tokenEndpoint)
-    DispatchQueue.main.async {
-      guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
-        os_log("%s rootViewController: nil", log: self.logger, type: .error, #function)
-        return
-      }
-      let loginVC = UIStoryboard(name: "Main", bundle: nil)
-        .instantiateViewController(identifier: "LoginViewController")
-      rootViewController.modalPresentationStyle = .fullScreen
-      rootViewController.modalTransitionStyle = .coverVertical
-      rootViewController.present(loginVC, animated: true)
+    DispatchQueue.main.async { [weak self] in
+      self?.window = UIApplication.shared.windows.first
+      let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginViewController")
+      let navigation = UINavigationController(rootViewController: loginVC)
+      self?.window?.rootViewController = navigation
+      self?.window?.makeKeyAndVisible()
     }
     os_log("%s completed", log: logger, type: .debug, #function)
   }

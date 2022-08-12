@@ -173,7 +173,7 @@ class SessionCallViewController: UIViewController {
   }
 
   private func setupLocalView() {
-    callerPreview.session = self.session
+    callerPreview.session = session
     session.beginConfiguration()
     let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
                                               for: .video,

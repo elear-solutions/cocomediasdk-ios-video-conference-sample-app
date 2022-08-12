@@ -15,6 +15,12 @@ class LaunchScreenController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     os_log("%s started", log: logger, type: .debug, #function)
     super.viewWillAppear(animated)
+    os_log("%s completed", log: logger, type: .debug, #function)
+  }
+
+  override func viewDidLoad() {
+    os_log("%s started", log: logger, type: .debug, #function)
+    super.viewDidLoad()
     let request = NetworkManagementRequest(commandId: .COCO_MEDIA_NW_CMD_GET_ALL_NETWORKS)
     do {
       try request.execute { result in
@@ -30,20 +36,10 @@ class LaunchScreenController: UIViewController {
       }
     } catch {
       debugPrint(String(describing: self), #function, String(describing: error))
+      AppDelegate().authCallback(authorizationEndpoint: "localhost",
+                                 tokenEndpoint: "localhost")
     }
     os_log("%s completed", log: logger, type: .debug, #function)
-  }
-
-  override func viewDidLoad() {
-    os_log("%s started", log: logger, type: .debug, #function)
-    super.viewDidLoad()
-    // Do any additional setup after loading the view.
-    os_log("%s completed", log: logger, type: .debug, #function)
-  }
-
-  override func viewDidDisappear(_ animated: Bool) {
-    // Do any additional wrap up before unloading the view.
-    super.viewDidDisappear(animated)
   }
 
   // MARK: Private
@@ -55,10 +51,9 @@ class LaunchScreenController: UIViewController {
     DispatchQueue.main.async {
       let vc = SessionListViewController.initFromNib()
       let nav = UINavigationController(rootViewController: vc)
-      nav.modalPresentationStyle = .fullScreen
-      nav.modalTransitionStyle = .coverVertical
-      nav.setNavigationBarHidden(true, animated: true)
-      self.present(nav, animated: true)
+      let window = UIApplication.shared.windows.first
+      window?.rootViewController = nav
+      window?.makeKeyAndVisible()
     }
     os_log("%s completed", log: logger, type: .debug, #function)
   }
