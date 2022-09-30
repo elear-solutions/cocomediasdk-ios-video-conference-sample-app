@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		473E9B10CF6414D81924D77F /* Pods_sessions_sessionsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAE9FFA252D0DDBDC448401 /* Pods_sessions_sessionsUITests.framework */; };
 		668BD3F5F45B9B9D9C32AA52 /* Pods_sessionsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31638245ABF3AD8D21AD0F16 /* Pods_sessionsTests.framework */; };
+		7E5A53FB28E31A53003A211F /* VideoOutputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A53FA28E31A53003A211F /* VideoOutputManager.swift */; };
+		7E5A53FD28E326D8003A211F /* VideoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A53FC28E326D8003A211F /* VideoClient.swift */; };
 		92DA176190062F97508D6D49 /* Pods_sessions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C557396B3F8C739497D523 /* Pods_sessions.framework */; };
 		DC3789F3273E8EB800BA0594 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3789F2273E8EB800BA0594 /* AppDelegate.swift */; };
 		DC3789F5273E8EB800BA0594 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3789F4273E8EB800BA0594 /* SceneDelegate.swift */; };
@@ -78,6 +80,8 @@
 		184F29554C37FDF573CEE6A0 /* Pods-sessions-sessionsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sessions-sessionsUITests.debug.xcconfig"; path = "Target Support Files/Pods-sessions-sessionsUITests/Pods-sessions-sessionsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		31638245ABF3AD8D21AD0F16 /* Pods_sessionsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sessionsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69BD9B0FFAACAB8D7A760E00 /* Pods-sessions-sessionsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sessions-sessionsUITests.release.xcconfig"; path = "Target Support Files/Pods-sessions-sessionsUITests/Pods-sessions-sessionsUITests.release.xcconfig"; sourceTree = "<group>"; };
+		7E5A53FA28E31A53003A211F /* VideoOutputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOutputManager.swift; sourceTree = "<group>"; };
+		7E5A53FC28E326D8003A211F /* VideoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoClient.swift; sourceTree = "<group>"; };
 		858E4A51227B08D2C3122228 /* Pods-sessions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sessions.release.xcconfig"; path = "Target Support Files/Pods-sessions/Pods-sessions.release.xcconfig"; sourceTree = "<group>"; };
 		9012D480706A388F2A5BCC30 /* Pods-sessionsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sessionsTests.release.xcconfig"; path = "Target Support Files/Pods-sessionsTests/Pods-sessionsTests.release.xcconfig"; sourceTree = "<group>"; };
 		B567220CA6A4EF7A4ABCDDF4 /* Pods-sessionsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sessionsTests.debug.xcconfig"; path = "Target Support Files/Pods-sessionsTests/Pods-sessionsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -302,6 +306,8 @@
 				DCA6876E27BFBE8B00BDF404 /* AudioRecordingService.swift */,
 				DC621D4C2770B8DD000A3029 /* AuthenticationService.swift */,
 				DC9E24E8278808260073CECF /* NetworkService.swift */,
+				7E5A53FA28E31A53003A211F /* VideoOutputManager.swift */,
+				7E5A53FC28E326D8003A211F /* VideoClient.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -570,6 +576,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC4722C6276EF17600D7B45E /* String+Extension.swift in Sources */,
+				7E5A53FD28E326D8003A211F /* VideoClient.swift in Sources */,
 				DC8960A927720B2C00CF4196 /* Models.swift in Sources */,
 				DC923184279689C30009F355 /* LaunchScreenController.swift in Sources */,
 				DC8960AE2772270600CF4196 /* UserDataManager.swift in Sources */,
@@ -585,6 +592,7 @@
 				DC3789F3273E8EB800BA0594 /* AppDelegate.swift in Sources */,
 				DC3789F5273E8EB800BA0594 /* SceneDelegate.swift in Sources */,
 				DCE60DA1277090FE00C6F510 /* SessionCallViewController.swift in Sources */,
+				7E5A53FB28E31A53003A211F /* VideoOutputManager.swift in Sources */,
 				DC621D4A2770B2D6000A3029 /* Global.swift in Sources */,
 				DC8960AB27720D2B00CF4196 /* AlamofireManager.swift in Sources */,
 				DC621D4D2770B8DD000A3029 /* AuthenticationService.swift in Sources */,
@@ -768,6 +776,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SY8Q6736C7;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
@@ -796,6 +805,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SY8Q6736C7;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
