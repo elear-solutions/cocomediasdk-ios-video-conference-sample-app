@@ -31,9 +31,6 @@ class SessionCallViewController: UIViewController {
 
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
-//    sessionQueue.async {
-//      self.session.stopRunning()
-//    }
     videoClient.stopSession()
     do {
       debugPrint("[DBG] \(#file) -> \(#function) disconnecting: \(selectedNetwork!)")
@@ -64,13 +61,10 @@ class SessionCallViewController: UIViewController {
   @IBOutlet var btnToggleSpeaker: UIButton!
 
   var selectedNetwork: Network?
-//  var videoOutput: AVCaptureVideoDataOutput = .init()
 
   // MARK: Private
 
   private var videoClient = VideoClient()
-//  private let session = AVCaptureSession()
-//  private let sessionQueue = DispatchQueue(label: "sampleBufferQueue", qos: .background)
 
   private var players: [SampleBufferPlayer] = [SampleBufferPlayer(), SampleBufferPlayer(), SampleBufferPlayer()]
   private var videoDecoders: [LiveVideoDecoder] = [LiveVideoDecoder(), LiveVideoDecoder(), LiveVideoDecoder()]
@@ -157,15 +151,6 @@ class SessionCallViewController: UIViewController {
       break
     case btnToggleVideo:
       sender.isSelected ? videoClient.restartSession() : videoClient.stopSession()
-//      if sender.isSelected {
-//        sessionQueue.async {
-//          self.session.startRunning()
-//        }
-//      } else {
-//        sessionQueue.async {
-//          self.session.stopRunning()
-//        }
-//      }
     case btnEndCall:
       try? selectedNetwork?.disconnect()
       navigationController?.popViewController(animated: true)
@@ -178,30 +163,6 @@ class SessionCallViewController: UIViewController {
     }
   }
 
-//  private func setupLocalView() {
-//    callerPreview.session = session
-//    session.beginConfiguration()
-//    let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
-//    guard
-//      let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice!),
-//      session.canAddInput(videoDeviceInput) else
-//    {
-//      debugPrint("failed to acquire camera")
-//      return
-//    }
-//    session.addInput(videoDeviceInput)
-//    configureCameraForHighestFrameRate(device: videoDevice!)
-  // let photoOutput = AVCapturePhotoOutput()
-  // guard session.canAddOutput(photoOutput) else { return }
-//    session.sessionPreset = .iFrame960x540
-  // session.addOutput(photoOutput)
-//    session.commitConfiguration()
-
-  // showSpinner(onView: callPreview02)
-  // showSpinner(onView: callPreview03)
-  // showSpinner(onView: callPreview04)
-//  }
-
   private func setupRemoteView() {
     players[0].attach(view: callPreview02) // yellow
     players[1].attach(view: callPreview03) // green
@@ -212,26 +173,13 @@ class SessionCallViewController: UIViewController {
     let avAudioSession = AVAudioSession.sharedInstance()
     do {
       try avAudioSession.setCategory(.playAndRecord,
-                                     mode: .voiceChat,
+                                     mode: .videoChat,
                                      options: [.defaultToSpeaker, .allowBluetooth])
-      // try? avAudioSession.setPreferredIOBufferDuration(0.4)
       AudioRecordingService().start()
     } catch {
       debugPrint(error.localizedDescription)
     }
   }
-
-//  private func setupLocalVideoFeed() {
-//    session.beginConfiguration()
-//    // videoOutput = AVCaptureVideoDataOutput()
-//    videoOutput.alwaysDiscardsLateVideoFrames = true
-//    videoOutput.setSampleBufferDelegate(self, queue: sessionQueue)
-//    guard session.canAddOutput(videoOutput) else {
-//      return
-//    }
-//    session.addOutput(videoOutput)
-//    session.commitConfiguration()
-//  }
 
   private func setupVideoClient() {
     do {
@@ -248,37 +196,11 @@ class SessionCallViewController: UIViewController {
     setupEndCallButton()
     setupToggleMicrophoneButton()
     setupToggleSpeakerButton()
-//    setupLocalView()
     setupVideoClient()
     setupLocalAudioFeed()
-//    setupLocalVideoFeed()
   }
 
   // MARK: - Helpers
-
-//  /* Set maximum frame rate */
-//  private func configureCameraForHighestFrameRate(device: AVCaptureDevice) {
-//    var bestFrameRateRange: AVFrameRateRange?
-//
-//    for range in device.activeFormat.videoSupportedFrameRateRanges {
-//      if range.maxFrameRate > bestFrameRateRange?.maxFrameRate ?? 0 {
-//        bestFrameRateRange = range
-//      }
-//    }
-//
-//    if let bestFrameRateRange = bestFrameRateRange {
-//      do {
-//        try device.lockForConfiguration()
-//
-//        let duration = bestFrameRateRange.minFrameDuration
-//        device.activeVideoMinFrameDuration = duration
-//        device.activeVideoMaxFrameDuration = duration
-//        frameRate = Int(duration.timescale)
-//
-//        device.unlockForConfiguration()
-//      } catch {}
-//    }
-//  }
 
   private func generateVideoDesc() -> String {
     let builder = SessionDescription.Builder()
@@ -293,24 +215,6 @@ class SessionCallViewController: UIViewController {
 
     return SessionDescriptionParser.unParse(sessionDescription: desc)
   }
-
-//  private func sendVPackedFrame(_: CMSampleBuffer) {
-//    guard let stream = videoTxStream, let data = LiveVideoEncoder.encode(buffer), stream.status == .COCO_MEDIA_CLIENT_STREAM_CREATED else {
-//      debugPrint("[DBG] stream is not created, status: \(videoTxStream?.status ?? .COCO_MEDIA_CLIENT_STREAM_CREATED)")
-//      return
-//    }
-//    let packedFrame = PackedFrame(index: videoIndex,
-//                                  mime: .COCO_MEDIA_CLIENT_MIME_TYPE_VIDEO_H264,
-//                                  type: .COCO_MEDIA_CLIENT_FRAME_TYPE_KEY,
-//                                  duration: frameRate,
-//                                  time: Int(buffer.presentationTimeStamp.value) / 1000,
-//                                  data: data,
-//                                  size: buffer.totalSampleSize)
-//
-//    try? stream.send(packedFrame)
-//
-//    videoIndex += 1
-//  }
 }
 
 // MARK: - Network
@@ -460,19 +364,6 @@ extension SessionCallViewController: RxStreamDelegate {
         debugPrint("[DBG] No video decoder with such sourceNodeId: \(stream)")
         return
       }
-      //      if someFrame.data == nil {
-      //      someFrame = frame
-      //      }
-      //      if videoTxStream?.status == .COCO_MEDIA_CLIENT_STREAM_CREATED {
-      //        let newFrame = PackedFrame(index: frame.index,
-      //                                   mime: frame.mime,
-      //                                   type: frame.type,
-      //                                   duration: frame.duration,
-      //                                   time: frame.time,
-      //                                   data: frame.data,
-      //                                   size: frame.size)
-      //        try? videoTxStream?.send(newFrame)
-      //      }
       try! videoDecoders[index].feed(data: data, sampleTime: time)
     case .COCO_MEDIA_CLIENT_MIME_TYPE_AUDIO_AAC:
       let time = CMTime(seconds: ptsTime, preferredTimescale: 16000)
@@ -513,85 +404,3 @@ extension SessionCallViewController: TxStreamDelegate {
     debugPrint("[DBG] \(#function) status: \(to)")
   }
 }
-
-// MARK: - AVCapture
-
-// extension SessionCallViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
-//  func captureOutput(_ output: AVCaptureOutput,
-//                     didOutput sampleBuffer: CMSampleBuffer,
-//                     from connection: AVCaptureConnection)
-//  {
-//    guard output == videoOutput else {
-//      return
-//    }
-//    // TODO: Call LiveVideoEncoder.encode
-//    print("\(#function) -> \(sampleBuffer)")
-//    let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-//    let duration = CMSampleBufferGetDuration(sampleBuffer)
-//    let width: size_t = CVPixelBufferGetWidth(imageBuffer)
-//    let height: size_t = CVPixelBufferGetHeight(imageBuffer)
-//    let vtSession = UnsafeMutablePointer<VTCompressionSession?>
-//      .allocate(capacity: 1)
-//    // ontime init
-//    let status: OSStatus = VTCompressionSessionCreate(
-//      allocator: kCFAllocatorDefault,
-//      width: 960,
-//      height: 540,
-//      codecType: kCMVideoCodecType_H264,
-//      encoderSpecification: nil,
-//      imageBufferAttributes: nil,
-//      compressedDataAllocator: kCFAllocatorDefault,
-//      outputCallback: nil,
-//      refcon: nil,
-//      compressionSessionOut: vtSession
-//    )
-//
-//    if status == noErr {
-//      //      VTSessionSetProperty(vtSession.pointee!,
-//      //                           key: kVTCompressionPropertyKey_RealTime,
-//      //                           value: kCFBooleanTrue)
-//      let propertyDictionary = [
-//        kVTCompressionPropertyKey_ProfileLevel: kVTProfileLevel_H264_Baseline_AutoLevel,
-//        kVTCompressionPropertyKey_MaxKeyFrameInterval: 60,
-//        kVTCompressionPropertyKey_RealTime: true,
-//        kVTCompressionPropertyKey_Quality: 0.5,
-//      ] as CFDictionary
-//
-//      guard VTSessionSetProperties(vtSession.pointee!, propertyDictionary: propertyDictionary) == noErr else {
-//        debugPrint("Properties failure")
-//        return
-//      }
-//
-//      guard VTCompressionSessionPrepareToEncodeFrames(vtSession.pointee!) == noErr else {
-//        debugPrint("Encoding preparation failure")
-//        return
-//      }
-//
-//      let presentationTimestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
-//      // function to encode
-//      VTCompressionSessionEncodeFrame(
-//        vtSession.pointee!,
-//        imageBuffer: imageBuffer,
-//        presentationTimeStamp: presentationTimestamp,
-//        duration: duration,
-//        frameProperties: nil,
-//        infoFlagsOut: nil,
-//        outputHandler: { [weak self] status, infoFlags, encodedBuffer in
-//          debugPrint(status)
-//          debugPrint(infoFlags)
-//          guard let self = self, let sBuf = encodedBuffer else {
-//            return
-//          }
-//          debugPrint(#function, sBuf)
-//          DispatchQueue.main.async {
-//            self.sendVPackedFrame(sBuf)
-//          }
-//        }
-//      )
-//    }
-//
-//    if vtSession.pointee != nil {
-//      VTCompressionSessionInvalidate(vtSession.pointee!)
-//    }
-//  }
-// }
