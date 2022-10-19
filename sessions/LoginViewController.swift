@@ -44,11 +44,9 @@ class LoginViewController: UIViewController {
                       for: .touchUpInside)
     // Demo URL for Development Environment
     baseUri.text = UserDataManager().getURL()
-    baseUri.isEnabled = !UserDataManager().getUserLoggedIn()
+//    baseUri.isEnabled = !UserDataManager().getUserLoggedIn()
     username.text = UserDataManager().getUsername()
-    username.isEnabled = !UserDataManager().getUserLoggedIn()
-    debugPrint("UserDataManager().getUserLoggedIn():", UserDataManager().getUserLoggedIn())
-    debugPrint("username.isEnabled:", username.isEnabled)
+//    username.isEnabled = !UserDataManager().getUserLoggedIn()
 
     enableKeyboardDismissal()
   }
