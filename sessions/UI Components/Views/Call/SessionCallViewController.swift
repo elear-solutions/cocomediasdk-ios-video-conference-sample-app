@@ -11,7 +11,7 @@ import CocoMediaSDK
 import OSLog
 import UIKit
 
-class SessionCallViewController: UIViewController {
+final class SessionCallViewController: UIViewController {
   // MARK: Lifecycle
 
   override func viewDidLoad() {
@@ -27,8 +27,7 @@ class SessionCallViewController: UIViewController {
     setup()
   }
 
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
+  deinit {
     captureSession.stopSession()
     do {
       debugPrint("[DBG] \(#file) -> \(#function) disconnecting: \(selectedNetwork!)")
@@ -40,37 +39,39 @@ class SessionCallViewController: UIViewController {
 
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    setupRemoteView()
+    callerPreview.setSession(captureSession.session)
+    reattachPlayers()
+    sendButton.layer.cornerRadius = sendButton.bounds.height / 2
+    inviteButton.layer.cornerRadius = 4
   }
 
   // MARK: Internal
 
   static let identifier = String(describing: SessionCallViewController.self)
 
-  @IBOutlet var callerPreview: PreviewView! // blue
-  @IBOutlet var callPreview02: UIView! // yellow
-  @IBOutlet var callPreview03: UIView! // green
-  @IBOutlet var callPreview04: UIView! // red
-
-  @IBOutlet var btnToggleCamera: UIButton!
-  @IBOutlet var btnToggleVideo: UIButton!
-  @IBOutlet var btnEndCall: UIButton!
-  @IBOutlet var btnToggleMicrophone: UIButton!
-  @IBOutlet var btnToggleSpeaker: UIButton!
-
   var selectedNetwork: Network?
 
   // MARK: Private
 
+  @IBOutlet private var callPreview04: UIView! // blue
+  @IBOutlet private var callPreview02: UIView! // yellow
+  @IBOutlet private var callPreview03: UIView! // green
+  @IBOutlet private var callerPreview: PreviewView! // red
+
+  @IBOutlet private var btnToggleCamera: UIButton!
+  @IBOutlet private var btnToggleVideo: UIButton!
+  @IBOutlet private var btnToggleMicrophone: UIButton!
+
+  @IBOutlet private var inviteButton: UIButton!
+  @IBOutlet private var chatContainerView: UIView!
+  @IBOutlet private var chatField: PaddingTextField!
+  @IBOutlet private var sendButton: UIButton!
+
   private let captureSession = CaptureClient()
 
-  private var players: [SampleBufferPlayer] = [SampleBufferPlayer(), SampleBufferPlayer(), SampleBufferPlayer()]
-  private var videoDecoders: [LiveVideoDecoder] = [LiveVideoDecoder(), LiveVideoDecoder(), LiveVideoDecoder()]
-  private var audioDecoders: [LiveAudioDecoder] = [LiveAudioDecoder(),
-                                                   LiveAudioDecoder(),
-                                                   LiveAudioDecoder()]
-
-  private var basetime: Int?
+  private var players = [SampleBufferPlayer(), SampleBufferPlayer(), SampleBufferPlayer()]
+  private var videoDecoders = [LiveVideoDecoder]()
+  private var audioDecoders = [LiveAudioDecoder]()
 
   private func setupToggleCameraButton() {
     btnToggleCamera.addTarget(
@@ -86,22 +87,13 @@ class SessionCallViewController: UIViewController {
       action: #selector(didTouchUpInside),
       for: .touchUpInside
     )
-    btnToggleVideo.setImage(
-      UIImage(systemName: "video.fill"),
-      for: .normal
-    )
-    btnToggleVideo.setImage(
-      UIImage(systemName: "video.slash.fill"),
-      for: .selected
-    )
-  }
 
-  private func setupEndCallButton() {
-    btnEndCall.addTarget(
-      self,
-      action: #selector(didTouchUpInside),
-      for: .touchUpInside
-    )
+    let largeConfig = UIImage.SymbolConfiguration(pointSize: 32, weight: .medium, scale: .medium)
+    let video = UIImage(systemName: "video", withConfiguration: largeConfig)
+    let videoOff = UIImage(systemName: "video.slash", withConfiguration: largeConfig)
+
+    btnToggleVideo.setImage(video, for: .normal)
+    btnToggleVideo.setImage(videoOff, for: .selected)
   }
 
   private func setupToggleMicrophoneButton() {
@@ -110,73 +102,61 @@ class SessionCallViewController: UIViewController {
       action: #selector(didTouchUpInside),
       for: .touchUpInside
     )
-    btnToggleMicrophone.setImage(
-      UIImage(systemName: "mic.fill"),
-      for: .normal
-    )
-    btnToggleMicrophone.setImage(
-      UIImage(systemName: "mic.slash.fill"),
-      for: .selected
-    )
-  }
+    let largeConfig = UIImage.SymbolConfiguration(pointSize: 32, weight: .medium, scale: .medium)
+    let mic = UIImage(systemName: "mic", withConfiguration: largeConfig)
+    let micOff = UIImage(systemName: "mic.slash", withConfiguration: largeConfig)
 
-  private func setupToggleSpeakerButton() {
-    btnToggleSpeaker.addTarget(
-      self,
-      action: #selector(didTouchUpInside),
-      for: .touchUpInside
-    )
-    btnToggleSpeaker.setImage(
-      UIImage(systemName: "speaker.3.fill"),
-      for: .normal
-    )
-    btnToggleSpeaker.setImage(
-      UIImage(systemName: "speaker.slash.fill"),
-      for: .selected
-    )
-  }
-
-  @objc private func didTouchUpInside(sender: UIButton) {
-    sender.isSelected = !sender.isSelected
-    switch sender {
-    case btnToggleCamera:
-      break
-    case btnToggleVideo:
-      sender.isSelected ? captureSession.restartSession() : captureSession.stopSession()
-    case btnEndCall:
-      try? selectedNetwork?.disconnect()
-      navigationController?.popViewController(animated: true)
-    case btnToggleMicrophone:
-      break
-    case btnToggleSpeaker:
-      break
-    default:
-      break
-    }
-  }
-
-  private func setupRemoteView() {
-    players[0].attach(view: callPreview02) // yellow
-    players[1].attach(view: callPreview03) // green
-    players[2].attach(view: callPreview04) // red
+    btnToggleMicrophone.setBackgroundImage(mic, for: .normal)
+    btnToggleMicrophone.setBackgroundImage(micOff, for: .selected)
   }
 
   private func setupVideoClient() {
     do {
       try captureSession.startSendingVideoToServer()
-      callerPreview.session = captureSession.session
     } catch {
       debugPrint("error video client: \(error.localizedDescription)")
     }
   }
 
   private func setup() {
+    enableKeyboardDismissal()
     setupToggleCameraButton()
     setupToggleVideoButton()
-    setupEndCallButton()
     setupToggleMicrophoneButton()
-    setupToggleSpeakerButton()
     setupVideoClient()
+    chatField.attributedPlaceholder = NSAttributedString(string: "Type a message...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+  }
+
+  @objc private func didTouchUpInside(sender: UIButton) {
+    switch sender {
+    case btnToggleCamera:
+      if !btnToggleVideo.isSelected {
+        captureSession.changeCamera()
+      }
+    case btnToggleVideo:
+      sender.isSelected = !sender.isSelected
+      sender.isSelected ? captureSession.disableCamera() : captureSession.enableCamera()
+    case btnToggleMicrophone:
+      sender.isSelected = !sender.isSelected
+      captureSession.isMuted = !captureSession.isMuted
+    default:
+      break
+    }
+  }
+
+  @IBAction private func invite() {
+    view.endEditing(true)
+    let controller = InviteViewController.initFromNib()
+    controller.network = selectedNetwork
+    navigationController?.pushViewController(controller, animated: true)
+  }
+
+  @IBAction private func sendMessage() {
+    guard let message = chatField.text else {
+      return
+    }
+    chatField.text = ""
+    selectedNetwork?.sendMessage(message: message)
   }
 
   // MARK: - Helpers
@@ -208,13 +188,28 @@ class SessionCallViewController: UIViewController {
 extension SessionCallViewController: NetworkDelegate {
   func didReceiveData(_ network: Network, from node: Node, data: String?) {
     debugPrint("[DBG] \(#file) -> \(#function) \(node)")
-    debugPrint("[DBG] \(#file) -> \(#function) \(data ?? "")")
+    debugPrint("[DBG Message] \(#file) -> \(#function) \(data ?? "")")
+    guard let message = data else {
+      return
+    }
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else { return }
+      MessageView().show(message: message, node: node.id, on: self.view)
+    }
   }
 
   func didReceiveContentInfo(_ network: Network, from node: Node, metadata: String?, time stamp: TimeInterval) {
     debugPrint("[DBG] \(#file) -> \(#function) \(node)")
     debugPrint("[DBG] \(#file) -> \(#function) \(metadata ?? "")")
     debugPrint("[DBG] \(#file) -> \(#function) \(stamp)")
+
+    guard let message = metadata else {
+      return
+    }
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else { return }
+      MessageView().show(message: message, node: node.id, on: self.view)
+    }
   }
 
   func didChangeStatus(_ network: Network, status from: Network.State, to: Network.State) {
@@ -229,7 +224,6 @@ extension SessionCallViewController: NetworkDelegate {
           debugPrint("[DBG] \(#file) -> \(#function) channels.count:", channels.count)
           for channel in channels {
             do {
-              debugPrint(channel)
               channel.delegate = self
               try channel.join()
             } catch {
@@ -263,7 +257,7 @@ extension SessionCallViewController: ChannelDelegate {
     if rxStream.status != .COCO_MEDIA_CLIENT_STREAM_CREATED {
       return
     }
-    try! rxStream.start { status in
+    try? rxStream.start { status in
       switch status {
       case .COCO_MEDIA_CLIENT_STREAM_STARTED:
         rxStream.delegate = self
@@ -276,15 +270,15 @@ extension SessionCallViewController: ChannelDelegate {
   func didChangeStatus(_ channel: Channel, status from: Channel.Status, to: Channel.Status) {
     switch to {
     case .COCO_MEDIA_CLIENT_CHANNEL_JOINED:
-//      let vTxStream = try! channel.createStream(descriptor: generateDesc(isVideo: true), statusHandler: { status in
-//        switch status {
-//        case .COCO_MEDIA_CLIENT_STREAM_CREATED:
-//          debugPrint("video stream created")
-//        default:
-//          debugPrint("txStream status: \(status)")
-//        }
-//      })
-//      vTxStream.delegate = self
+      let vTxStream = try! channel.createStream(descriptor: generateDesc(isVideo: true), statusHandler: { status in
+        switch status {
+        case .COCO_MEDIA_CLIENT_STREAM_CREATED:
+          debugPrint("video stream created")
+        default:
+          debugPrint("txStream status: \(status)")
+        }
+      })
+      vTxStream.delegate = self
       let aTxStream = try! channel.createStream(descriptor: generateDesc(isVideo: false), statusHandler: { status in
         switch status {
         case .COCO_MEDIA_CLIENT_STREAM_CREATED:
@@ -302,7 +296,7 @@ extension SessionCallViewController: ChannelDelegate {
 
 // MARK: - MediaFrame
 
-extension SessionCallViewController: LiveDecoderDelegate {
+extension SessionCallViewController: LiveDecoderDelegate, VideoAngleDelegate {
   func output(mediaFrame: MediaFrame, sender: LiveDecoder) {
     debugPrint("[DBG] \(#function) started.")
     guard let index = videoDecoders.firstIndex(where: { $0.rxStreamId == sender.rxStreamId }) else {
@@ -311,6 +305,17 @@ extension SessionCallViewController: LiveDecoderDelegate {
     }
     enqueueFrame(frame: mediaFrame, index: index)
     debugPrint("[DBG] \(#function) completed.")
+  }
+
+  func rotate(angle: CGFloat, sender: LiveDecoder) {
+    guard let index = videoDecoders.firstIndex(where: { $0.rxStreamId == sender.rxStreamId }) else {
+      debugPrint("[DBG] \(#function) No decoder with such index: \(sender)")
+      return
+    }
+    DispatchQueue.main.async { [weak self] in
+      self?.players[index].rotate(angle: angle)
+      self?.view.setNeedsLayout()
+    }
   }
 
   private func enqueueFrame(frame: MediaFrame, index: Int) {
@@ -355,45 +360,78 @@ extension SessionCallViewController: RxStreamDelegate {
   }
 }
 
-// MARK: - TxStream
+// MARK: - Stream status
 
 extension SessionCallViewController: TxStreamDelegate {
   func didChangeStatus(_ stream: CocoMediaSDK.Stream, status from: CocoMediaSDK.Stream.Status, to: CocoMediaSDK.Stream.Status) {
     debugPrint("[DBG] \(#function) txstream: \(stream)")
 
+    if stream is TxStream, to == .COCO_MEDIA_CLIENT_STREAM_CREATED {
+      setupTxStream(stream)
+    }
+
+    if to == .COCO_MEDIA_CLIENT_STREAM_STARTED && stream is RxStream {
+      setupRxStream(stream)
+    } else if to == .COCO_MEDIA_CLIENT_STREAM_CLOSED || to == .COCO_MEDIA_CLIENT_STREAM_DESTROYED {
+      stopStream(stream)
+    }
+    debugPrint("[DBG] \(#function) status: \(to)")
+  }
+
+  private func setupTxStream(_ stream: CocoMediaSDK.Stream) {
     let sdp = try? SessionDescriptionParser.parse(sdpString: stream.sdp ?? "")
     guard let mediaDesc = sdp?.mediaDescriptionList.first else {
       return
     }
 
-    if stream is TxStream, to == .COCO_MEDIA_CLIENT_STREAM_CREATED {
-      if mediaDesc.mediaType == mediaDesc.MEDIA_TYPE_VIDEO {
-        captureSession.videoTxStream = stream as? TxStream
-        captureSession.videoTxStream?.delegate = self
-      } else if mediaDesc.mediaType == mediaDesc.MEDIA_TYPE_AUDIO {
-        captureSession.audioTxStream = stream as? TxStream
-        captureSession.audioTxStream?.delegate = self
-      }
+    if mediaDesc.mediaType == mediaDesc.MEDIA_TYPE_VIDEO {
+      captureSession.setVideo(stream: stream as? TxStream)
+    } else if mediaDesc.mediaType == mediaDesc.MEDIA_TYPE_AUDIO {
+      captureSession.setAudio(stream: stream as? TxStream)
     }
-    if to == .COCO_MEDIA_CLIENT_STREAM_STARTED && !videoDecoders.contains(where: { $0.rxStreamId == stream.sourceNodeId }) && stream is RxStream {
-      let audioDecoder = audioDecoders.first(where: { $0.rxStreamId == nil })
-      let videoDecoder = videoDecoders.first(where: { $0.rxStreamId == nil })
+  }
 
-      audioDecoder?.rxStreamId = stream.sourceNodeId
-      videoDecoder?.rxStreamId = stream.sourceNodeId
-
-      audioDecoder?.delegate = self
-      videoDecoder?.delegate = self
-    } else if to == .COCO_MEDIA_CLIENT_STREAM_CLOSED || to == .COCO_MEDIA_CLIENT_STREAM_DESTROYED {
-      if captureSession.videoTxStream?.sourceNodeId == stream.sourceNodeId {
-        captureSession.videoTxStream = nil
-      } else if captureSession.audioTxStream?.sourceNodeId == stream.sourceNodeId {
-        captureSession.audioTxStream = nil
+  private func setupRxStream(_ stream: CocoMediaSDK.Stream) {
+    if !videoDecoders.contains(where: { $0.rxStreamId == stream.sourceNodeId }) {
+      if videoDecoders.count == players.count {
+        players.append(SampleBufferPlayer())
       }
 
-      audioDecoders.first(where: { $0.rxStreamId == stream.sourceNodeId })?.rxStreamId = nil
-      videoDecoders.first(where: { $0.rxStreamId == stream.sourceNodeId })?.rxStreamId = nil
+      DispatchQueue.main.async {
+        self.reattachPlayers()
+      }
+
+      let videoDecoder = LiveVideoDecoder(rxStreamId: stream.sourceNodeId, delegate: self)
+      videoDecoder.angleDelegate = self
+      videoDecoders.append(videoDecoder)
+      audioDecoders.append(LiveAudioDecoder(rxStreamId: stream.sourceNodeId, delegate: self))
     }
-    debugPrint("[DBG] \(#function) status: \(to)")
+  }
+
+  private func stopStream(_ stream: CocoMediaSDK.Stream) {
+    guard let index = videoDecoders.firstIndex(where: { $0.rxStreamId == stream.sourceNodeId }) else {
+      return
+    }
+    
+    videoDecoders.removeAll(where: { $0.rxStreamId == stream.sourceNodeId })
+    audioDecoders.removeAll(where: { $0.rxStreamId == stream.sourceNodeId })
+    players.remove(at: index)
+    reattachPlayers()
+  }
+
+  private func reattachPlayers() {
+    switch players.count {
+    case 1:
+      players[0].attach(view: callPreview02)
+    case 2:
+      players[0].attach(view: callPreview02)
+      players[1].attach(view: callPreview03)
+    case 3:
+      players[0].attach(view: callPreview02)
+      players[1].attach(view: callPreview03)
+      players[2].attach(view: callPreview04)
+    default:
+      break
+    }
   }
 }

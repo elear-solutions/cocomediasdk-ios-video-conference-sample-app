@@ -26,11 +26,7 @@ final class CaptureManager {
 
   // MARK: Internal
 
-  // MARK: - Manager
-
   let session = AVCaptureSession()
-
-  // MARK: - Video
 
   private(set) var frameRate = 0
 
@@ -50,6 +46,20 @@ final class CaptureManager {
   func stopSession() {
     sessionQueue.async {
       self.session.stopRunning()
+    }
+  }
+
+  func enableCamera(position: AVCaptureDevice.Position) {
+    do {
+      try addVideoDeviceInputToSession(position: position)
+    } catch {
+      debugPrint(error.localizedDescription)
+    }
+  }
+
+  func disableCamera() {
+    if let currentInput = session.inputs.first(where: { $0.ports.contains(where: { $0.mediaType == .video }) }) {
+      session.removeInput(currentInput)
     }
   }
 
@@ -96,9 +106,8 @@ final class CaptureManager {
     let audioSession = AVAudioSession.sharedInstance()
     do {
       try audioSession.setCategory(.playAndRecord,
-                                   mode: .videoChat,
-                                   options: [.defaultToSpeaker, .allowBluetoothA2DP, .mixWithOthers, .allowBluetooth])
-//      try audioSession.setPreferredInputOrientation(.portrait)
+                                   mode: .voiceChat,
+                                   options: [.defaultToSpeaker, .allowBluetoothA2DP, .allowBluetooth])
       try audioSession.setActive(true)
     } catch {
       debugPrint(error.localizedDescription)
@@ -107,8 +116,8 @@ final class CaptureManager {
 
     session.beginConfiguration()
 
-    if session.canSetSessionPreset(.iFrame960x540) {
-      session.sessionPreset = .iFrame960x540
+    if session.canSetSessionPreset(.low) {
+      session.sessionPreset = .low
     }
 
     do {
@@ -124,6 +133,8 @@ final class CaptureManager {
 
     session.commitConfiguration()
   }
+
+  // MARK: - Video
 
   private func requestCameraAuthorizationIfNeeded() {
     switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -142,18 +153,25 @@ final class CaptureManager {
     }
   }
 
-  private func addVideoDeviceInputToSession() throws {
+  private func addVideoDeviceInputToSession(position: AVCaptureDevice.Position = .front) throws {
     do {
       var defaultVideoDevice: AVCaptureDevice?
 
-      if let frontCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) {
-        defaultVideoDevice = frontCameraDevice
-      } else if let dualCameraDevice = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) {
-        defaultVideoDevice = dualCameraDevice
-      } else if let dualWideCameraDevice = AVCaptureDevice.default(.builtInDualWideCamera, for: .video, position: .back) {
-        defaultVideoDevice = dualWideCameraDevice
-      } else if let backCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) {
-        defaultVideoDevice = backCameraDevice
+      disableCamera()
+
+      switch position {
+      case .front:
+        defaultVideoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
+      case .back:
+        if let dualCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) {
+          defaultVideoDevice = dualCameraDevice
+        } else if let dualWideCameraDevice = AVCaptureDevice.default(.builtInDualWideCamera, for: .video, position: .back) {
+          defaultVideoDevice = dualWideCameraDevice
+        } else if let backCameraDevice = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) {
+          defaultVideoDevice = backCameraDevice
+        }
+      default:
+        break
       }
 
       guard let videoDevice = defaultVideoDevice else {

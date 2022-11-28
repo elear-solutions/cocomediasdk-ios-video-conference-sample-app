@@ -9,8 +9,14 @@
 /* Begin PBXBuildFile section */
 		473E9B10CF6414D81924D77F /* Pods_sessions_sessionsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAE9FFA252D0DDBDC448401 /* Pods_sessions_sessionsUITests.framework */; };
 		668BD3F5F45B9B9D9C32AA52 /* Pods_sessionsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31638245ABF3AD8D21AD0F16 /* Pods_sessionsTests.framework */; };
-		7E5A53FB28E31A53003A211F /* VideoOutputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A53FA28E31A53003A211F /* VideoOutputManager.swift */; };
-		7E5A53FD28E326D8003A211F /* VideoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A53FC28E326D8003A211F /* VideoClient.swift */; };
+		7E5A53FB28E31A53003A211F /* CaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A53FA28E31A53003A211F /* CaptureManager.swift */; };
+		7E5A53FD28E326D8003A211F /* CaptureClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A53FC28E326D8003A211F /* CaptureClient.swift */; };
+		7E8ACEEE2930DC95000A4F8D /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8ACEED2930DC95000A4F8D /* PaddingTextField.swift */; };
+		7EED7AEC2934D7EB0085240F /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EED7AEB2934D7EB0085240F /* MessageView.swift */; };
+		7EED7AEE2934D8760085240F /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EED7AED2934D8760085240F /* UIView+Extension.swift */; };
+		7EED7AF02934D9C30085240F /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EED7AEF2934D9C30085240F /* MessageView.xib */; };
+		7EF1893F292637980039953C /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1893E292637980039953C /* InviteViewController.swift */; };
+		7EF18941292637EC0039953C /* InviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EF18940292637EC0039953C /* InviteViewController.xib */; };
 		92DA176190062F97508D6D49 /* Pods_sessions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C557396B3F8C739497D523 /* Pods_sessions.framework */; };
 		DC3789F3273E8EB800BA0594 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3789F2273E8EB800BA0594 /* AppDelegate.swift */; };
 		DC3789F5273E8EB800BA0594 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3789F4273E8EB800BA0594 /* SceneDelegate.swift */; };
@@ -37,7 +43,6 @@
 		DC9E24EC278B061A0073CECF /* CreateSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */; };
 		DC9E24ED278B061A0073CECF /* CreateSessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */; };
 		DC9E24EF278B12D50073CECF /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E24EE278B12D50073CECF /* SpinnerView.swift */; };
-		DCA6876F27BFBE8B00BDF404 /* AudioRecordingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA6876E27BFBE8B00BDF404 /* AudioRecordingService.swift */; };
 		DCAC6A092785C46B003F0C98 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAC6A082785C46B003F0C98 /* UITableView+Extension.swift */; };
 		DCE60D992770894800C6F510 /* SessionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE60D972770894800C6F510 /* SessionListViewController.swift */; };
 		DCE60D9A2770894800C6F510 /* SessionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE60D982770894800C6F510 /* SessionListViewController.xib */; };
@@ -80,8 +85,14 @@
 		184F29554C37FDF573CEE6A0 /* Pods-sessions-sessionsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sessions-sessionsUITests.debug.xcconfig"; path = "Target Support Files/Pods-sessions-sessionsUITests/Pods-sessions-sessionsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		31638245ABF3AD8D21AD0F16 /* Pods_sessionsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sessionsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69BD9B0FFAACAB8D7A760E00 /* Pods-sessions-sessionsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sessions-sessionsUITests.release.xcconfig"; path = "Target Support Files/Pods-sessions-sessionsUITests/Pods-sessions-sessionsUITests.release.xcconfig"; sourceTree = "<group>"; };
-		7E5A53FA28E31A53003A211F /* VideoOutputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOutputManager.swift; sourceTree = "<group>"; };
-		7E5A53FC28E326D8003A211F /* VideoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoClient.swift; sourceTree = "<group>"; };
+		7E5A53FA28E31A53003A211F /* CaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureManager.swift; sourceTree = "<group>"; };
+		7E5A53FC28E326D8003A211F /* CaptureClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureClient.swift; sourceTree = "<group>"; };
+		7E8ACEED2930DC95000A4F8D /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
+		7EED7AEB2934D7EB0085240F /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		7EED7AED2934D8760085240F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		7EED7AEF2934D9C30085240F /* MessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
+		7EF1893E292637980039953C /* InviteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
+		7EF18940292637EC0039953C /* InviteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteViewController.xib; sourceTree = "<group>"; };
 		858E4A51227B08D2C3122228 /* Pods-sessions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sessions.release.xcconfig"; path = "Target Support Files/Pods-sessions/Pods-sessions.release.xcconfig"; sourceTree = "<group>"; };
 		9012D480706A388F2A5BCC30 /* Pods-sessionsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sessionsTests.release.xcconfig"; path = "Target Support Files/Pods-sessionsTests/Pods-sessionsTests.release.xcconfig"; sourceTree = "<group>"; };
 		B567220CA6A4EF7A4ABCDDF4 /* Pods-sessionsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sessionsTests.debug.xcconfig"; path = "Target Support Files/Pods-sessionsTests/Pods-sessionsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,7 +129,6 @@
 		DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionViewController.swift; sourceTree = "<group>"; };
 		DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateSessionViewController.xib; sourceTree = "<group>"; };
 		DC9E24EE278B12D50073CECF /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
-		DCA6876E27BFBE8B00BDF404 /* AudioRecordingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecordingService.swift; sourceTree = "<group>"; };
 		DCAC6A082785C46B003F0C98 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		DCE60D972770894800C6F510 /* SessionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewController.swift; sourceTree = "<group>"; };
 		DCE60D982770894800C6F510 /* SessionListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionListViewController.xib; sourceTree = "<group>"; };
@@ -165,6 +175,51 @@
 				9012D480706A388F2A5BCC30 /* Pods-sessionsTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		7EED7AEA2934D7DF0085240F /* MessageView */ = {
+			isa = PBXGroup;
+			children = (
+				7EED7AEB2934D7EB0085240F /* MessageView.swift */,
+				7EED7AEF2934D9C30085240F /* MessageView.xib */,
+			);
+			path = MessageView;
+			sourceTree = "<group>";
+		};
+		7EF1893A292637410039953C /* Call */ = {
+			isa = PBXGroup;
+			children = (
+				DCE60DA0277090FE00C6F510 /* SessionCallViewController.xib */,
+				DCE60D9F277090FE00C6F510 /* SessionCallViewController.swift */,
+			);
+			path = Call;
+			sourceTree = "<group>";
+		};
+		7EF1893B292637640039953C /* CreateSession */ = {
+			isa = PBXGroup;
+			children = (
+				DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */,
+				DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */,
+			);
+			path = CreateSession;
+			sourceTree = "<group>";
+		};
+		7EF1893C292637730039953C /* SessionList */ = {
+			isa = PBXGroup;
+			children = (
+				DCE60D972770894800C6F510 /* SessionListViewController.swift */,
+				DCE60D982770894800C6F510 /* SessionListViewController.xib */,
+			);
+			path = SessionList;
+			sourceTree = "<group>";
+		};
+		7EF1893D292637800039953C /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				7EF1893E292637980039953C /* InviteViewController.swift */,
+				7EF18940292637EC0039953C /* InviteViewController.xib */,
+			);
+			path = Invite;
 			sourceTree = "<group>";
 		};
 		883DF8DFD1A686F8465748C1 /* Frameworks */ = {
@@ -244,6 +299,7 @@
 				DC4722C5276EF17600D7B45E /* String+Extension.swift */,
 				DCAC6A082785C46B003F0C98 /* UITableView+Extension.swift */,
 				DC621D5627710FBC000A3029 /* UIViewController+Extension.swift */,
+				7EED7AED2934D8760085240F /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -268,8 +324,10 @@
 		DC5183BD2767258800BC7DE2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7EED7AEA2934D7DF0085240F /* MessageView */,
 				DC467A942743CD1A0025EBF3 /* PreviewView.swift */,
 				DC9E24EE278B12D50073CECF /* SpinnerView.swift */,
+				7E8ACEED2930DC95000A4F8D /* PaddingTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -286,12 +344,10 @@
 		DC5183C92767511C00BC7DE2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DC9E24EA278B061A0073CECF /* CreateSessionViewController.swift */,
-				DC9E24EB278B061A0073CECF /* CreateSessionViewController.xib */,
-				DCE60D9F277090FE00C6F510 /* SessionCallViewController.swift */,
-				DCE60DA0277090FE00C6F510 /* SessionCallViewController.xib */,
-				DCE60D972770894800C6F510 /* SessionListViewController.swift */,
-				DCE60D982770894800C6F510 /* SessionListViewController.xib */,
+				7EF1893D292637800039953C /* Invite */,
+				7EF1893C292637730039953C /* SessionList */,
+				7EF1893B292637640039953C /* CreateSession */,
+				7EF1893A292637410039953C /* Call */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -303,11 +359,10 @@
 				DC8960A62771CBC300CF4196 /* RestApiHeaders.swift */,
 				DC8960AA27720D2B00CF4196 /* AlamofireManager.swift */,
 				DC8960AD2772270600CF4196 /* UserDataManager.swift */,
-				DCA6876E27BFBE8B00BDF404 /* AudioRecordingService.swift */,
 				DC621D4C2770B8DD000A3029 /* AuthenticationService.swift */,
 				DC9E24E8278808260073CECF /* NetworkService.swift */,
-				7E5A53FA28E31A53003A211F /* VideoOutputManager.swift */,
-				7E5A53FC28E326D8003A211F /* VideoClient.swift */,
+				7E5A53FA28E31A53003A211F /* CaptureManager.swift */,
+				7E5A53FC28E326D8003A211F /* CaptureClient.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -423,6 +478,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC3789FF273E8EB900BA0594 /* LaunchScreen.storyboard in Resources */,
+				7EF18941292637EC0039953C /* InviteViewController.xib in Resources */,
+				7EED7AF02934D9C30085240F /* MessageView.xib in Resources */,
 				DC3789FC273E8EB900BA0594 /* Assets.xcassets in Resources */,
 				DC5183C1276728CF00BC7DE2 /* ListViewItem.xib in Resources */,
 				DCE60D9A2770894800C6F510 /* SessionListViewController.xib in Resources */,
@@ -576,8 +633,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC4722C6276EF17600D7B45E /* String+Extension.swift in Sources */,
-				7E5A53FD28E326D8003A211F /* VideoClient.swift in Sources */,
+				7E8ACEEE2930DC95000A4F8D /* PaddingTextField.swift in Sources */,
+				7E5A53FD28E326D8003A211F /* CaptureClient.swift in Sources */,
 				DC8960A927720B2C00CF4196 /* Models.swift in Sources */,
+				7EF1893F292637980039953C /* InviteViewController.swift in Sources */,
 				DC923184279689C30009F355 /* LaunchScreenController.swift in Sources */,
 				DC8960AE2772270600CF4196 /* UserDataManager.swift in Sources */,
 				DC621D5727710FBC000A3029 /* UIViewController+Extension.swift in Sources */,
@@ -587,17 +646,18 @@
 				DC5183C32767290D00BC7DE2 /* ListViewItem.swift in Sources */,
 				DCE60D992770894800C6F510 /* SessionListViewController.swift in Sources */,
 				DC9E24EF278B12D50073CECF /* SpinnerView.swift in Sources */,
-				DCA6876F27BFBE8B00BDF404 /* AudioRecordingService.swift in Sources */,
+				7EED7AEE2934D8760085240F /* UIView+Extension.swift in Sources */,
 				DC467A952743CD1A0025EBF3 /* PreviewView.swift in Sources */,
 				DC3789F3273E8EB800BA0594 /* AppDelegate.swift in Sources */,
 				DC3789F5273E8EB800BA0594 /* SceneDelegate.swift in Sources */,
 				DCE60DA1277090FE00C6F510 /* SessionCallViewController.swift in Sources */,
-				7E5A53FB28E31A53003A211F /* VideoOutputManager.swift in Sources */,
+				7E5A53FB28E31A53003A211F /* CaptureManager.swift in Sources */,
 				DC621D4A2770B2D6000A3029 /* Global.swift in Sources */,
 				DC8960AB27720D2B00CF4196 /* AlamofireManager.swift in Sources */,
 				DC621D4D2770B8DD000A3029 /* AuthenticationService.swift in Sources */,
 				DCAC6A092785C46B003F0C98 /* UITableView+Extension.swift in Sources */,
 				DC9E24EC278B061A0073CECF /* CreateSessionViewController.swift in Sources */,
+				7EED7AEC2934D7EB0085240F /* MessageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

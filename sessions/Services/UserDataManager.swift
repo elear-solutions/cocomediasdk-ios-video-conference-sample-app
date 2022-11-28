@@ -34,7 +34,7 @@ final class UserDataManager {
   }
 
   func getURL() -> String {
-    let defaultURL = "http://43.205.235.179:8080"
+    let defaultURL = "http://35.154.212.12:8080"
     return defaults.string(forKey: savedKey.baseURL.rawValue) ?? defaultURL
   }
 

@@ -10,16 +10,12 @@ import CocoMediaPlayer
 import CocoMediaSDK
 import Foundation
 
-protocol TestDelegate: AnyObject {
-  func testBuf(_ data: Data, pts: Int)
-}
-
 final class CaptureClient {
   // MARK: Internal
 
-  var videoTxStream: TxStream?
-  var audioTxStream: TxStream?
-  weak var delegate: TestDelegate?
+  private(set) var videoTxStream: TxStream?
+  private(set) var audioTxStream: TxStream?
+  var isMuted = false
 
   var session: AVCaptureSession {
     return captureManager.session
@@ -39,6 +35,34 @@ final class CaptureClient {
     }
   }
 
+  func setVideo(stream: TxStream?) {
+    videoTxStream = stream
+  }
+
+  func setAudio(stream: TxStream?) {
+    audioTxStream = stream
+  }
+
+  func changeCamera() {
+    switch cameraPosition {
+    case .back:
+      cameraPosition = .front
+    case .front:
+      cameraPosition = .back
+    default:
+      break
+    }
+    enableCamera()
+  }
+
+  func disableCamera() {
+    captureManager.disableCamera()
+  }
+
+  func enableCamera() {
+    captureManager.enableCamera(position: cameraPosition)
+  }
+
   func restartSession() {
     captureManager.startSessionIfPossible()
   }
@@ -56,6 +80,7 @@ final class CaptureClient {
   private lazy var audioEncoder = LiveAudioEncoder()
   private var videoIndex = 0
   private var audioIndex = 0
+  private var cameraPosition = AVCaptureDevice.Position.front
 
   private func sendVideoFrame(data: Data, pts: Int) {
     guard let stream = videoTxStream, videoTxStream?.status == .COCO_MEDIA_CLIENT_STREAM_CREATED else {
@@ -77,8 +102,8 @@ final class CaptureClient {
   }
 
   private func sendAudioFrame(data: Data, pts: Int) {
-    guard let stream = audioTxStream, audioTxStream?.status == .COCO_MEDIA_CLIENT_STREAM_CREATED else {
-      debugPrint("Error while sending a frame: \(audioTxStream?.status ?? .COCO_MEDIA_CLIENT_STREAM_CREATED)")
+    guard let stream = audioTxStream, audioTxStream?.status == .COCO_MEDIA_CLIENT_STREAM_CREATED, !isMuted else {
+//      debugPrint("Error while sending a frame: \(audioTxStream?.status ?? .COCO_MEDIA_CLIENT_STREAM_CREATED)")
       return
     }
     let packedFrame = PackedFrame(index: audioIndex,

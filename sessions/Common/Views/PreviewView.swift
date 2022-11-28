@@ -8,24 +8,22 @@
 import AVFoundation
 import UIKit
 
-class PreviewView: UIView {
-  override class var layerClass: AnyClass {
-    return AVCaptureVideoPreviewLayer.self
+final class PreviewView: UIView {
+  // MARK: Internal
+
+  func setSession(_ session: AVCaptureSession) {
+    CATransaction.begin()
+    CATransaction.setDisableActions(true)
+
+    videoLayer.session = session
+    videoLayer.frame = bounds
+    videoLayer.videoGravity = .resizeAspectFill
+    layer.insertSublayer(videoLayer, at: 0)
+
+    CATransaction.commit()
   }
 
-  var videoPreviewLayer: AVCaptureVideoPreviewLayer {
-    guard let layer = layer as? AVCaptureVideoPreviewLayer else {
-      fatalError("Expected `AVCaptureVideoPreviewLayer` type for layer. Check PreviewView.layerClass implementation.")
-    }
-    return layer
-  }
+  // MARK: Private
 
-  var session: AVCaptureSession? {
-    get {
-      return videoPreviewLayer.session
-    }
-    set {
-      videoPreviewLayer.session = newValue
-    }
-  }
+  private let videoLayer = AVCaptureVideoPreviewLayer()
 }
